@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FD91EF38-308A-4157-82D4-169696379F23}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JsonClient.JavaScript</RootNamespace>
+    <AssemblyName>JsonClient.JavaScript</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="js\dojo\!ReadMe.txt" />
+    <Content Include="js\cityIndex\client-library-sample-generator.js" />
+    <Content Include="js\dojo\dojo.js" />
+    <Content Include="js\dojo\dojo.js.uncompressed.js" />
+    <Content Include="js\cityIndex\client-library-core.js" />
+    <Content Include="js\cityIndex\client-library-dojo.js" />
+    <Content Include="js\cityIndex\client-library-io.js" />
+    <Content Include="js\src\dojox\html\entities.js" />
+    <Content Include="js\src\dojox\rpc\Service.js" />
+    <Content Include="js\src\dojo\AdapterRegistry.js" />
+    <Content Include="js\src\dojo\dojo.js" />
+    <Content Include="js\src\dojo\i18n.js" />
+    <Content Include="js\src\dojo\_base.js" />
+    <Content Include="js\src\dojo\_base\array.js" />
+    <Content Include="js\src\dojo\_base\browser.js" />
+    <Content Include="js\src\dojo\_base\Color.js" />
+    <Content Include="js\src\dojo\_base\connect.js" />
+    <Content Include="js\src\dojo\_base\declare.js" />
+    <Content Include="js\src\dojo\_base\Deferred.js" />
+    <Content Include="js\src\dojo\_base\event.js" />
+    <Content Include="js\src\dojo\_base\fx.js" />
+    <Content Include="js\src\dojo\_base\html.js" />
+    <Content Include="js\src\dojo\_base\json.js" />
+    <Content Include="js\src\dojo\_base\lang.js" />
+    <Content Include="js\src\dojo\_base\NodeList.js" />
+    <Content Include="js\src\dojo\_base\query.js" />
+    <Content Include="js\src\dojo\_base\window.js" />
+    <Content Include="js\src\dojo\_base\xhr.js" />
+    <Content Include="js\src\dojo\_base\_loader\bootstrap.js" />
+    <Content Include="js\src\dojo\_base\_loader\hostenv_browser.js" />
+    <Content Include="js\src\dojo\_base\_loader\hostenv_ff_ext.js" />
+    <Content Include="js\src\dojo\_base\_loader\hostenv_rhino.js" />
+    <Content Include="js\src\dojo\_base\_loader\loader.js" />
+    <Content Include="js\flensed\checkplayer.js" />
+    <Content Include="js\flensed\flCookie.js" />
+    <Content Include="js\flensed\flCookie.swf" />
+    <Content Include="js\flensed\flensed.js" />
+    <Content Include="js\flensed\flXHR.js" />
+    <Content Include="js\flensed\flXHR.swf" />
+    <Content Include="js\flensed\flXHR.vbs" />
+    <Content Include="js\flensed\swfobject.js" />
+    <Content Include="js\flensed\updateplayer.swf" />
+    <Content Include="js\src\json\json2-nativebugpatches.js" />
+    <Content Include="js\src\util\buildscripts\!ciapi build notes.txt" />
+    <Content Include="js\src\util\buildscripts\build.js" />
+    <Content Include="js\src\util\buildscripts\build_notice.txt" />
+    <Content Include="js\src\util\buildscripts\cdnBuild.txt" />
+    <Content Include="js\src\util\buildscripts\changeVersion.js" />
+    <Content Include="js\src\util\buildscripts\cldr\alias.js" />
+    <Content Include="js\src\util\buildscripts\cldr\arrayInherit.js" />
+    <Content Include="js\src\util\buildscripts\cldr\build.xml" />
+    <Content Include="js\src\util\buildscripts\cldr\calendar.xsl" />
+    <Content Include="js\src\util\buildscripts\cldr\cldrUtil.js" />
+    <Content Include="js\src\util\buildscripts\cldr\currency.xsl" />
+    <Content Include="js\src\util\buildscripts\cldr\ldml\core.zip" />
+    <Content Include="js\src\util\buildscripts\cldr\lib\ant-apache-bsf.jar" />
+    <Content Include="js\src\util\buildscripts\cldr\lib\APL-2.0.html" />
+    <Content Include="js\src\util\buildscripts\cldr\lib\bsf.jar" />
+    <Content Include="js\src\util\buildscripts\cldr\lib\commons-logging-1.1.1.jar" />
+    <Content Include="js\src\util\buildscripts\cldr\lib\MPL-1.0.html" />
+    <Content Include="js\src\util\buildscripts\cldr\lib\resolver.jar" />
+    <Content Include="js\src\util\buildscripts\cldr\lib\saxon9.jar" />
+    <Content Include="js\src\util\buildscripts\cldr\number.xsl" />
+    <Content Include="js\src\util\buildscripts\cldr\specialLocale.js" />
+    <Content Include="js\src\util\buildscripts\cldr\util.xsl" />
+    <Content Include="js\src\util\buildscripts\copyright.txt" />
+    <Content Include="js\src\util\buildscripts\jslib\buildUtil.js" />
+    <Content Include="js\src\util\buildscripts\jslib\buildUtilXd.js" />
+    <Content Include="js\src\util\buildscripts\jslib\checkBuildSize.js" />
+    <Content Include="js\src\util\buildscripts\jslib\convertTestsToXDomain.js" />
+    <Content Include="js\src\util\buildscripts\jslib\fileUtil.js" />
+    <Content Include="js\src\util\buildscripts\jslib\i18nUtil.js" />
+    <Content Include="js\src\util\buildscripts\jslib\logger.js" />
+    <Content Include="js\src\util\buildscripts\listProfileDeps.js" />
+    <Content Include="js\src\util\buildscripts\makeDojoJsWeb.js" />
+    <Content Include="js\src\util\buildscripts\profiles\ciapi.profile2.js" />
+    <Content Include="js\src\util\buildscripts\profiles\layers.profile.js" />
+    <Content Include="js\src\util\buildscripts\profiles\rhino.profile.js" />
+    <Content Include="js\src\util\buildscripts\profiles\sql.profile.js" />
+    <Content Include="js\src\util\buildscripts\profiles\standard.profile.js" />
+    <Content Include="js\src\util\buildscripts\profiles\standardCustomBase.profile.js" />
+    <Content Include="js\src\util\buildscripts\profiles\storage.profile.js" />
+    <Content Include="js\src\util\buildscripts\webbuild.html" />
+    <Content Include="js\src\util\buildscripts\webbuild\index.html" />
+    <Content Include="js\src\util\buildscripts\webbuild\makeWebBuildModuleList.js" />
+    <Content Include="js\src\util\buildscripts\webbuild\server\build.xml" />
+    <Content Include="js\src\util\buildscripts\webbuild\server\js\build.js" />
+    <Content Include="js\src\util\buildscripts\webbuild\server\lib\js.jar" />
+    <Content Include="js\src\util\buildscripts\webbuild\server\lib\shrinksafe.jar" />
+    <Content Include="js\src\util\buildscripts\webbuild\server\src\org\dtk\BuilderContextAction.java" />
+    <Content Include="js\src\util\buildscripts\webbuild\server\src\org\dtk\BuilderServlet.java" />
+    <Content Include="js\src\util\buildscripts\webbuild\server\src\org\dtk\FileUtil.java" />
+    <Content Include="js\src\util\buildscripts\webbuild\server\web\WEB-INF\web.xml" />
+    <Content Include="js\src\util\buildscripts\zoneinfo\strip_olson_comments.rb" />
+    <Content Include="js\src\util\checkstyle\checkstyle.php.rename.html" />
+    <Content Include="js\src\util\checkstyle\checkstyleReport.html" />
+    <Content Include="js\src\util\checkstyle\checkstyleUtil.js" />
+    <Content Include="js\src\util\checkstyle\readme.txt" />
+    <Content Include="js\src\util\checkstyle\runCheckstyle.js" />
+    <Content Include="js\src\util\docscripts\cheat.php" />
+    <Content Include="js\src\util\docscripts\cheat\cheat.css" />
+    <Content Include="js\src\util\docscripts\cheat\lib.js" />
+    <Content Include="js\src\util\docscripts\generate.php" />
+    <Content Include="js\src\util\docscripts\includes\dojo.inc" />
+    <Content Include="js\src\util\docscripts\lib\generator\common\AbstractSerializer.php" />
+    <Content Include="js\src\util\docscripts\lib\generator\common\db.php" />
+    <Content Include="js\src\util\docscripts\lib\generator\file\Freezer.php" />
+    <Content Include="js\src\util\docscripts\lib\generator\file\Serializer.php" />
+    <Content Include="js\src\util\docscripts\lib\generator\JsonSerializer.php" />
+    <Content Include="js\src\util\docscripts\lib\generator\mysql\Freezer.php" />
+    <Content Include="js\src\util\docscripts\lib\generator\mysql\Serializer.php" />
+    <Content Include="js\src\util\docscripts\lib\generator\resource\Freezer.php" />
+    <Content Include="js\src\util\docscripts\lib\generator\resource\Serializer.php" />
+    <Content Include="js\src\util\docscripts\lib\generator\XmlSerializer.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\Destructable.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\Dojo.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\dojo2.inc" />
+    <Content Include="js\src\util\docscripts\lib\parser2\DojoCommentBlock.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\JavaScriptArray.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\JavaScriptAssignment.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\JavaScriptFunction.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\JavaScriptFunctionCall.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\JavaScriptLanguage.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\JavaScriptLiteral.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\JavaScriptNumber.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\JavaScriptObject.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\JavaScriptOr.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\JavaScriptParser.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\JavaScriptRegExp.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\JavaScriptStatements.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\JavaScriptString.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\JavaScriptSymbol.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\JavaScriptTernary.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\JavaScriptVariable.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\Parser.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\Scope.php" />
+    <Content Include="js\src\util\docscripts\lib\parser2\Symbol.php" />
+    <Content Include="js\src\util\docscripts\lib\parser\Dojo.php" />
+    <Content Include="js\src\util\docscripts\lib\parser\DojoArray.php" />
+    <Content Include="js\src\util\docscripts\lib\parser\DojoBlock.php" />
+    <Content Include="js\src\util\docscripts\lib\parser\DojoBoolean.php" />
+    <Content Include="js\src\util\docscripts\lib\parser\DojoExecutedFunction.php" />
+    <Content Include="js\src\util\docscripts\lib\parser\DojoFunction.php" />
+    <Content Include="js\src\util\docscripts\lib\parser\DojoFunctionBody.php" />
+    <Content Include="js\src\util\docscripts\lib\parser\DojoFunctionCall.php" />
+    <Content Include="js\src\util\docscripts\lib\parser\DojoFunctionDeclare.php" />
+    <Content Include="js\src\util\docscripts\lib\parser\DojoNull.php" />
+    <Content Include="js\src\util\docscripts\lib\parser\DojoObject.php" />
+    <Content Include="js\src\util\docscripts\lib\parser\DojoPackage.php" />
+    <Content Include="js\src\util\docscripts\lib\parser\DojoParameter.php" />
+    <Content Include="js\src\util\docscripts\lib\parser\DojoParameters.php" />
+    <Content Include="js\src\util\docscripts\lib\parser\DojoString.php" />
+    <Content Include="js\src\util\docscripts\lib\parser\DojoVariable.php" />
+    <Content Include="js\src\util\docscripts\lib\parser\Text.php" />
+    <Content Include="js\src\util\docscripts\makeCix.php" />
+    <Content Include="js\src\util\docscripts\_browse.php" />
+    <Content Include="js\src\util\docscripts\_browse2.php" />
+    <Content Include="js\src\util\doh\Robot.html" />
+    <Content Include="js\src\util\doh\robot.js" />
+    <Content Include="js\src\util\doh\robot\DOHRobot.jar" />
+    <Content Include="js\src\util\doh\robot\DOHRobot.java" />
+    <Content Include="js\src\util\doh\robot\robot.css" />
+    <Content Include="js\src\util\doh\runner.html" />
+    <Content Include="js\src\util\doh\runner.js" />
+    <Content Include="js\src\util\doh\small_logo.png" />
+    <Content Include="js\src\util\doh\tests\robot.html" />
+    <Content Include="js\src\util\doh\_browserRunner.js" />
+    <Content Include="js\src\util\doh\_rhinoRunner.js" />
+    <Content Include="js\src\util\doh\_sounds\doh.wav" />
+    <Content Include="js\src\util\doh\_sounds\dohaaa.wav" />
+    <Content Include="js\src\util\doh\_sounds\woohoo.wav" />
+    <Content Include="js\src\util\jsdoc\jsdoc.css" />
+    <Content Include="js\src\util\jsdoc\jsdoc.js" />
+    <Content Include="js\src\util\jsdoc\template.php" />
+    <Content Include="js\src\util\shrinksafe\js.jar" />
+    <Content Include="js\src\util\shrinksafe\MPL-1.1.html" />
+    <Content Include="js\src\util\shrinksafe\shrinksafe.jar" />
+    <Content Include="js\src\util\shrinksafe\src\org\dojotoolkit\shrinksafe\Compressor.java" />
+    <Content Include="js\src\util\shrinksafe\src\org\dojotoolkit\shrinksafe\DebugData.java" />
+    <Content Include="js\src\util\shrinksafe\src\org\dojotoolkit\shrinksafe\Main.java" />
+    <Content Include="js\src\util\shrinksafe\src\org\dojotoolkit\shrinksafe\ReplacedTokens.java" />
+    <Content Include="js\src\util\shrinksafe\src\org\dojotoolkit\shrinksafe\TokenMapper.java" />
+    <Content Include="js\src\util\shrinksafe\tests\1768.js" />
+    <Content Include="js\src\util\shrinksafe\tests\3241.js" />
+    <Content Include="js\src\util\shrinksafe\tests\5303.js" />
+    <Content Include="js\src\util\shrinksafe\tests\8828.js" />
+    <Content Include="js\src\util\shrinksafe\tests\8974.js" />
+    <Content Include="js\src\util\shrinksafe\tests\9444.js" />
+    <Content Include="js\src\util\shrinksafe\tests\9676.js" />
+    <Content Include="js\src\util\shrinksafe\tests\escapeunicode.js" />
+    <Content Include="js\src\util\shrinksafe\tests\module.js" />
+    <Content Include="js\src\util\shrinksafe\tests\stripcomplex.js" />
+    <Content Include="js\src\util\shrinksafe\tests\stripconsole.js" />
+    <Content Include="js\tests\sanitycheck.htm" />
+    <Content Include="js\tests\qunit\qunit.css" />
+    <Content Include="js\tests\qunit\qunit.js" />
+    <Content Include="js\tests\qunit\QUnitExt.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="js\src\util\buildscripts\build.bat" />
+    <None Include="js\src\util\buildscripts\build.sh" />
+    <None Include="js\src\util\buildscripts\build_release.sh" />
+    <None Include="js\src\util\buildscripts\cdnBuild.sh" />
+    <None Include="js\src\util\buildscripts\ciapi.build.bat" />
+    <None Include="js\src\util\buildscripts\ciapi.build.bat.bak" />
+    <None Include="js\src\util\buildscripts\cldr\ldml\catalog" />
+    <None Include="js\src\util\buildscripts\cldr\ldml\CatalogManager.properties" />
+    <None Include="js\src\util\buildscripts\cldr\ldml\LICENSE" />
+    <None Include="js\src\util\buildscripts\cldr\ldml\README" />
+    <None Include="js\src\util\buildscripts\cldr\lib\LICENSE" />
+    <None Include="js\src\util\buildscripts\cldr\README" />
+    <None Include="js\src\util\buildscripts\clean_release.sh" />
+    <None Include="js\src\util\buildscripts\copyright.txt.bak" />
+    <None Include="js\src\util\buildscripts\jslib\dojoGuardEnd.jsfrag" />
+    <None Include="js\src\util\buildscripts\jslib\dojoGuardStart.jsfrag" />
+    <None Include="js\src\util\buildscripts\LICENSE" />
+    <None Include="js\src\util\buildscripts\mk_branch.sh" />
+    <None Include="js\src\util\buildscripts\README" />
+    <None Include="js\src\util\buildscripts\zoneinfo\LICENSE" />
+    <None Include="js\src\util\buildscripts\zoneinfo\README" />
+    <None Include="js\src\util\buildscripts\zoneinfo\tzdata2009k.tar.gz" />
+    <None Include="js\src\util\checkstyle\checkstyle.bat" />
+    <None Include="js\src\util\checkstyle\checkstyle.sh" />
+    <None Include="js\src\util\docscripts\lib\parser\README" />
+    <None Include="js\src\util\docscripts\LICENSE" />
+    <None Include="js\src\util\docscripts\modules\dijit.module" />
+    <None Include="js\src\util\docscripts\modules\dojo.module" />
+    <None Include="js\src\util\docscripts\modules\dojox.module.properties" />
+    <None Include="js\src\util\docscripts\README" />
+    <None Include="js\src\util\doh\LICENSE" />
+    <None Include="js\src\util\doh\README" />
+    <None Include="js\src\util\doh\robot\compilerobot.bat" />
+    <None Include="js\src\util\doh\robot\compilerobot.sh" />
+    <None Include="js\src\util\doh\robot\README" />
+    <None Include="js\src\util\doh\runner.sh" />
+    <None Include="js\src\util\doh\_sounds\LICENSE" />
+    <None Include="js\src\util\jsdoc\INSTALL" />
+    <None Include="js\src\util\jsdoc\jsdoc.info" />
+    <None Include="js\src\util\jsdoc\jsdoc.install" />
+    <None Include="js\src\util\jsdoc\jsdoc.module" />
+    <None Include="js\src\util\jsdoc\lib\EXTERNALS" />
+    <None Include="js\src\util\jsdoc\LICENSE" />
+    <None Include="js\src\util\jsdoc\THEMING" />
+    <None Include="js\src\util\LICENSE" />
+    <None Include="js\src\util\LICENSE.bak" />
+    <None Include="js\src\util\migration\dijitCss14to15.sed" />
+    <None Include="js\src\util\shrinksafe\build.sh" />
+    <None Include="js\src\util\shrinksafe\LICENSE" />
+    <None Include="js\src\util\shrinksafe\README" />
+    <None Include="js\src\util\shrinksafe\src\manifest" />
+    <None Include="js\src\util\shrinksafe\src\org\dojotoolkit\shrinksafe\resources\Messages.properties" />
+    <None Include="js\src\util\shrinksafe\tests\runner.sh" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="js\src\util\docscripts\cache\" />
+    <Folder Include="js\src\util\jsdoc\cache\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1837</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

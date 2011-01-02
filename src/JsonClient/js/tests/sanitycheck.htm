@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="../flensed/flXHR.js" type="text/javascript"></script>
+    <script src="../dojo/dojo.js.uncompressed.js" type="text/javascript"></script>
+    <script src="../cityIndex/client-library-core.js" type="text/javascript"></script>
+    <script src="../cityIndex/client-library-io.js" type="text/javascript"></script>
+    <script src="../cityIndex/client-library-dojo.js" type="text/javascript"></script>
+    <script src="../cityIndex/client-library-sample-generator.js" type="text/javascript"></script>
+    
+    <script src="http://ec2-174-129-8-69.compute-1.amazonaws.com/RESTWebServices/smd.js?includeDemoValue=true" type="text/javascript"></script>
+    <script src="http://ec2-174-129-8-69.compute-1.amazonaws.com/RESTWebServices/schema.js?includeDemoValue=true" type="text/javascript"></script>
+    <link href="qunit/qunit.css" rel="stylesheet" type="text/css" />
+    <script src="qunit/qunit.js" type="text/javascript"></script>
+    <script src="qunit/QUnitExt.js" type="text/javascript"></script>
+</head>
+<body>
+    <!-- Include any markup you need in the page for use in the test -->
+    <h1 id="qunit-header">
+        TITLE</h1>
+    <h2 id="qunit-banner">
+    </h2>
+    <h2 id="qunit-userAgent">
+    </h2>
+    <ol id="qunit-tests">
+    </ol>
+    <p>
+        <textarea id="qunit-log" rows="10" cols="100"></textarea>
+    </p>
+    <script type="text/javascript">
+
+        function logResponse(method, response, complete) {
+            ok(response, method + " = " + JSON.stringify(response).substring(0, 64));
+            if (complete) { start(); }
+        }
+
+        function logError(error) {
+            var err;
+            if (typeof (error['responseText']) !== 'undefined') {
+                err = error.responseText;
+            }
+            else {
+                err = JSON.stringify(error);
+            }
+            ok(false, "error = " + err.substring(0, 64));
+            start();
+        }
+
+        dojo.addOnLoad(function () {
+
+            ciapi.initialize(ciConfig.smd, ciConfig.schema);
+
+            var ciapi_tests = "";
+
+            for (var methodName in ciapi.smd.services) {
+                if (methodName !== "GenerateException") {
+                    ciapi_tests += ciapi.codeGeneration.methods.ciapi.tests[methodName];
+                }
+            }
+            eval(ciapi_tests);
+
+        });
+    </script>
+</body>
+</html>

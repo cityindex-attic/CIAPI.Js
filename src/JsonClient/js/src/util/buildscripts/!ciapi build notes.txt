@@ -1,0 +1,30 @@
+﻿
+To build run the following batch file
+
+\TFS.Mirror.Sky\Source\Servers\RESTWebServices\RESTWebServices\js\src\util\buildscripts>ciapi.build.bat
+
+(there is also a release build step that is remmed out that does this)
+
+what happens.....
+
+this builds into \TFS.Mirror.Sky\Source\Servers\RESTWebServices\RESTWebServices\js\staging\0.9.1\
+
+to simplify copying of build product to deployment, delete _svn dirs with powershell
+powershell.exe "cd C:\dev\utp\TFS.Mirror.Sky\Source\Servers\RESTWebServices\RESTWebServices\js\0.9.1; get-childitem . -filter _svn -force -recurse | remove-item -recurse -force"
+
+99.99 % of the files in this directory, especially the _svn dirs copied, are extraneous. Only the build target .js and .css and the image directories are required to be copied to the deployment.
+
+\TFS.Mirror.Sky\Source\Servers\RESTWebServices\RESTWebServices\js\staging\0.9.1\dojo\dijit.js (or dijit.js.uncompressed.js)  --> \TFS.Mirror.Sky\Source\Servers\RESTWebServices\RESTWebServices\js\dijit.js
+\TFS.Mirror.Sky\Source\Servers\RESTWebServices\RESTWebServices\js\staging\0.9.1\dojo\dojo.js (or dojo.js.uncompressed.js)    --> \TFS.Mirror.Sky\Source\Servers\RESTWebServices\RESTWebServices\js\dojo.js
+
+\TFS.Mirror.Sky\Source\Servers\RESTWebServices\RESTWebServices\js\staging\0.9.1\dijit\themes\cityindex\cityindex.css         --> \TFS.Mirror.Sky\Source\Servers\RESTWebServices\RESTWebServices\css\theme\cityindex.css
+
+\TFS.Mirror.Sky\Source\Servers\RESTWebServices\RESTWebServices\js\staging\0.9.1\dijit\icons\images\*.*                       --> \TFS.Mirror.Sky\Source\Servers\RESTWebServices\RESTWebServices\icons\images\*.*
+\TFS.Mirror.Sky\Source\Servers\RESTWebServices\RESTWebServices\js\staging\0.9.1\dijit\themes\cityindex\form\images\*.*       --> \TFS.Mirror.Sky\Source\Servers\RESTWebServices\RESTWebServices\css\theme\form\images\*.*
+\TFS.Mirror.Sky\Source\Servers\RESTWebServices\RESTWebServices\js\staging\0.9.1\dijit\themes\cityindex\images\*.*            --> \TFS.Mirror.Sky\Source\Servers\RESTWebServices\RESTWebServices\css\theme\images\*.*
+\TFS.Mirror.Sky\Source\Servers\RESTWebServices\RESTWebServices\js\staging\0.9.1\dijit\themes\cityindex\layout\images\*.*     --> \TFS.Mirror.Sky\Source\Servers\RESTWebServices\RESTWebServices\css\theme\layout\images\*.*
+
+Then we delete the staging directory.
+
+
+OOPS - forgot nls and resources
