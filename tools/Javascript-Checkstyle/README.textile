@@ -1,0 +1,18 @@
+h1. History
+
+Javscript-Checkstyle is a "fork" of dojo util.checkstyle.  They had all the right pieces in place to make a generic Javascript checkstyle application, but needed someone to take it the next step.
+
+h1. Plan
+
+The plan is to have a tool and tasks/plugins for "ant":http://ant.apache.org/ and "maven":http://maven.apache.org that can be integrated into your build lifecycle similar to "phpcs":http://pear.php.net/package/PHP_CodeSniffer/redirected and "checkstyle":http://checkstyle.sourceforge.net/.
+
+h1. Command Line Usage
+
+The following command line arguments are allowed
+
+|_. Parameter |_. Default |_. Description |
+| files | n/a | A comma delimited list of filepaths to be loaded and checked. |
+| dir | n/a | A directory path (from the execution location) to loop over and run validation on |
+| reportFile | checkstleData.js |The path to the output file you want. |
+| ruleSets| dojo | a comma (,) delimited list of predefined rulesets to execute against your code base. |
+| ruleSetConfig | n/a | the path to a .js file that will configure the rulesets and/or define your own custom rulesets.  If this is present ruleSets will be ignored.|

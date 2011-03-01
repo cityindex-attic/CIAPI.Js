@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<project name="CIAPI.Js-Master" default="build" basedir=".">
+
+	<property file="${basedir}/build.properties"/>
+	
+    <target name="build">
+		<subant target="build">
+		  <fileset dir="." includes="**/build.project.xml"/>
+		</subant>
+	</target>
+
+	<target name="start-webserver" description="(PUBLIC) Open /dist via built in webserver on http://localhost:4225/">
+		<exec spawn="true" executable="../tools/CassiniDev/Release/CassiniDev.exe">
+			<arg value="/a../dist"/>
+			<arg value="/pm:Specific"/>
+			<arg value="/p:4224"/>
+		</exec>
+	</target>
+	
+	<target name="start-jstestdriver" description="(PUBLIC) Start jsTestDriver server on http://localhost:${jstestdriver.port}">
+		<echo message="Starting JsTestDriver on port ${jstestdriver.port}" />
+		<echo message="Ctl-C to terminate" />
+		<exec executable="java" dir="${basedir}">
+			<arg line="-jar &quot;${tool.jstestdriver}&quot;"/>
+			<arg line="--port ${jstestdriver.port}"/>
+		</exec>
+	</target>
+	
+</project>
