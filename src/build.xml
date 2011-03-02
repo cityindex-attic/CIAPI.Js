@@ -18,11 +18,12 @@
 	</target>
 	
 	<target name="start-jstestdriver" description="(PUBLIC) Start jsTestDriver server on http://localhost:${jstestdriver.port}">
-		<echo message="Starting JsTestDriver on port ${jstestdriver.port}" />
+		<echo message="Starting JsTestDriver on http://localhost:${jstestdriver.local.port}" />
+		<echo message="You need to capture a slave browser by browsing to on http://localhost:${jstestdriver.local.port}/capture" />
 		<echo message="Ctl-C to terminate" />
 		<exec executable="java" dir="${basedir}">
 			<arg line="-jar &quot;${tool.jstestdriver}&quot;"/>
-			<arg line="--port ${jstestdriver.port}"/>
+			<arg line="--port ${jstestdriver.local.port}"/>
 		</exec>
 	</target>
 	

@@ -145,7 +145,11 @@
     </if>
     </target>
 	
-	<target name="runtests" description="(PUBLIC) runs tests">
+	<target name="runtests-local" description="(PUBLIC) runs tests on local jsTestDriver instance">
+		<antcall target="-runtests-local"/>
+    </target>
+	
+	<target name="runtests-remote" description="(PUBLIC) runs tests on remote jsTestDriver instance">
 		<antcall target="-runtests-remote"/>
     </target>
 	
@@ -269,6 +273,7 @@
             depends="-rev,
                      -clean,
                      -copy,
+					 -runtests-remote,
                      -imagespng,
                      -imagesjpg"/>
 
@@ -276,6 +281,7 @@
             depends="-rev,
                      -clean,
                      -copy,
+					 -runtests-remote,
                      -usemin,
                      -js.all.minify,
                      -js.main.concat,
@@ -292,6 +298,7 @@
             depends="-rev,
                      -clean,
                      -copy,
+					 -runtests-remote,
                      -usemin,
                      -js.all.minify,
                      -js.main.concat,
@@ -352,12 +359,25 @@
 	*************************************************
 	-->
 	
-	<target name="-runtests-remote" description="(PRIVATE) Run tests through remote jsTestDriver">
+	<target name="-runtests-local" depends="-create-reports-folder" description="(PRIVATE) Run tests through local jsTestDriver">
+		<exec executable="java" dir="${basedir}">
+			<arg line="-jar &quot;${tool.jstestdriver}&quot;"/>
+			<arg line="--config &quot;${jstestdriver.config}&quot;"/>
+			<arg line="--server http://localhost:${jstestdriver.local.port}"/>
+			<arg line="--testOutput &quot;./${dir.publish.reports}/&quot;"/>
+			<arg line="--verbose"/>
+			<arg line="--reset"/>
+			<arg line="--captureConsole"/>
+			<arg line="--tests all"/>
+		</exec>
+	</target>	
+	 
+	<target name="-runtests-remote" depends="-create-reports-folder" description="(PRIVATE) Run tests through remote jsTestDriver">
 		<exec executable="java" dir="${basedir}">
 			<arg line="-jar &quot;${tool.jstestdriver}&quot;"/>
 			<arg line="--config &quot;${jstestdriver.config}&quot;"/>
 			<arg line="--server ${jstestdriver.remote}"/>
-			<arg line="--testOutput ."/>
+			<arg line="--testOutput &quot;./${dir.publish.reports}/&quot;"/>
 			<arg line="--verbose"/>
 			<arg line="--reset"/>
 			<arg line="--captureConsole"/>
@@ -369,13 +389,17 @@
 		<property file="./${dir.build}/${build.version.info}"/>
 	</target>
 	
-	<target name="-clean" description="(PRIVATE) Wipe the previous build (Deletes the dir.publish directory">
+	<target name="-clean" description="(PRIVATE) Wipe the previous build">
 	<!-- This is a private target -->
 	
 		<echo message="Cleaning up previous build directory..."/>
 		<delete dir="./${dir.publish}/"/>
 	</target>
 	
+	<target name="-create-reports-folder" description="(PRIVATE) Wipe the previous build">
+		<!-- This is a private target -->
+		<mkdir dir="./${dir.publish.reports}/"/>
+	</target>
 	
 	<target name="-rev" description="(PRIVATE) Increase the current build number by one and set build date">
 		<!-- This is a private target -->
