@@ -69,4 +69,4 @@ publish
 .idea
 
 # build script local files
-src/build.properties
+src/local.build.properties
