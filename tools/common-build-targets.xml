@@ -443,7 +443,8 @@
 	</target>
 	
 	
-	<target name="-js.mylibs.concat" depends="-load-build-info" description="(PRIVATE) Concatenates the JS files in dir.js.mylibs">
+	<target name="-js.mylibs.concat" depends="-check-js-mylibs-exists,-load-build-info" if="js.mylibs.folder.exists"
+            description="(PRIVATE) Concatenates the JS files in dir.js.mylibs">
 		<echo message="Concatenating JS libraries"/>
 	    <concat destfile="./${dir.publish}/${dir.js}/libs-${build.number}.js">
 			<fileset dir="./${dir.publish}/${dir.js.mylibs}/">
@@ -451,8 +452,7 @@
 			</fileset>    	
 	    </concat>
 	</target>
-	
-	
+
 	<target name="-js.scripts.concat" depends="-load-build-info" if="build.concat.scripts">
 		<echo message="Concatenating library file with main script file"/>
  		<concat destfile="./${dir.publish}/${dir.js}/${scripts.filename}-${build.number}.min.js">
@@ -493,7 +493,8 @@
 	</target>
 
 	
-	<target name="-js.libs.minify" depends="-load-build-info" description="(PRIVATE) Minifies the helper files in dir.js.libs">
+	<target name="-js.libs.minify" depends="-check-js-mylibs-exists, -load-build-info" if="js.mylibs.folder.exists"
+            description="(PRIVATE) Minifies the helper files in dir.js.libs">
 		<echo message="Minifying helper JS files..."/>
 		
 		<apply executable="java" parallel="false">
@@ -506,6 +507,9 @@
 			<targetfile/>
 		</apply>
 	</target>
+        <target name="-check-js-mylibs-exists" unless="js.mylibs.folder.exists">
+            <available property="js.mylibs.folder.exists" file="./${dir.publish}/${dir.js.mylibs}/" type="dir"/>
+		</target>
 	
 	
 	<target name="-js.delete" depends="-load-build-info" description="(PRIVATE) Deletes the unoptimized js files from build if set">
