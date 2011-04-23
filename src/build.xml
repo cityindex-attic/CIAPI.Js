@@ -1,10 +1,16 @@
 <?xml version="1.0"?>
-<project name="CIAPI.Js-Master" default="build" basedir=".">
+<project name="CIAPI.Js.Master" default="build" basedir=".">
 
 	<property file="${basedir}/build.properties"/>
 	
-    <target name="build">
+  <target name="build">
 		<subant target="build">
+		  <fileset dir="." includes="**/build.project.xml"/>
+		</subant>
+  </target>
+
+  <target name="basics">
+		<subant target="basics">
 		  <fileset dir="." includes="**/build.project.xml"/>
 		</subant>
 	</target>

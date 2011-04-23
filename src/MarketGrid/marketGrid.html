@@ -1,0 +1,58 @@
+<!-- saved from url=(0052)http://media.fxsolutions.com/price_feed/default.html -->
+<html>
+<head>
+    <title>MarketGrid demo</title>
+
+    <script type="text/javascript" src="../../tools/jquery/jquery-1.5.1.min.js"></script>
+    <script type="text/javascript" src="js/libs/jquery.tmpl.js"></script>
+    <script type="text/javascript" src="js/libs/jquery-ui-1.8.11.custom/js/jquery-ui-1.8.11.custom.min.js"></script>
+    <link type="text/css" href="js/libs/jquery-ui-1.8.11.custom/css/dark-hive/jquery-ui-1.8.11.custom.css"
+          rel="Stylesheet"/>
+    <script type="text/javascript" src="js/libs/jquery.sparkline.min.js"></script>
+
+    <script type="text/javascript" src="../../tools/JSON/json2.js"></script>
+    <script type="text/javascript" src="../CIAPI/js/libs/dojo.js.uncompressed.js"></script>
+    <script type="text/javascript" src="../CIAPI/js/CIAPI.js"></script>
+
+    <script type="text/javascript" src="js/libs/knockout-1.2.0.debug.js"></script>
+    <script type="text/javascript" src="js/libs/knockout.mapping-latest.js"></script>
+
+    <script type="text/javascript" src="js/marketGrid.js"></script>
+</head>
+<body>
+
+<div id="marketGrid">
+    <div>
+        <input id="marketSearchQuery" name="marketSearch" type="text" value="USD"/>
+        <button id="doMarketSearchButton" data-bind="click: doMarketSearch">Search</button>
+    </div>
+    <table border=1>
+        <thead>
+            <tr>
+                <th>Market</th>
+                <th>&nbsp;</th>
+                <th>Bid</th>
+                <th>Offer</th>
+                <th>High</th>
+                <th>Low</th>
+                <th>Change</th>
+            </tr>
+        </thead>
+        <tbody data-bind='template: { name: "itemTemplate", foreach: marketList }'></tbody>
+    </table>
+    <script type="text/html" id="itemTemplate">
+        <tr>
+            <td data-bind="text: Name">EUR/USD</td>
+            <td><span data-bind="attr: { id: MarketId() + '_sparkline'}">rendering...</span></td>
+            <td data-bind="text: currentPrice.bid().toFixed(5)">1.3876</td>
+            <td data-bind="text: currentPrice.offer().toFixed(5)">1.3876</td>
+            <td data-bind="text: currentPrice.high().toFixed(5)">1.3876</td>
+            <td data-bind="text: currentPrice.low().toFixed(5)">1.3876</td>
+            <td data-bind="text: currentPrice.change().toFixed(5), style: { backgroundColor: currentPrice.change() < 0 ? 'red' : 'blue' }">1.3876</td>
+        </tr>
+    </script>
+</div>
+
+
+</body>
+</html>

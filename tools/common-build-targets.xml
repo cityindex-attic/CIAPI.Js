@@ -433,7 +433,7 @@
 	<!-- JAVASCRIPT -->
 	<target name="-js.main.concat" depends="-load-build-info" description="(PRIVATE) Concatenates the JS files in dir.js">
 		<echo message="Concatenating Main JS scripts..."/>
-	    <concat destfile="./${dir.publish}/${dir.js}/scripts-${build.number}.js">
+	    <concat destfile="./${dir.publish}/${dir.js}/${scripts.filename}-${build.number}.js">
 			<fileset dir="./${dir.publish}/">
 				<include name="**/${dir.js.main}/*.min.js"/>
 				<exclude name="**/${dir.js.mylibs}/*.js"/>
@@ -455,24 +455,25 @@
 	
 	<target name="-js.scripts.concat" depends="-load-build-info" if="build.concat.scripts">
 		<echo message="Concatenating library file with main script file"/>
- 		<concat destfile="./${dir.publish}/${dir.js}/scripts-${build.number}.min.js">
+ 		<concat destfile="./${dir.publish}/${dir.js}/${scripts.filename}-${build.number}.min.js">
 			<fileset dir="./${dir.publish}/${dir.js}/">
 				<include name="libs-${build.number}.js"/>
-				<include name="scripts-${build.number}.js"/>
+				<include name="${scripts.filename}-${build.number}.js"/>
 			</fileset>    	
 	    </concat>
 		
 		<echo message="Concatenating library file with main debug script file"/>
- 		<concat destfile="./${dir.publish}/${dir.js}/scripts-${build.number}-debug.min.js">
+ 		<concat destfile="./${dir.publish}/${dir.js}/${scripts.filename}-${build.number}-debug.min.js">
 			<fileset dir="./${dir.publish}/${dir.js}/">
 				<include name="libs-${build.number}.js"/>
-				<include name="scripts-${build.number}-debug.js"/>
+				<include name="${scripts.filename}-${build.number}-debug.js"/>
 			</fileset>    	
 	    </concat>
 	</target>
 	
 	
-	<target name="-js.all.minify" depends="-js.libs.minify" description="(PRIVATE) Minifies the scripts.js files created by js.scripts.concat">
+	<target name="-js.all.minify" depends="-js.libs.minify"
+            description="(PRIVATE) Minifies the scripts.js files created by js.scripts.concat">
 		<echo message="Minifying concatenated script- and library-file"/>
 		<apply verbose="true" executable="java" parallel="false">
 			<fileset dir="./${dir.publish}/${dir.js}">
@@ -483,11 +484,10 @@
 			<arg line="-jar"/>
 			<arg path="./${dir.build.tools}/${tool.yuicompressor}"/>
 			<srcfile/>
-			<arg line="--verbose"/>
 			<arg line="--line-break"/>
 			<arg line="4000"/>
 			<arg line="-o"/>
-			<mapper type="glob" from="*.js" to="${dir.publish}/${dir.js}/*.min.js"/>
+			<mapper type="glob" from="*.js" to="${basedir}/${dir.publish}/${dir.js}/*.min.js"/>
 			<targetfile/>
 		</apply>
 	</target>
@@ -502,7 +502,7 @@
 			<arg path="./${dir.build.tools}/${tool.yuicompressor}"/>
 			<srcfile/>
 			<arg line="-o"/>
-			<mapper type="glob" from="*.js" to="./${dir.publish}/${dir.js.libs}/*-${build.number}.min.js"/>
+			<mapper type="glob" from="*.js" to="${basedir}/${dir.publish}/${dir.js.libs}/*-${build.number}.min.js"/>
 			<targetfile/>
 		</apply>
 	</target>
@@ -513,8 +513,8 @@
 			<equals arg1="${build.delete.unoptimized}" arg2="true"/>
 			<then>
 				<echo message="Deleting unoptimized files..."/>
-				<delete file="./${dir.publish}/${dir.js}/scripts-${build.number}.js"/>
-				<delete file="./${dir.publish}/${dir.js}/scripts-${build.number}-debug.js"/>
+				<delete file="./${dir.publish}/${dir.js}/${scripts.filename}-${build.number}.js"/>
+				<delete file="./${dir.publish}/${dir.js}/${scripts.filename}-${build.number}-debug.js"/>
 				<!-- 
 				<delete dir="./${dir.publish}/${dir.js.lib}/"/> 
 				<delete file="./${dir.publish}/${dir.js}/libs-${build.number}.js"/>
@@ -533,7 +533,7 @@
 			</and>
 			<then>
 				<delete file="./${dir.publish}/${dir.js}/libs-${build.number}.js"/>
-				<delete file="./${dir.publish}/${dir.js}/scripts-${build.number}.js"/>
+				<delete file="./${dir.publish}/${dir.js}/${scripts.filename}-${build.number}.js"/>
 			</then>
 		</if>
 	</target>
@@ -575,7 +575,7 @@
 	<target name="-html" depends="-load-build-info" description="(PRIVATE) Very basic clean up of the HTML">
 		<echo message="Clean up the html..."/>
 		<!-- style.css replacement handled as a replacetoken above -->
-		<replaceregexp match="&lt;!-- scripts concatenated [\d\w\s\W]*?!-- end ((scripts)|(concatenated and minified scripts))--&gt;" replace="&lt;script src='${dir.js}/scripts-${build.number}.min.js\'&gt;&lt;/script&gt;" flags="m">
+		<replaceregexp match="&lt;!-- scripts concatenated [\d\w\s\W]*?!-- end ((scripts)|(concatenated and minified scripts))--&gt;" replace="&lt;script src='${dir.js}/${scripts.filename}-${build.number}.min.js\'&gt;&lt;/script&gt;" flags="m">
 			<fileset dir="./${dir.publish}" includes="${page-files}"/>
 		</replaceregexp>
 		<!--[! use comments like this one to avoid having them get minified -->
@@ -635,14 +635,17 @@
 	</target>
   
 
-	<target name="-serverconfig" description="(PRIVATE) Upgrades expires headers">
+	<target name="-serverconfig" description="(PRIVATE) Upgrades expires headers" depends="-check-serverconfig-file" if="${serverconfig.file.exists}">
 		<echo message="Upgrading expires header timeouts for js/css"/>
 		<replace file="./${dir.publish}/${file.serverconfig}" token="access plus 2 months" value="access plus 1 year"/>
 	</target>
-
+	    <target name="-check-serverconfig-file" unless="serverconfig.file.exists">
+		    <available property="serverconfig.file.exists" file="./${dir.publish}/${file.serverconfig}"/>
+		</target>
 	
 	<!-- CSS -->
-	<target name="-css" depends="-load-build-info" description="(PRIVATE) Concatenates and Minifies any stylesheets listed in the file.stylesheets property">
+	<target name="-css" depends="-check-css-exists,-load-build-info" if="css.folder.exists"
+            description="(PRIVATE) Concatenates and Minifies any stylesheets listed in the file.stylesheets property">
 		<echo message="Minifying css..."/>
 		<concat destfile="./${dir.publish}/${dir.css}/style-${build.number}.css">
 			<filelist dir="./${dir.publish}/${dir.css}" files="${stylesheet-files}"/>
@@ -658,6 +661,10 @@
 		</apply>
 		<replace token="style.css" value="style-${build.number}.min.css" dir="${dir.publish}" includes="${page-files}"/>
 	</target>
+        <target name="-check-css-exists" unless="css.folder.exists">
+		    <!--<echo message="Checking if folder &quot;./${dir.publish}/${dir.css}/&quot; exists" />-->
+            <available property="css.folder.exists" file="./${dir.publish}/${dir.css}/" type="dir"/>
+		</target>
 	
 	<!-- IMAGES -->
 	<target name="-imagespng" description="(PRIVATE) Optimizes .png images using optipng">
@@ -691,7 +698,7 @@
 			</else>
 		</if>
 		<apply executable="jpegtran" osfamily="unix">
-			<fileset dir="./${dir.images}" includes="*.jpg"/>
+			<fileset dir="${dir.publish}/${dir.images}" includes="*.jpg"/>
 			<arg value="-copy"/>
 			<arg value="${strip-meta-tags}"/>
 			<srcfile/>

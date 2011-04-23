@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<project name="CIAPI.Js.Core" default="build" basedir=".."><!-- pretend we're at the solution root -->
+    <import file="${basedir}/../tools/common-build-targets.xml"/>
+
+	<!-- load property files -->
+	<property file="${basedir}/CIAPI/build.project.properties"/>
+	<property file="${basedir}/project.default.properties"/>
+	<property file="${basedir}/build.properties"/>
+  
+	<!-- merge the stylesheet properties -->
+	<var name="stylesheet-files" value="${file.stylesheets}, ${file.default.stylesheets}"/>
+	
+	<!-- merge the pages properties -->
+	<var name="page-files" value="${file.pages}, ${file.pages.default.include}"/>
+
+</project>

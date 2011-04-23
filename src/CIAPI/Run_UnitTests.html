@@ -1,0 +1,26 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Unit Test Runner</title>
+  <link rel="stylesheet" type="text/css" href="lib/jasmine/jasmine.css">
+  <script type="text/javascript" src="lib/jasmine/jasmine.js"></script>
+  <script type="text/javascript" src="lib/jasmine/jasmine-html.js"></script>
+
+  <!-- include source files here... -->
+  <script type="text/javascript" src="src/RomanNumeralConverter.js"></script>
+
+  <!-- include spec files here... -->
+  <script type="text/javascript" src="unit_tests/RomanNumeralConverterTests.js"></script>
+
+</head>
+<body>
+
+<script type="text/javascript">
+  jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+  jasmine.getEnv().execute();
+</script>
+
+</body>
+</html>
