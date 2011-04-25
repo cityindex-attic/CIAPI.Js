@@ -1,0 +1,13 @@
+/*
+---
+name: CIAPI login demo
+description: jsFiddle based demo showing how to logon with CIAPI
+authors:
+  - David Laing
+resources:
+  - /js/empty.js
+  - /css/normalize.css
+...
+*/
+
+<p>This demo will show you how to: logon to CIAPI using the CIAPI.Js client library</p>
