@@ -70,3 +70,4 @@ publish
 
 # build script local files
 src/local.build.properties
+buildinfo.properties
