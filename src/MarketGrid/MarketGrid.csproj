@@ -1,23 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
-  </ItemGroup>
+  <PropertyGroup>
+    <ProjectGuid>{703FAA6A-1456-43EC-8275-C74E2FB53FAD}</ProjectGuid>
+  </PropertyGroup>
   <ItemGroup>
     <Content Include="build.project.xml" />
     <Content Include="css\handheld.css" />
@@ -59,5 +44,5 @@
     <None Include="build.project.properties" />
     <None Include="JsTestDriver.conf" />
   </ItemGroup>
-  <Import Project="$(MSBuildStartupDirectory)\..\tools\common-build-targets-msbuild-wrapper.proj.xml" />
+  <Import Project="$(MSBuildProjectDirectory)\..\..\tools\common-build-targets-msbuild-wrapper.proj.xml" />
 </Project>
