@@ -8,7 +8,8 @@ Wraps the build targets exposed by ant in a format that VS2010 can consume
 -->
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Target Name="Clean">
-    <Message Text="Cleaning" />
+    <Message Text="Shelling out to ant" />
+    <Exec Command='ant -f build.project.xml clean' />
   </Target>
   <Target Name="Build">
     <Message Text="Shelling out to ant" />
