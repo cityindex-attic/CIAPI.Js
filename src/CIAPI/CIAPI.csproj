@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{F49CC88F-4CD3-4402-B736-693FF2F3FC94}</ProjectGuid>
+  </PropertyGroup>
   <ItemGroup>
     <Content Include="build.project.xml" />
     <Content Include="js\CIAPI.dojo.js" />
@@ -10,8 +13,9 @@
     <Content Include="js\libs\dojo\!ReadMe.txt" />
     <Content Include="js\libs\dojo\dojo.js" />
     <Content Include="js\libs\dojo\dojo.js.uncompressed.js" />
-    <Content Include="Run_AcceptanceTests.html" />
-    <Content Include="Run_UnitTests.html" />
+    <Content Include="test\CIAPI.UnitTests.js" />
+    <Content Include="test\Run_AcceptanceTests.html" />
+    <Content Include="test\Run_UnitTests.html" />
     <Content Include="test\CIAPI.AcceptanceTests.js" />
   </ItemGroup>
   <ItemGroup>

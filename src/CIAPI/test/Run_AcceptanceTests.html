@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Acceptance Test Runner</title>
+  <link rel="stylesheet" type="text/css" href="../../../tools/jasmine/jasmine.css">
+  <script type="text/javascript" src="../../../tools/jasmine/jasmine.js"></script>
+  <script type="text/javascript" src="../../../tools/jasmine/jasmine-html.js"></script>
+
+  <!-- include source files here... -->
+  <script type="text/javascript" src="../js/CIAPI.js"></script>
+  <script type="text/javascript" src="../js/CIAPI.dojo.js"></script>
+  <script type="text/javascript" src="../js/CIAPI.__testData.js"></script>
+  <script type="text/javascript" src="../js/CIAPI.services.js"></script>
+  <script type="text/javascript" src="../js/CIAPI.streams.js"></script>
+
+  <!-- include spec files here... -->
+  <script type="text/javascript" src="CIAPI.AcceptanceTests.js"></script>
+
+</head>
+<body>
+
+<script type="text/javascript">
+  jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+  jasmine.getEnv().execute();
+</script>
+
+</body>
+</html>

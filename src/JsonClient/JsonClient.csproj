@@ -17,13 +17,6 @@
     <Content Include="test\qunit\QUnitExt.js" />
     <Content Include="test\sample-test.js" />
     <Content Include="test\sanitycheck.htm" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

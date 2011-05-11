@@ -18,4 +18,12 @@ Wraps the build targets exposed by ant in a format that VS2010 can consume
   <Target Name="ReBuild" DependsOnTargets="Clean;Build">
     <Message Text="Rebuilding" />
   </Target>
+  <Target Name="runtests-local">
+    <Message Text="Shelling out to ant" />
+    <Exec Command='ant -f build.project.xml runtests-local' />
+  </Target>
+  <Target Name="runtests-remote">
+    <Message Text="Shelling out to ant" />
+    <Exec Command='ant -f build.project.xml runtests-remote' />
+  </Target>
 </Project>

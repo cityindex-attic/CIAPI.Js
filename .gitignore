@@ -71,3 +71,5 @@ publish
 # build script local files
 src/local.build.properties
 buildinfo.properties
+**target*
+buildinfo.properties

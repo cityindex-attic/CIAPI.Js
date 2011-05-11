@@ -147,11 +147,11 @@
 	
 	<target name="runtests-local" description="(PUBLIC) runs tests on local jsTestDriver instance">
 		<antcall target="-runtests-local"/>
-    </target>
+  </target>
 	
 	<target name="runtests-remote" description="(PUBLIC) runs tests on remote jsTestDriver instance">
 		<antcall target="-runtests-remote"/>
-    </target>
+  </target>
 	
 	<!--
 	*************************************************
@@ -360,7 +360,7 @@
 	-->
 	
 	<target name="-runtests-local" depends="-create-reports-folder" description="(PRIVATE) Run tests through local jsTestDriver">
-		<exec executable="java" dir="${basedir}">
+		<exec executable="java" dir="${basedir}" failonerror="true">
 			<arg line="-jar &quot;${tool.jstestdriver}&quot;"/>
 			<arg line="--config &quot;${jstestdriver.config}&quot;"/>
 			<arg line="--server http://localhost:${jstestdriver.local.port}"/>
@@ -373,7 +373,7 @@
 	</target>	
 	 
 	<target name="-runtests-remote" depends="-create-reports-folder" description="(PRIVATE) Run tests through remote jsTestDriver">
-		<exec executable="java" dir="${basedir}">
+		<exec executable="java" dir="${basedir}" failonerror="true">
 			<arg line="-jar &quot;${tool.jstestdriver}&quot;"/>
 			<arg line="--config &quot;${jstestdriver.config}&quot;"/>
 			<arg line="--server ${jstestdriver.remote}"/>
