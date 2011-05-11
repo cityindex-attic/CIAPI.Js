@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="CIAPI.Js.Core" default="build" basedir=".."><!-- pretend we're at the solution root -->
+<project name="CIAPI" default="build" basedir=".."><!-- pretend we're at the solution root -->
     <import file="${basedir}/../tools/common-build-targets.xml"/>
 
 	<!-- load property files -->
