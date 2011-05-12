@@ -1,36 +1,47 @@
 <?xml version="1.0"?>
 <project name="CIAPI.Js.Master" default="build" basedir=".">
 
-	<property file="${basedir}/build.properties"/>
-	
-  <target name="build">
+	<property file="${basedir}/build.properties" />
+
+	<target name="build">
 		<subant target="build">
-		  <fileset dir="." includes="**/build.project.xml"/>
-		</subant>
-  </target>
-
-  <target name="basics">
-		<subant target="basics">
-		  <fileset dir="." includes="**/build.project.xml"/>
+			<fileset dir="." includes="**/build.project.xml" />
 		</subant>
 	</target>
 
-	<target name="start-webserver" description="(PUBLIC) Open /dist via built in webserver on http://localhost:4225/">
-		<exec spawn="true" executable="../tools/CassiniDev/Release/CassiniDev.exe">
-			<arg value="/a../dist"/>
-			<arg value="/pm:Specific"/>
-			<arg value="/p:4224"/>
-		</exec>
+	<target name="basics">
+		<subant target="basics">
+			<fileset dir="." includes="**/build.project.xml" />
+		</subant>
 	</target>
 	
+	<target name="publish" description="(PUBLIC) Copy selected files for publishing from /target folders of each sub-project">
+		<delete dir="${dir.publish}" />
+		
+		<copy todir="${dir.publish}/CIAPI">
+			<fileset dir="./CIAPI/target">
+				<include name="js/CIAPI-*.min.js" />
+			</fileset>
+		</copy>
+		
+		<copy todir="${dir.publish}/MarketGrid">
+			<fileset dir="./MarketGrid/target">
+				<include name="marketGrid.html" />
+				<include name="js/CIAPI.MarketGrid-*.min.js" />
+				<include name="css/**/*.min.css" />
+				<include name="images/**/*" />
+			</fileset>
+		</copy>
+	</target>
+
 	<target name="start-jstestdriver" description="(PUBLIC) Start jsTestDriver server on http://localhost:${jstestdriver.port}">
 		<echo message="Starting JsTestDriver on http://localhost:${jstestdriver.local.port}" />
 		<echo message="You need to capture a slave browser by browsing to on http://localhost:${jstestdriver.local.port}/capture" />
 		<echo message="Ctl-C to terminate" />
 		<exec executable="java" dir="${basedir}">
-			<arg line="-jar &quot;${tool.jstestdriver}&quot;"/>
-			<arg line="--port ${jstestdriver.local.port}"/>
+			<arg line="-jar &quot;${tool.jstestdriver}&quot;" />
+			<arg line="--port ${jstestdriver.local.port}" />
 		</exec>
 	</target>
-	
+
 </project>
