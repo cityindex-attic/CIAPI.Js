@@ -1,4 +1,4 @@
-describe("CIAPI acceptance tests", function() {
+describe("CIAPI unit tests", function() {
     var oneMinute = 1000 * 60;
     var timeDifference = function (priceBar1, priceBar2) {
         return Math.abs(priceBar1.BarDate.getTime() - priceBar2.BarDate.getTime());

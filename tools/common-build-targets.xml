@@ -671,7 +671,8 @@
 		</target>
 	
 	<!-- IMAGES -->
-	<target name="-imagespng" description="(PRIVATE) Optimizes .png images using optipng">
+	<target name="-imagespng" depends="-check-images-png-exists" if="images.png.exists"
+		description="(PRIVATE) Optimizes .png images using optipng">
 		<echo message="Optimizing images"/>
 		
 		<!-- osfamily=unix is actually true on OS X as well -->
@@ -688,9 +689,13 @@
 			</fileset>
 		</apply>
 	</target>
+	 		<target name="-check-images-png-exists" unless="images.png.exists">
+	            <available property="images.png.exists" file="./${dir.publish}/**/*.png" type="file"/>
+			</target>
  
 
-	<target name="-imagesjpg" description="(PRIVATE) Optimizes .jpg images using jpegtan">
+	<target name="-imagesjpg" depends="-check-images-jpg-exists" if="images.jpg.exists"
+		description="(PRIVATE) Optimizes .jpg images using jpegtan">
 		<echo message="Clean up those jpgs..."/>
 		<if>
 			<equals arg1="${images.strip.metadata}" arg2="true"/>
@@ -720,4 +725,7 @@
 			<mapper type="glob" from="*.jpg" to="${dir.publish}/${dir.images}/*.jpg"/>
 		</apply>
 	</target>
+				<target name="-check-images-jpg-exists" unless="images.jpg.exists">
+		            <available property="images.jpg.exists" file="./${dir.publish}/**/*.jpg" type="file"/>
+				</target>
 </project>
