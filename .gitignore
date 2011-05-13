@@ -73,3 +73,5 @@ src/local.build.properties
 buildinfo.properties
 **target*
 buildinfo.properties
+hudson-s3-plugin
+/src/.metadata/
