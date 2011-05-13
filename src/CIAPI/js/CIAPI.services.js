@@ -22,6 +22,6 @@ CIAPI.services = (function() {
                 PriceBars: CIAPI.dojo.clone(CIAPI.__testData.PriceBars.minute.slice(1, priceBars + 1))
             };
         }
-    }
+    };
 
 })();

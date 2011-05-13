@@ -17,7 +17,7 @@ CIAPI.__testData = (function() {
             minute: 1000 * 60,
             hour:  1000 * 60 * 60,
             day: 1000 * 60 * 60 * 24
-        }
+        };
         var theDate = new Date(previousBar.BarDate.getTime() - intervalInMs[interval]);
         var close = _generateNextPrice(previousBar);
         return {
@@ -26,7 +26,7 @@ CIAPI.__testData = (function() {
             "High": close * 1.1,
             "Low":close * 0.9,
             "Open":previousBar.Close
-        }
+        };
     },
     _currentBar = {
         "BarDate":new Date(),
@@ -37,7 +37,7 @@ CIAPI.__testData = (function() {
     };
 
     for (_i = 0; _i <= 1000; _i++) {
-        _priceBars.minute.push(_currentBar)
+        _priceBars.minute.push(_currentBar);
         _currentBar = _createPriceBar(_currentBar, 'minute');
 
         _marketList.push({
@@ -49,6 +49,6 @@ CIAPI.__testData = (function() {
     return {
         PriceBars: _priceBars,
         MarketList: _marketList
-    }
+    };
 
 })();

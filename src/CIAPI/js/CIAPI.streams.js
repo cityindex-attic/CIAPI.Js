@@ -23,6 +23,6 @@ CIAPI.streams = (function() {
                 });
             }, Math.random() * 5000 + 1000);
         }
-    }
+    };
 
 })();

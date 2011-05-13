@@ -19,7 +19,7 @@ function getMarketList(marketName) {
             high : market.priceHistory.PartialPriceBar.High,
             low : market.priceHistory.PartialPriceBar.Low,
             change : market.priceHistory.PartialPriceBar.Close - market.priceHistory.PriceBars[0].Close
-        }
+        };
     }
 
     console.log("Search for '" + marketName + "' returned: ", marketList);
@@ -82,7 +82,7 @@ function renderSparkline(market) {
          }
          closePrices.push(priceHistory.PartialPriceBar.Close());
          return closePrices;
-    }
+    };
     var sparklineId = '#' + market.MarketId() + "_sparkline";
     $(sparklineId).sparkline(extractClose(market.priceHistory));
 }

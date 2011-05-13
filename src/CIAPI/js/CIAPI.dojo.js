@@ -78,6 +78,6 @@ CIAPI.dojo = {};
             }
         }
         return r; // Object
-    }
+    };
 
 })();

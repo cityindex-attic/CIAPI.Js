@@ -1,45 +1,48 @@
-<!-- saved from url=(0052)http://media.fxsolutions.com/price_feed/default.html -->
-<html>
+<!doctype html> 
 <head>
     <title>MarketGrid demo</title>
 
-    <script type="text/javascript" src="../../tools/jquery/jquery-1.5.1.min.js"></script>
-    <script type="text/javascript" src="js/libs/jquery.tmpl.js"></script>
-    <script type="text/javascript" src="js/libs/jquery-ui-1.8.11.custom/js/jquery-ui-1.8.11.custom.min.js"></script>
-    <link type="text/css" href="js/libs/jquery-ui-1.8.11.custom/css/dark-hive/jquery-ui-1.8.11.custom.css"
-          rel="Stylesheet"/>
-    <script type="text/javascript" src="js/libs/jquery.sparkline.min.js"></script>
-
-    <script type="text/javascript" src="../../tools/JSON/json2.js"></script>
-    <script type="text/javascript" src="../CIAPI/target/js/CIAPI-0001.min.js"></script>
-
-    <script type="text/javascript" src="js/libs/knockout-1.2.0.debug.js"></script>
-    <script type="text/javascript" src="js/libs/knockout.mapping-latest.js"></script>
-
-    <script type="text/javascript" src="js/marketGrid.js"></script>
+	<link type="text/css" href="js/libs/jquery-ui-1.8.11.custom/css/dark-hive/jquery-ui-1.8.11.custom.css" rel="Stylesheet"/>
+	<script src="js/libs/head.min.js"></script> 
+ 
+	<script> 
+	    var cdn_libs = [
+				   {jquery: "http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"},
+				   {jquery_tmpl: "http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"},
+				   {jquery_sparklines: "js/libs/jquery.sparkline.min.js"},
+				   {json2: "http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"}
+				   ],
+			local_libs = [
+				   {knockout: "js/libs/knockout-1.2.0.debug.js"},
+				   {knockout_mapping: "js/libs/knockout.mapping-latest.js"}
+				   ],
+		    CIAPI = ["../CIAPI/target/js/CIAPI-0001.min.js"],
+		    CIAPI_MarketGrid = ["js/marketGrid.js"]; 
+	    
+		head.js.apply(this, cdn_libs.concat(local_libs, CIAPI, CIAPI_MarketGrid));
+	</script>
 </head>
 <body>
-
-<div id="marketGrid">
-    <div>
-        <input id="marketSearchQuery" name="marketSearch" type="text" value="USD"/>
-        <button id="doMarketSearchButton" data-bind="click: doMarketSearch">Search</button>
-    </div>
-    <table border=1>
-        <thead>
-            <tr>
-                <th>Market</th>
-                <th>&nbsp;</th>
-                <th>Bid</th>
-                <th>Offer</th>
-                <th>High</th>
-                <th>Low</th>
-                <th>Change</th>
-            </tr>
-        </thead>
-        <tbody data-bind='template: { name: "itemTemplate", foreach: marketList }'></tbody>
-    </table>
-    <script type="text/html" id="itemTemplate">
+	<div id="marketGrid">
+	    <div>
+	        <input id="marketSearchQuery" name="marketSearch" type="text" value="USD"/>
+	        <button id="doMarketSearchButton" data-bind="click: doMarketSearch">Search</button>
+	    </div>
+	    <table border=1>
+	        <thead>
+	            <tr>
+	                <th>Market</th>
+	                <th>&nbsp;</th>
+	                <th>Bid</th>
+	                <th>Offer</th>
+	                <th>High</th>
+	                <th>Low</th>
+	                <th>Change</th>
+	            </tr>
+	        </thead>
+	        <tbody data-bind='template: { name: "itemTemplate", foreach: marketList }'></tbody>
+	    </table>
+	    <script type="text/html" id="itemTemplate">
         <tr>
             <td data-bind="text: Name">EUR/USD</td>
             <td><span data-bind="attr: { id: MarketId() + '_sparkline'}">rendering...</span></td>
@@ -50,8 +53,6 @@
             <td data-bind="text: currentPrice.change().toFixed(5), style: { backgroundColor: currentPrice.change() < 0 ? 'red' : 'blue' }">1.3876</td>
         </tr>
     </script>
-</div>
-
-
+	</div>
 </body>
 </html>
