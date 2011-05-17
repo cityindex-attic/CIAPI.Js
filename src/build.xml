@@ -32,6 +32,15 @@
 				<include name="images/**/*" />
 			</fileset>
 		</copy>
+
+        <copy todir="${dir.publish}/Chart">
+			<fileset dir="./Chart/target">
+				<include name="chart.html" />
+				<include name="js/CIAPI.Chart-*.min.js" />
+				<include name="css/**/*.min.css" />
+				<include name="images/**/*" />
+			</fileset>
+		</copy>
 	</target>
 
 	<target name="start-jstestdriver" description="(PUBLIC) Start jsTestDriver server on http://localhost:${jstestdriver.port}">
