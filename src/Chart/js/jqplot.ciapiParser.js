@@ -2,7 +2,7 @@
  * jqPlot
  * Pure JavaScript plotting plugin using jQuery
  *
- * Version: 1.0.0b1_r746
+ * Version: 1.0.0a_r701
  *
  * Copyright (c) 2009-2011 Chris Leonello
  * jqPlot is currently available for use in all personal or commercial projects 
@@ -53,7 +53,6 @@
     $.jqplot.ciParser = function (data, plot) {
         var ret = [],
             line,
-			temp,
             i, j, k, kk;
     
          if (typeof(data) == "string") {
@@ -97,10 +96,8 @@
             line = [];
             temp = data[prop];
             switch (prop) {
-                case "PriceTicks":
-                    for (i=0; i<temp.length; i++) {
-                        line.push([temp[i]['TickDate'], temp[i]['Price']]);
-                    }
+                case "PartialPriceBar":
+                        line.push([handleStrings(null, temp['BarDate']), temp['Open'], temp['High'], temp['Low'], temp['Close']]);
                     break;
                 case "PriceBars":
                     for (i=0; i<temp.length; i++) {

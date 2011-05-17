@@ -1,47 +1,105 @@
 (function($, undefined) {
 
-    function init() {
-		var idx, priceBarsMinute, currentBar;
-		var idx, priceBarsMinute, currentBar;
-        jQuery.jqplot.config.enablePlugins = true; // on the page before plot creation.
-        priceBarsMinute = CIAPI.services.GetPriceBars(36246, 'minute', 1, 50);
+    function calculateRangeData(priceBars)
+    {
+        var idx, currentBar,
+            rangeData = { Min: 99999, Max:-99999 };
+        for(idx in priceBars.PriceBars) {
+            currentBar = priceBars.PriceBars[idx];
 
-        priceBarsMinute.RangeData = { Min: 1, Max:2 };
-        for(idx in priceBarsMinute.PriceBars) {
-            currentBar = priceBarsMinute.PriceBars[idx];
-
-            if (currentBar.High > priceBarsMinute.RangeData.Max) {
-                priceBarsMinute.RangeData.Max =  currentBar.High;
+            if (currentBar.High > rangeData.Max) {
+                rangeData.Max =  currentBar.High * 1.5;
             }
-            if (currentBar.Low < priceBarsMinute.RangeData.Min) {
-                priceBarsMinute.RangeData.Min =  currentBar.Low;
+            if (currentBar.Low < rangeData.Min) {
+                rangeData.Min = currentBar.Low * 0.9;
             }
         }
+        return rangeData;
+    }
 
-        chart1 = $.jqplot('chart1', priceBarsMinute, {
-          title:'1 minute',
+    function plotCandleStickChart(chartInfo) {
+		var rangeInfo, theChart, myRenderOptions;
+        jQuery.jqplot.config.enablePlugins = true; // on the page before plot creation.
+
+        rangeInfo = calculateRangeData(chartInfo.data);
+        myRenderOptions = {
+                renderer:$.jqplot.OHLCRenderer,
+                rendererOptions: {
+                    candleStick:true,
+                    fillUpBody:true,
+                    upBodyColor:'#66FF00',
+                    downBodyColor:'#FF0000'}
+                };
+        theChart = $.jqplot(chartInfo.id, chartInfo.data, {
+          title: chartInfo.title,
           dataRenderer: $.jqplot.ciParser,
+          grid: {
+            gridLineColor: '#555555',
+            background: '#000000',
+            borderColor:'#000000',
+            shadow: false
+          },
+          cursor:{
+            show: true,
+            style: 'crosshair',
+            zoom:true,
+            showTooltip:true,
+            tooltipLocation: 'sw'
+
+          },
+          axesDefaults: {
+              tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+              tickOptions: {
+                fontSize: '12px'
+              },
+              pad: 1.05
+          },
           axes: {
               xaxis: {
                   renderer:$.jqplot.DateAxisRenderer,
-                  tickInterval: '1 minute',
-                  tickOptions:{formatString:'%H:%m:%S'}
+                  tickInterval: '5 minute',
+                  tickOptions:{
+                      formatString:'%H:%m:%S',
+                      angle: -60
+                  }
               },
               yaxis: {
-                  tickOptions:{formatString:'%.4f'},
-                  min: priceBarsMinute.RangeData.Min,
-                  max: priceBarsMinute.RangeData.Max
+                  tickOptions:{
+                      formatString:'%.4f'
+                  }
               }
           },
           series: [
-            {renderer:$.jqplot.OHLCRenderer, rendererOptions:{candleStick:true}},
-            {renderer:$.jqplot.OHLCRenderer, rendererOptions:{candleStick:true}}]
+              myRenderOptions,
+              myRenderOptions
+          ],
+          highlighter: {
+              show: true,
+              showMarker:false,
+              tooltipAxes: 'xy',
+              yvalues: 4,
+              formatString:'<table class="jqplot-highlighter">' +
+                            '<tr><td>Date:</td><td>%s</td></tr>' +
+                            '<tr><td>Open:</td><td>%s</td></tr>' +
+                            '<tr><td>Hi:</td><td>%s</td></tr>' +
+                            '<tr><td>Low:</td><td>%s</td></tr> ' +
+                            '<tr><td>Close:</td><td>%s</td></tr></table>'
+            }
         });
 	};
 
     $(document).ready(function() {
        CIAPI.log('initialising charts');
-       init();
+       plotCandleStickChart({
+           id: 'chart1',
+           title: '1 minute',
+           data: CIAPI.services.GetPriceBars(36246, 'minute', 1, 100)
+       });
+       plotCandleStickChart({
+           id: 'chart2',
+           title: '1 minute',
+           data: CIAPI.services.GetPriceBars(36246, 'minute', 1, 10)
+       });
     });
 
 })(jQuery);
