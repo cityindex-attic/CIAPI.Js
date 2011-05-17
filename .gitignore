@@ -75,3 +75,4 @@ buildinfo.properties
 buildinfo.properties
 hudson-s3-plugin
 /src/.metadata/
+/scratchpad/
