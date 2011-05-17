@@ -2,7 +2,7 @@
 <head>
     <title>Chart demo</title>
 
-    <link rel="stylesheet" type="text/css" href="js/libs/jqplot/jquery.jqplot.css" />
+    <link rel="stylesheet" type="text/css" href="js/libs/jqplot/jquery.jqplot.min.css" />
 	<script src="js/libs/head.min.js"></script>
  
 	<script> 
@@ -14,15 +14,21 @@
 			local_libs = [
 				   {jqplot: "js/libs/jqplot/jquery.jqplot.min.js"},
 				   "js/libs/jqplot/plugins/jqplot.cursor.min.js",
-				   "js/libs/jqplot/plugins/jqplot.dateAxisRenderer.js",
+				   "js/libs/jqplot/plugins/jqplot.dateAxisRenderer.min.js",
 				   "js/libs/jqplot/plugins/jqplot.canvasTextRenderer.min.js",
 				   "js/libs/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js",
 				   "js/libs/jqplot/plugins/jqplot.highlighter.min.js",
 				   "js/libs/jqplot/plugins/jqplot.ohlcRenderer.min.js",
 				   "js/libs/jqplot/plugins/jqplot.json2.min.js"
 				   ],
-		    CIAPI = ["../CIAPI/target/js/CIAPI-0001.min.js"],
-		    CIAPI_Chart = ["js/jqplot.ciapiParser.js", "js/chart.js"];
+		    CIAPI = [
+                /*dev*/ "../CIAPI/target/js/CIAPI-0001.min.js"
+                /*production "../CIAPI/js/CIAPI-0001.min.js" */
+                ],
+		    CIAPI_Chart = [
+                /*dev*/ "js/jqplot.ciapiParser.js", "js/chart.js"
+                /*production "js/CIAPI.Chart-0001.min.js" */
+            ];
 	    
 		head.js.apply(this, cdn_libs.concat(local_libs, CIAPI, CIAPI_Chart));
 	</script>
