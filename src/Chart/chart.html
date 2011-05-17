@@ -1,58 +1,30 @@
 <!doctype html> 
 <head>
-    <title>MarketGrid demo</title>
+    <title>Chart demo</title>
 
-	<link type="text/css" href="js/libs/jquery-ui-1.8.11.custom/css/dark-hive/jquery-ui-1.8.11.custom.css" rel="Stylesheet"/>
-	<script src="js/libs/head.min.js"></script> 
+    <link rel="stylesheet" type="text/css" href="js/libs/jqplot/jquery.jqplot.css" />
+	<script src="js/libs/head.min.js"></script>
  
 	<script> 
 	    var cdn_libs = [
 				   {jquery: "http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"},
 				   {jquery_tmpl: "http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"},
-				   {jquery_sparklines: "js/libs/jquery.sparkline.min.js"},
 				   {json2: "http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"}
 				   ],
 			local_libs = [
-				   {knockout: "js/libs/knockoutjs/knockout-1.2.0.debug.js"},
-				   {knockout_mapping: "js/libs/knockoutjs/knockout.mapping-latest.js"}
+				   {jqplot: "js/libs/jqplot/jquery.jqplot.js"},
+				   "js/libs/jqplot/plugins/jqplot.dateAxisRenderer.js",
+				   "js/libs/jqplot/plugins/jqplot.ohlcRenderer.js",
+				   "js/libs/jqplot/plugins/jqplot.json2.js",
+				   "js/libs/jqplot/plugins/jqplot.ciParser.js"
 				   ],
 		    CIAPI = ["../CIAPI/target/js/CIAPI-0001.min.js"],
-		    CIAPI_MarketGrid = ["js/marketGrid.js"]; 
+		    CIAPI_Chart = ["js/chart.js"];
 	    
-		head.js.apply(this, cdn_libs.concat(local_libs, CIAPI, CIAPI_MarketGrid));
+		head.js.apply(this, cdn_libs.concat(local_libs, CIAPI, CIAPI_Chart));
 	</script>
 </head>
 <body>
-	<div id="marketGrid">
-	    <div>
-	        <input id="marketSearchQuery" name="marketSearch" type="text" value="USD"/>
-	        <button id="doMarketSearchButton" data-bind="click: doMarketSearch">Search</button>
-	    </div>
-	    <table border=1>
-	        <thead>
-	            <tr>
-	                <th>Market</th>
-	                <th>&nbsp;</th>
-	                <th>Bid</th>
-	                <th>Offer</th>
-	                <th>High</th>
-	                <th>Low</th>
-	                <th>Change</th>
-	            </tr>
-	        </thead>
-	        <tbody data-bind='template: { name: "itemTemplate", foreach: marketList }'></tbody>
-	    </table>
-	    <script type="text/html" id="itemTemplate">
-        <tr>
-            <td data-bind="text: Name">EUR/USD</td>
-            <td><span data-bind="attr: { id: MarketId() + '_sparkline'}">rendering...</span></td>
-            <td data-bind="text: currentPrice.bid().toFixed(5)">1.3876</td>
-            <td data-bind="text: currentPrice.offer().toFixed(5)">1.3876</td>
-            <td data-bind="text: currentPrice.high().toFixed(5)">1.3876</td>
-            <td data-bind="text: currentPrice.low().toFixed(5)">1.3876</td>
-            <td data-bind="text: currentPrice.change().toFixed(5), style: { backgroundColor: currentPrice.change() < 0 ? 'red' : 'blue' }">1.3876</td>
-        </tr>
-    </script>
-	</div>
+    <div id="chart1" style="height:100%; width:100%;"></div>
 </body>
 </html>
