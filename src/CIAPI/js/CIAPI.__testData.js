@@ -1,5 +1,8 @@
 var CIAPI = CIAPI || {};
 
+/**
+    @namespace Test data
+*/
 CIAPI.__testData = (function() {
 
    var
@@ -8,10 +11,16 @@ CIAPI.__testData = (function() {
     _priceBars = {
         minute: []
     },
+   /**
+    * @private
+    */
     _generateNextPrice = function (lastPrice) {
         var direction = Math.random() > 0.5 ? 1 : -1;
         return lastPrice.Close + (direction * lastPrice.Close * 0.05);
     },
+   /**
+    * @private
+    */
     _createPriceBar = function(previousBar, interval) {
         var intervalInMs = {
             minute: 1000 * 60,

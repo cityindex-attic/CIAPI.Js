@@ -26,11 +26,23 @@
                 /*production "../CIAPI/js/CIAPI-0001.min.js" */
                 ],
 		    CIAPI_Chart = [
-                /*dev*/ "js/jqplot.ciapiParser.js", "js/chart.js"
+                /*dev*/ "js/chart.js"
                 /*production "js/CIAPI.Chart-0001.min.js" */
             ];
 	    
-		head.js.apply(this, cdn_libs.concat(local_libs, CIAPI, CIAPI_Chart));
+		head.js.apply(this, cdn_libs.concat(local_libs, CIAPI, CIAPI_Chart)).ready(function() {
+            CIAPI.log('initialising charts');
+            CIAPI.chart.plotCandlestickChart({
+                   id: 'chart1',
+                   title: '1 minute',
+                   data: CIAPI.services.GetPriceBars(36246, 'minute', 1, 100)
+               });
+            CIAPI.chart.plotCandlestickChart({
+                   id: 'chart2',
+                   title: '1 minute',
+                   data: CIAPI.services.GetPriceBars(36246, 'minute', 1, 10)
+               });
+            });
 	</script>
 </head>
 <body>

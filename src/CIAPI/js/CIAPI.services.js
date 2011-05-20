@@ -1,8 +1,17 @@
 var CIAPI = CIAPI || {};
 
+/**
+    @namespace A collection of services that you can call
+*/
 CIAPI.services = (function() {
 
     return {
+        /**
+         * Search for markets of type CFD
+         * @param searchByMarketName
+         * @param searchByMarketCode
+         * @param maxResults
+         */
         ListCfdMarkets: function(searchByMarketName, searchByMarketCode, maxResults) {
             if (maxResults > 1000) throw { message: "Can only return a maximum of 1000 pricebars" };
 

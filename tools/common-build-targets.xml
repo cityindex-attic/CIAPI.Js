@@ -161,7 +161,19 @@
 				<include name="**/*" />
 			</fileset>
 		</copy>
-  	</target>
+  </target>
+
+  <taskdef name="jsdoctoolkit" classname="uk.co.darrenhurley.ant.tasks.JsDocToolkit" classpath="../tools/jsdoc/jsdoc-toolkit-ant-task-1.1.2.jar;../tools/rhino/js.jar"/>
+  <target name="generate-docs">
+    <echo message="Writing Javascript documentation to ${dir.publish.reports}"/> 
+    <jsdoctoolkit jsdochome="${basedir}/../tools/jsdoc/jsdoc-toolkit/" template="outline" outputdir="${basedir}/${dir.publish.reports}/jsdocs" 
+      includeundocumented="true" includeunderscored="false" verbose="true">
+      <fileset dir="${dir.source}/js/" >
+        <include name="**/*.js" />
+        <exclude name="libs/" />
+      </fileset>
+    </jsdoctoolkit>
+  </target>
 	
 	<!--
 	*************************************************

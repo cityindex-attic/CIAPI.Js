@@ -16,9 +16,14 @@
 		 			 "../js/CIAPI.dojo.js",
 					 "../js/CIAPI.__testData.js",
 					 "../js/CIAPI.services.js",
-					 "../js/CIAPI.streams.js"];
+					 "../js/CIAPI.streams.js",
+					 "../js/dto/PriceBar.js",
+            ];
 	    
-		head.js.apply(this, standard_libs.concat(CIAPI, ["CIAPI.UnitTests.js"]));
+		head.js.apply(this, standard_libs.concat(CIAPI, [
+            "CIAPI.UnitTests.js",
+            "dto.PriceBar.UnitTests.js"
+        ]));
 	</script>
 </head>
 
