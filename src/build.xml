@@ -23,7 +23,17 @@
 				<include name="js/CIAPI-*.min.js" />
 			</fileset>
 		</copy>
-		
+
+    <copy todir="${dir.publish}/Authentication">
+			<fileset dir="./Authentication/target">
+				<include name="sample.html" />
+                <include name="js/libs/head.min.js" />
+				<include name="js/CIAPI.Authentication-*.min.js" />
+				<include name="css/**/*.min.css" />
+				<include name="images/**/*" />
+			</fileset>
+		</copy>
+
 		<copy todir="${dir.publish}/MarketGrid">
 			<fileset dir="./MarketGrid/target">
 				<include name="marketGrid.html" />
@@ -44,9 +54,10 @@
 				<include name="css/**/*.min.css" />
 				<include name="images/**/*" />
 			</fileset>
-		</copy>
+    </copy>
 	</target>
 
+   
 	<target name="start-jstestdriver" description="(PUBLIC) Start jsTestDriver server on http://localhost:${jstestdriver.port}">
 		<echo message="Starting JsTestDriver on http://localhost:${jstestdriver.local.port}" />
 		<echo message="You need to capture a slave browser by browsing to on http://localhost:${jstestdriver.local.port}/capture" />

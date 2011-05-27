@@ -1,0 +1,53 @@
+<!doctype html> 
+<head>
+    <title>Authentication demo</title>
+
+	<link type="text/css" href="js/libs/jquery-ui-1.8.11.custom/css/dark-hive/jquery-ui-1.8.11.custom.css" rel="Stylesheet"/>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+	<script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+	<script src="js/libs/jquery-ui-1.8.11.custom/js/jquery-ui-1.8.11.custom.js"></script>
+	<script src="js/libs/knockoutjs/knockout-1.2.0.debug.js"></script>
+	<script src="js/libs/knockoutjs/knockout.mapping-latest.js"></script>
+	<script src="../CIAPI/target/js/CIAPI-0001.min.js"></script>
+	<script src="js/authentication.js"></script>
+
+</head>
+<body>
+	<div id="AuthenticationWidget" style="width: 200px"></div>
+    <script>
+        $(document).ready(function() {
+          $('#AuthenticationWidget').CIAPI_AuthenticationWidget();
+          //$('#AuthenticationWidget').CIAPI_AuthenticationWidget({template: "detailTemplate2"});
+        });
+    </script>
+    <script id="detailTemplate2" type="text/x-jquery-tmpl">
+        <p>
+            <label for="username">USERNAME<br />
+            <input type="text"
+                    name="username"
+                    id="username"
+                    class="inputFields"
+                    data-bind="value: username"
+                    size="20"
+                    tabindex="1" />
+            </label>
+        </p>
+        <p>
+            <label for="password">PASSWORD<br />
+            <input type="password"
+                    name="password"
+                    id="password"
+                    class="inputFields"
+                    data-bind="value: password"
+                    size="20"
+                    tabindex="2" />
+            </label>
+        </p>
+        <p class="submit">
+            <button id="doAuthenticationButton"  data-bind="click: doAuthentication" tabindex="3">Log on</button>
+        </p>
+        <div id="login_message"></div>
+    </script>
+</body>
+</html>
