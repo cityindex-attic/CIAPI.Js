@@ -5,7 +5,7 @@ describe("CIAPI unit tests", function() {
     };
 
     it("should return a meaningful valid pricehistory result", function() {
-        var priceBars = CIAPI.services.GetPriceBars(71442, 'minute', 1, 200);
+        var priceBars = CIAPI.services.GetPriceBars(10, 'minute', 1, 200);
 
         expect(priceBars.PriceBars.length).toEqual(200);
         expect(timeDifference(priceBars.PartialPriceBar, priceBars.PriceBars[0])).toEqual(oneMinute);
@@ -20,6 +20,15 @@ describe("CIAPI unit tests", function() {
 
         expect(markets.length).toEqual(65);
     });
+
+    it("priceHistories should be different for each market", function() {
+        var priceBars1 = CIAPI.services.GetPriceBars(9, 'minute', 1, 200);
+        var priceBars2 = CIAPI.services.GetPriceBars(10, 'minute', 1, 200);
+
+        expect(priceBars1.PartialPriceBar.Open).not.toEqual(priceBars2.PartialPriceBar.Open);
+    });
+
+
 });
 
 

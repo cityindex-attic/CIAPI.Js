@@ -76,3 +76,5 @@ buildinfo.properties
 hudson-s3-plugin
 /src/.metadata/
 /scratchpad/
+/src/Authentication/js/libs/
+/src/OpenPositions/js/libs/

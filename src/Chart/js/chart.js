@@ -84,11 +84,21 @@ CIAPI.chart = (function($, undefined) {
         return ret;
     };
 
+    function sanitise(data) {
+        if (data.PriceBars["__ko_proto__"] === undefined)
+        {
+            return data;
+        }
+
+        var priceBars = ko.mapping.toJS(data);
+        return priceBars;
+    }
+
+    var createdCharts = {};
     function plotCandleStickChart(chartInfo) {
-		var rangeInfo, theChart, myRenderOptions;
+		var rangeInfo, theChart, standardRenderOptions, theChart, chartData;
         jQuery.jqplot.config.enablePlugins = true; // on the page before plot creation.
-        //rangeInfo = calculateRangeData(chartInfo.data);
-        myRenderOptions = {
+        standardRenderOptions = {
                 renderer:$.jqplot.OHLCRenderer,
                 rendererOptions: {
                     candleStick:true,
@@ -96,64 +106,76 @@ CIAPI.chart = (function($, undefined) {
                     upBodyColor:'#66FF00',
                     downBodyColor:'#FF0000'}
                 };
+
         try
         {
-        theChart = $.jqplot(chartInfo.id, chartInfo.data, {
-          title: chartInfo.title,
-          dataRenderer: $.jqplot.ciParser,
-          grid: {
-            gridLineColor: '#555555',
-            background: '#000000',
-            borderColor:'#000000',
-            shadow: false
-          },
-          cursor:{
-            show: true,
-            style: 'crosshair',
-            zoom:true,
-            showTooltip:true,
-            tooltipLocation: 'sw'
+            chartData = sanitise(chartInfo.data);
+            if (!createdCharts[chartInfo.id]) {
+              createdCharts[chartInfo.id] = $.jqplot(chartInfo.id, chartData, {
+              title: chartInfo.title,
+              dataRenderer: $.jqplot.ciParser,
+              grid: {
+                gridLineColor: '#555555',
+                background: '#000000',
+                borderColor:'#000000',
+                shadow: false
+              },
+              cursor:{
+                show: true,
+                style: 'crosshair',
+                zoom:true,
+                showTooltip:true,
+                tooltipLocation: 'sw'
 
-          },
-          axesDefaults: {
-              tickRenderer: $.jqplot.CanvasAxisTickRenderer,
-              tickOptions: {
-                fontSize: '12px'
               },
-              pad: 1.05
-          },
-          axes: {
-              xaxis: {
-                  renderer:$.jqplot.DateAxisRenderer,
-                  tickInterval: '5 minute',
-                  tickOptions:{
-                      formatString:'%H:%m:%S',
-                      angle: -60
+              axesDefaults: {
+                  tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                  tickOptions: {
+                    fontSize: '12px'
                   }
               },
-              yaxis: {
-                  tickOptions:{
-                      formatString:'%.4f'
+              axes: {
+                  xaxis: {
+                      renderer:$.jqplot.DateAxisRenderer,
+                      tickInterval: '5 minute',
+                      tickOptions:{
+                          formatString:'%H:%m:%S',
+                          angle: -60
+                      }
+                  },
+                  yaxis: {
+                      tickOptions:{
+                          formatString:'%.2f'
+                      }
                   }
-              }
-          },
-          series: [
-              myRenderOptions,
-              myRenderOptions
-          ],
-          highlighter: {
-              show: true,
-              showMarker:false,
-              tooltipAxes: 'xy',
-              yvalues: 4,
-              formatString:'<table class="jqplot-highlighter">' +
-                            '<tr><td>Date:</td><td>%s</td></tr>' +
-                            '<tr><td>Open:</td><td>%s</td></tr>' +
-                            '<tr><td>Hi:</td><td>%s</td></tr>' +
-                            '<tr><td>Low:</td><td>%s</td></tr> ' +
-                            '<tr><td>Close:</td><td>%s</td></tr></table>'
-            }
-        });
+              },
+              series: [
+                  standardRenderOptions,
+                  standardRenderOptions
+              ],
+              highlighter: {
+                  show: true,
+                  showMarker:false,
+                  tooltipAxes: 'xy',
+                  yvalues: 4,
+                  formatString:'<table class="jqplot-highlighter">' +
+                                '<tr><td>Date:</td><td>%s</td></tr>' +
+                                '<tr><td>Open:</td><td>%s</td></tr>' +
+                                '<tr><td>Hi:</td><td>%s</td></tr>' +
+                                '<tr><td>Low:</td><td>%s</td></tr> ' +
+                                '<tr><td>Close:</td><td>%s</td></tr></table>'
+                }
+            });
+          }
+          else {
+                var newData = $.jqplot.ciParser(chartData);
+                var theChart = createdCharts[chartInfo.id];
+
+                theChart.series[0].data = newData[0];
+                theChart.series[1].data = newData[1];
+
+                theChart.replot({resetAxes:true})
+          }
         }
         catch(error)
         {

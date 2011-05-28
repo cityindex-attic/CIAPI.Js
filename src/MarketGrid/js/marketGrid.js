@@ -12,7 +12,6 @@ function getMarketList(marketName) {
 
     for (var idx in marketList) {
         market = marketList[idx];
-        market.priceHistory = CIAPI.services.GetPriceBars(market.MarketId, 'minute', 1, 50);
         market.currentPrice = {
             bid : market.priceHistory.PartialPriceBar.Close,
             offer : market.priceHistory.PartialPriceBar.Close,

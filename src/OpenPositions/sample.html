@@ -1,0 +1,67 @@
+<!doctype html> 
+<head>
+    <title>Open Positions demo</title>
+
+	<link type="text/css" href="js/libs/jquery-ui-1.8.11.custom/css/dark-hive/jquery-ui-1.8.11.custom.css" rel="Stylesheet"/>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+	<script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+	<script src="js/libs/jquery-ui-1.8.11.custom/js/jquery-ui-1.8.11.custom.js"></script>
+
+
+	<script src="js/libs/knockoutjs/knockout-1.2.0.debug.js"></script>
+	<script src="js/libs/knockoutjs/knockout.mapping-latest.js"></script>
+
+	<script src="../CIAPI/target/js/CIAPI-0001.min.js"></script>
+
+	<script src="../Chart/target/js/libs/jqplot/jquery.jqplot.min.js"></script>
+	<script src="../Chart/target/js/libs/jqplot/plugins/jqplot.cursor.min.js"></script>
+	<script src="../Chart/target/js/libs/jqplot/plugins/jqplot.dateAxisRenderer.min.js"></script>
+	<script src="../Chart/target/js/libs/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+	<script src="../Chart/target/js/libs/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+	<script src="../Chart/target/js/libs/jqplot/plugins/jqplot.ohlcRenderer.min.js"></script>
+	<script src="../Chart/target/js/libs/jqplot/plugins/jqplot.json2.min.js"></script>
+
+    <script src="../Chart/js/chart.js"></script>
+
+    <script src="js/mylibs/ko.bindingHandlers.delegatedEvent.js"></script>
+    <script src="js/openPositions.js"></script>
+
+</head>
+<body>
+	<div id="OpenPositionsWidget"></div>
+
+    <style>
+        .clickableRow { cursor: pointer; }
+    </style>
+    <script type="text/html" id="OpenPositionsWidgetTemplate">
+        <div id="chart" style="width:100%; height:300px"></div>
+        <div id="grid" style="width:100%;" >
+            <table border=1 data-bind="delegatedEvent: [{ event: 'click', callback: changeSelectedRow, selector: 'td'}, { event: 'mouseover', callback: highlightRow, selector: 'td'}, { event: 'mouseout', callback: clearRowHighlight, selector: 'td'}]">
+               <thead>
+                   <tr>
+                        <th>Market</th>
+                        <th>Open price</th>
+                        <th>Current price</th>
+                        <th>P&L</th>
+                   </tr>
+               </thead>
+               <tbody data-bind="template: { name: 'gridRowTemplate', foreach: openPositions }"></tbody>
+            </table>
+         </div>
+    </script>
+    <script type="text/html" id="gridRowTemplate">
+        <tr class="clickableRow" data-bind="css: { 'ui-state-highlight': isHighlighted(), 'ui-state-active': isSelected() }">
+            <td data-bind="text: marketName">EUR/USD</td>
+            <td data-bind="text: openPrice().toFixed(5)">1.3876</td>
+            <td data-bind="text: currentPrice.bid().toFixed(5)">1.3876</td>
+            <td data-bind="text: profit().toFixed(2)">1.3876</td>
+        </tr>
+    </script>
+    <script>
+        $(document).ready(function() {
+          $('#OpenPositionsWidget').CIAPI_OpenPositionsWidget();
+        });
+    </script>
+</body>
+</html>

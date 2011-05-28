@@ -23,12 +23,23 @@ CIAPI.services = (function() {
             return markets;
         },
         GetPriceBars: function(marketId, interval, span, priceBars) {
+            var idx, marketPriceBars=[];
+
             if (interval !== 'minute') throw { message: "Only interval of 'minute' is currently supported" };
             if (priceBars > 1000) throw { message: "Can only return a maximum of 1000 pricebars" };
 
+            for(idx in CIAPI.__testData.MarketList)
+            {
+
+                if (CIAPI.__testData.MarketList[idx].MarketId == marketId){
+                    marketPriceBars = CIAPI.__testData.MarketList[idx].PriceHistory;
+                    break;
+                }
+            }
+
             return {
-                PartialPriceBar: CIAPI.dojo.clone(CIAPI.__testData.PriceBars.minute[0]),
-                PriceBars: CIAPI.dojo.clone(CIAPI.__testData.PriceBars.minute.slice(1, priceBars + 1))
+                PartialPriceBar: CIAPI.dojo.clone(marketPriceBars.minute[0]),
+                PriceBars: CIAPI.dojo.clone(marketPriceBars.minute.slice(1, priceBars + 1))
             };
         }
     };

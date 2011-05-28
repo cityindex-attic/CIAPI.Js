@@ -5,9 +5,17 @@ CIAPI.streams = (function() {
     return {
         ListenToPrice: function(marketId, callBack) {
             setInterval(function() {
-                var change,
+                var idx, change,
                     direction,
-                    _priceBars = CIAPI.__testData.PriceBars;
+                    _priceBars;
+
+                for(idx in CIAPI.__testData.MarketList)
+                {
+                    if (CIAPI.__testData.MarketList[idx].MarketId == marketId){
+                        _priceBars = CIAPI.__testData.MarketList[idx].PriceHistory;
+                        break;
+                    }
+                }
                 direction = Math.random() > 0.5 ? 1 : -1;
                 change = direction * _priceBars.minute[0].Close * 0.05;
                 _priceBars.minute[0].Close += change;
