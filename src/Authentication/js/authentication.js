@@ -1,7 +1,7 @@
 (function($, undefined) {
     $.widget("CIAPI.CIAPI_AuthenticationWidget", {
-        options: {template: "internalTemplate"},
-        template: $.template('loginForm',
+        options: {template: 'defaultAuthWidgetTemplate'},
+        template: $.template('defaultAuthWidgetTemplate',
                 '<div id="login_message"></div>                                                              '+
                 '<p>                                                                                         '+
                 '    <label for="username">Username<br />                                                    '+
@@ -41,22 +41,14 @@
 
                 $(".CIAPI_AuthenticationWidget").effect("shake", {times:2}, 100);
                 $("#login_message")
-                    .attr('class', 'ui-state-error')
+                    .addClass('ui-state-error')
                     .html('<strong>ERROR</strong>: Your details were incorrect.<br />');
         },
         _create: function() {
             this.viewModel.doAuthentication = this._doAuthentication;
-
             this.element.addClass('CIAPI_AuthenticationWidget');
-            var templateContent = "";
-            if (this.options['template']=="internalTemplate") {
-               templateContent =  this.template;
-            }
-            else
-            {
-                templateContent = $('#'+this.options["template"]);
-            }
-            $.tmpl(templateContent,{}).appendTo(this.element);
+            $.tmpl(this.options.template, {}).appendTo(this.element);
+
             ko.applyBindings(this.viewModel, this.element.get(0));
             this.element.find("#doAuthenticationButton").button();
             this._update();
