@@ -6,7 +6,10 @@
 	<script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
 	<script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
                     <script src="js/libs/jquery-ui-1.8.11.custom/js/jquery-ui-1.8.11.custom.min.js"></script>
-    <link type="text/css"  href="js/libs/jquery-ui-1.8.11.custom/css/dark-hive/jquery-ui-1.8.11.custom.css" rel="Stylesheet"/>
+    <!--<link type="text/css"  href="js/libs/jquery-ui-1.8.11.custom/css/dark-hive/jquery-ui-1.8.11.custom.css" rel="Stylesheet"/>-->
+    <!--<link type="text/css"  href="http://cdn.wijmo.com/themes/rocket/jquery-wijmo.css" rel="Stylesheet"/>-->
+    <!--<link type="text/css"  href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/black-tie/jquery-ui.css" rel="Stylesheet"/>-->
+    <link type="text/css"  href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/eggplant/jquery-ui.css" rel="Stylesheet"/>
 
 	<script src="js/libs/knockoutjs/knockout-1.2.0.debug.js"></script>
 	<script src="js/libs/knockoutjs/knockout.mapping-latest.js"></script>
@@ -17,10 +20,10 @@
 <body>
     <style>
        .CIAPI_AuthenticationWidget .container {
-          padding: 0px 5px 5px 5px;
+          padding: 5px 5px 5px 5px;
        }
        .CIAPI_AuthenticationWidget .submit {
-           text-align:right;
+           text-align: right;
        }
        .CIAPI_AuthenticationWidget .inputFields {
            width:97%;
@@ -34,36 +37,36 @@
         });
     </script>
     <script id="customAuthWidgetTemplate" type="text/x-jquery-tmpl">
-        <div class="ui-widget-shadow ui-corner-all">
-        <div class="container ui-widget ui-widget-content ui-corner-all">
-        <div class="content">
-            <p>
-                <label for="username">UserName<br />
-                <input type="text"
-                        name="username"
-                        id="username"
-                        class="inputFields"
-                        data-bind="value: username"
-                        tabindex="1" />
-                </label>
-            </p>
-            <p>
-                <label for="password">Password<br />
-                <input type="password"
-                        name="password"
-                        id="password"
-                        class="inputFields"
-                        data-bind="value: password"
-                        tabindex="2" />
-                </label>
-            </p>
-            <p class="submit">
-                <button id="doAuthenticationButton" data-bind="click: doAuthentication" tabindex="3">Log on</button>
-            </p>
-            <div id="login_message" class="ui-corner-all"></div>
+        <div class="ui-widget-shadow ui-corner-all" style="position:absolute; width:250px; height:300px"></div>
+        <div class="container ui-widget ui-widget-content ui-corner-all" style="position:absolute; padding:10px">
+            <div class="content">
+                <div id="login_message" class="ui-corner-all"></div>
+                <p>
+                    <label for="username">UserName<br />
+                    <input type="text"
+                            name="username"
+                            id="username"
+                            class="inputFields"
+                            data-bind="value: username"
+                            tabindex="1" />
+                    </label>
+                </p>
+                <p>
+                    <label for="password">Password<br />
+                    <input type="password"
+                            name="password"
+                            id="password"
+                            class="inputFields"
+                            data-bind="value: password"
+                            tabindex="2" />
+                    </label>
+                </p>
+                <p class="submit">
+                    <button id="doAuthenticationButton" data-bind="click: doAuthentication" tabindex="3">Log on</button>
+                </p>
+            </div>
         </div>
-        </div>
-        </div>
+
     </script>
 </body>
 </html>
