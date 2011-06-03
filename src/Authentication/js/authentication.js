@@ -1,5 +1,5 @@
 (function($, undefined) {
-    $.widget("CIAPI.CIAPI_AuthenticationWidget", {
+    $.widget("ui.CIAPI_widget_AuthenticationWidget", $.ui.CIAPI_widget, {
         options: {template: 'defaultAuthWidgetTemplate'},
         template: $.template('defaultAuthWidgetTemplate',
                 '<div id="login_message"></div>                                                              '+
@@ -38,14 +38,16 @@
                     Password: this.password()
                 };
                 console.log("TODO: authenticate with CIAPI using", authDTO);
-
-                $(".CIAPI_AuthenticationWidget").effect("shake", {times:2}, 100);
-                $("#login_message")
+                console.log('inside _doAuthentication, this is',this);
+                this.widgetElement.find(".CIAPI_AuthenticationWidget").effect("shake", {times:2}, 100);
+                this.widgetElement.find("#login_message")
                     .addClass('ui-state-error')
                     .html('<strong>ERROR</strong>: Your details were incorrect.<br />');
         },
         _create: function() {
             this.viewModel.doAuthentication = this._doAuthentication;
+            this.viewModel.widgetElement = this.element;
+
             this.element.addClass('CIAPI_AuthenticationWidget');
             $.tmpl(this.options.template, {}).appendTo(this.element);
 

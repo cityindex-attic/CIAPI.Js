@@ -5,19 +5,31 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 	<script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
 	<script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
-    <script src="js/libs/jquery-ui-1.8.11.custom/js/jquery-ui-1.8.11.custom.min.js"></script>
-    <!--<link type="text/css"  href="js/libs/jquery-ui-1.8.11.custom/css/dark-hive/jquery-ui-1.8.11.custom.css" rel="Stylesheet"/>-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
     <!--<link type="text/css"  href="http://cdn.wijmo.com/themes/rocket/jquery-wijmo.css" rel="Stylesheet"/>-->
     <!--<link type="text/css"  href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/black-tie/jquery-ui.css" rel="Stylesheet"/>-->
     <link type="text/css"  href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/eggplant/jquery-ui.css" rel="Stylesheet"/>
 
-	<script src="js/libs/knockoutjs/knockout-1.2.0.debug.js"></script>
-	<script src="js/libs/knockoutjs/knockout.mapping-latest.js"></script>
 	<script src="../CIAPI/target/js/CIAPI-0001.min.js"></script>
+	<script src="../CIAPI.widget/target/js/CIAPI.widget-0001.min.js"></script>
 	<script src="js/authentication.js"></script>
 
 </head>
 <body>
+
+    <p>A default authentication widget</p>
+    <div id="DefaultAuthenticationWidget" style="width: 250px"></div>
+    <script>
+        $(document).ready(function() {
+          $('#DefaultAuthenticationWidget').CIAPI_widget_AuthenticationWidget(); //inject the widget into the div
+        });
+    </script>
+
+
+    <hr>
+
+    <p>A authentication widget with a custom template</p>
+
     <style>
        .CIAPI_AuthenticationWidget .container {
           padding: 5px 5px 5px 5px;
@@ -29,11 +41,11 @@
            width:97%;
        }
     </style>
-	<div id="AuthenticationWidget" style="width: 250px"></div>
+	<div id="CustomAuthenticationWidget" style="width: 250px"></div>
     <script>
         $(document).ready(function() {
           $("#customAuthWidgetTemplate" ).template("customAuthWidgetTemplate"); //compile & name the template
-          $('#AuthenticationWidget').CIAPI_AuthenticationWidget({template: 'customAuthWidgetTemplate'}); //override the default template
+          $('#CustomAuthenticationWidget').CIAPI_widget_AuthenticationWidget({template: 'customAuthWidgetTemplate'}); //override the default template
         });
     </script>
     <script id="customAuthWidgetTemplate" type="text/x-jquery-tmpl">
@@ -66,7 +78,6 @@
                 </p>
             </div>
         </div>
-
     </script>
 </body>
 </html>
