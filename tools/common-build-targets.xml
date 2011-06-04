@@ -150,8 +150,7 @@
   	</target>
 	
 	<target name="runtests-remote" description="(PUBLIC) runs tests on remote jsTestDriver instance">
-<echo message="Ignore whilst remote test runner infrastructure is repaired"/>		
-<!--<antcall target="-runtests-remote"/>-->
+                 <antcall target="-runtests-remote"/>
   	</target>
 	
 	<target name="copy-shared-libs" description="(PUBLIC) overwrites the js/libs folder with a copy of the shared libs">
@@ -396,7 +395,8 @@
 	</target>	
 	 
 	<target name="-runtests-remote" depends="-create-reports-folder" description="(PRIVATE) Run tests through remote jsTestDriver">
-		<exec executable="java" dir="${basedir}" failonerror="true">
+<echo message="Ignore whilst remote test runner infrastructure is repaired"/>
+<!--		<exec executable="java" dir="${basedir}" failonerror="true">
 			<arg line="-jar &quot;${tool.jstestdriver}&quot;"/>
 			<arg line="--config &quot;${jstestdriver.config}&quot;"/>
 			<arg line="--server ${jstestdriver.remote}"/>
@@ -406,6 +406,7 @@
 			<arg line="--captureConsole"/>
 			<arg line="--tests all"/>
 		</exec>
+-->
 	</target>		
 
 	<target name="-load-build-info" description="(PRIVATE) Loads the build versioning information">
