@@ -150,7 +150,8 @@
   	</target>
 	
 	<target name="runtests-remote" description="(PUBLIC) runs tests on remote jsTestDriver instance">
-		<antcall target="-runtests-remote"/>
+<echo message="Ignore whilst remote test runner infrastructure is repaired"/>		
+<!--<antcall target="-runtests-remote"/>-->
   	</target>
 	
 	<target name="copy-shared-libs" description="(PUBLIC) overwrites the js/libs folder with a copy of the shared libs">
