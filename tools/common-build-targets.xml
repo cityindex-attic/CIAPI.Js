@@ -507,7 +507,7 @@
 	</target>
 
 	
-	<target name="-js.libs.minify" depends="-check-js-mylibs-exists, -check-js-libs-exists, -load-build-info" if="js.mylibs.folder.exists"
+	<target name="-js.libs.minify" depends="-check-js-mylibs-exists, -check-js-libs-exists, -load-build-info" if="js.mylibs.folder.exists and js.mylibs.folder.exists"
             description="(PRIVATE) Minifies the helper files in dir.js.libs">
 		<echo message="Minifying helper JS files..."/>
 		
