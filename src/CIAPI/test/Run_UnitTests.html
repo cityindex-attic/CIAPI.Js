@@ -4,35 +4,34 @@
 <html>
 <head>
   <title>Unit Test Runner</title>
-	<link rel="stylesheet" type="text/css" href="../js/libs/jasmine/jasmine.css">
-	<script src="../js/libs/head.min.js"></script> 
- 
-	<script> 
-	    var standard_libs = [
-				   {jquery: "http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"},
-				   {jasmine: "../js/libs/jasmine/jasmine.js"},
-				   {jasmine_html: "../js/libs/jasmine/jasmine-html.js"}],
-		    CIAPI = ["../js/CIAPI.js",
-		 			 "../js/CIAPI.dojo.js",
-					 "../js/CIAPI.__testData.js",
-					 "../js/CIAPI.services.js",
-					 "../js/CIAPI.streams.js",
-					 "../js/dto/PriceBar.js",
-            ];
-	    
-		head.js.apply(this, standard_libs.concat(CIAPI, [
-            "CIAPI.UnitTests.js",
-            "dto.PriceBar.UnitTests.js"
-        ]));
-	</script>
+    <!-- standard dependencies -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+
+    <!-- test framework -->
+    <script type="text/javascript" src="libs/jasmine/jasmine.js" ></script>
+    <script type="text/javascript" src="libs/jasmine/jasmine-html.js" ></script>
+    <link rel="stylesheet" type="text/css" href="libs/jasmine/jasmine.css">
+
+    <!-- CIAPI -->
+    <script type="text/javascript" src="../js/mylibs/amplify.debug.js" ></script>
+    <script type="text/javascript" src="../js/CIAPI.js" ></script>
+    <script type="text/javascript" src="../js/CIAPI.dojo.js" ></script>
+    <script type="text/javascript" src="../js/CIAPI.__testData.js" ></script>
+    <script type="text/javascript" src="../js/CIAPI.connect.js" ></script>
+    <script type="text/javascript" src="../js/CIAPI.services.js" ></script>
+    <script type="text/javascript" src="../js/CIAPI.streams.js" ></script>
+    <script type="text/javascript" src="../js/dto/PriceBar.js" ></script>
+
+    <!-- Tests -->
+    <!--<script type="text/javascript" src="CIAPI.UnitTests.js" ></script>-->
+    <script type="text/javascript" src="dto.PriceBar.UnitTests.js" ></script>
+
 </head>
 
 <body>
 	<script>
-		head.ready(function() {
-			jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
-			jasmine.getEnv().execute();
-		});
+        jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+        jasmine.getEnv().execute();
 	</script>
 </body>
 </html>

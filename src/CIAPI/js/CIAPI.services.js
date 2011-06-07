@@ -30,7 +30,6 @@ CIAPI.services = (function() {
 
             for(idx in CIAPI.__testData.MarketList)
             {
-
                 if (CIAPI.__testData.MarketList[idx].MarketId == marketId){
                     marketPriceBars = CIAPI.__testData.MarketList[idx].PriceHistory;
                     break;

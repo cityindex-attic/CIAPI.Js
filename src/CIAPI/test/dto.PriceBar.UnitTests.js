@@ -1,10 +1,12 @@
 describe("PriceBar dto unit tests", function() {
+    var date, priceBar;
 
-    var date = new Date();
-    var priceBar = new PriceBarDTO(date, 1, 2, 0, 1.5);
+    beforeEach(function() {
+        date = new Date();
+        priceBar = new CIAPI.dtos.PriceBarDTO(date, 1, 2, 0, 1.5);
+    });
 
     it("should have readonly properties", function() {
-
         expect(priceBar.BarDate).toEqual(date);
 
         //Trying to set a property should do nothing
@@ -12,13 +14,15 @@ describe("PriceBar dto unit tests", function() {
         expect(priceBar.BarDate).toEqual(date);
 
         priceBar.Close = -1;
-        expect(priceBar.Close).toEqual(1);
+        console.log(priceBar);
+        expect(priceBar.Close).toEqual(1.5);
     });
-    
+
     it("should serialise to JSON correctly", function() {
-        var expectedJSON = '{"BarDate":'+JSON.stringify(date)+',"Close":1,"High":2,"Low":0,"Open":1.5}';
+        var expectedJSON = '{"BarDate":'+JSON.stringify(date)+',"Open":1,"High":2,"Low":0,"Close":1.5}';
         expect(JSON.stringify(priceBar)).toEqual(expectedJSON);
     });
+
 });
 
 

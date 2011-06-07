@@ -15,7 +15,7 @@ CIAPI.dtos = CIAPI.dtos || {};
  *
  * @returns a frozen readonly object
  */
-CIAPI.dtos.PriceBarDTO = function(barDate, open, high, low, high){
+CIAPI.dtos.PriceBarDTO = function(barDate, open, high, low, close){
     /**
      * The date of the start of the price bar interval
      * @type Date
@@ -45,8 +45,6 @@ CIAPI.dtos.PriceBarDTO = function(barDate, open, high, low, high){
      * @type Number
      */
     this.Close = close;
-
-
 
     Object.freeze(this);
 }
