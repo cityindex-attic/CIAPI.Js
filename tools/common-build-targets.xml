@@ -445,89 +445,106 @@
 	
 	
 	<!-- JAVASCRIPT -->
-	<target name="-js.main.concat" depends="-load-build-info" description="(PRIVATE) Concatenates the JS files in dir.js">
-		<echo message="Concatenating Main JS scripts..."/>
-	    <concat destfile="./${dir.publish}/${dir.js}/${scripts.filename}-${build.number}.js">
-			<fileset dir="./${dir.publish}/">
-				<include name="**/${dir.js.main}/*.min.js"/>
-				<exclude name="**/${dir.js.mylibs}/*.js"/>
-				<exclude name="**/${dir.js.libs}/*.js"/>
-			</fileset>    	
+  <target name="-check-js-mylibs-exists" unless="js.mylibs.folder.exists">
+    <available property="js.mylibs.folder.exists" file="./${dir.publish}/${dir.js.mylibs}/" type="dir"/>
+  </target>
+  
+  <target name="-check-js-libs-exists" unless="js.libs.folder.exists">
+    <available property="js.libs.folder.exists" file="./${dir.publish}/${dir.js.libs}/" type="dir"/>
+  </target>
+  
+  <target name="-js.libs.minify" depends="-check-js-libs-exists, -load-build-info" if="js.mylibs.folder.exists"
+          description="(PRIVATE) Minifies the (unminified) lib files in dir.js.libs">
+    <echo message="-js.libs.minify currently does nothing (we assume that the libraries in libs are as we want them"/>
+    <!--
+    <echo message="Minifying helper JS files..."/>
+    <apply executable="java" parallel="false">
+      <fileset dir="./${dir.publish}/${dir.js.libs}/" includes="*.js" excludes="*.min.js"/>
+      <arg line="-jar"/>
+      <arg path="./${dir.build.tools}/${tool.yuicompressor}"/>
+      <srcfile/>
+      <arg line="-o"/>
+      <mapper type="glob" from="*.js" to="${basedir}/${dir.publish}/${dir.js.libs}/*-${build.number}.min.js"/>
+      <targetfile/>
+    </apply>
+    -->
+  </target>
+
+  <target name="-js.all.minify" depends="-js.libs.minify"
+            description="(PRIVATE) Minifies the js and mylibs scripts (excluding *.min.js and *.debug.js)">
+    <echo message="Minifying the js and mylibs scripts (excluding *.min.js and *.debug.js)"/>
+    <apply verbose="true" executable="java" parallel="false">
+      <fileset dir="./${dir.publish}/${dir.js}">
+        <include name="**/*.js"/>
+        <exclude name="**/*.min.js"/>
+        <exclude name="**/*.debug.js"/>
+        <exclude name="**/${dir.js.libs}/*.js"/>
+      </fileset>
+      <arg line="-jar"/>
+      <arg path="./${dir.build.tools}/${tool.yuicompressor}"/>
+      <srcfile/>
+      <arg line="--line-break"/>
+      <arg line="4000"/>
+      <arg line="-o"/>
+      <mapper type="glob" from="*.js" to="${basedir}/${dir.publish}/${dir.js}/*.min.js"/>
+      <targetfile/>
+    </apply>
+  </target>
+  
+  <target name="-js.main.concat" depends="-load-build-info" 
+          description="(PRIVATE) Concatenates the JS files in dir.js">
+		  <echo message="Concatenating Main JS scripts... (minified)"/>
+	    <concat destfile="./${dir.publish}/${dir.js}/b.main-${build.number}.min.js">
+			  <fileset dir="./${dir.publish}/">
+				  <include name="**/${dir.js.main}/**/*.min.js"/>
+				  <exclude name="**/${dir.js.mylibs}/**/*.js"/>
+				  <exclude name="**/${dir.js.libs}/**/*.js"/>
+			  </fileset>    	
 	    </concat>
+      <echo message="Concatenating Main JS scripts... (debug)"/>
+      <concat destfile="./${dir.publish}/${dir.js}/b.main-${build.number}.debug.js">
+        <fileset dir="./${dir.publish}/">
+          <include name="**/${dir.js.main}/**/*.js"/>
+          <exclude name="**/${dir.js.main}/**/*.min.js"/>
+          <exclude name="**/${dir.js.mylibs}/**/*.js"/>
+          <exclude name="**/${dir.js.libs}/**/*.js"/>
+        </fileset>
+      </concat>
 	</target>
-	
 	
 	<target name="-js.mylibs.concat" depends="-check-js-mylibs-exists,-load-build-info" if="js.mylibs.folder.exists"
             description="(PRIVATE) Concatenates the JS files in dir.js.mylibs">
-		<echo message="Concatenating JS libraries"/>
-	    <concat destfile="./${dir.publish}/${dir.js}/libs-${build.number}.js">
-			<fileset dir="./${dir.publish}/${dir.js.mylibs}/">
-				<include name="**/*.min.js"/>
-			</fileset>    	
+		  <echo message="Concatenating JS libraries ( {mylibs}/{minified} )"/>
+	    <concat destfile="./${dir.publish}/${dir.js}/a.mylibs-${build.number}.min.js">
+			  <fileset dir="./${dir.publish}/${dir.js.mylibs}/">
+				  <include name="**/*.min.js"/>
+			  </fileset>    	
 	    </concat>
+      <echo message="Concatenating JS libraries ( {mylibs}/{debug} )"/>
+      <concat destfile="./${dir.publish}/${dir.js}/a.mylibs-${build.number}.debug.js">
+        <fileset dir="./${dir.publish}/${dir.js.mylibs}/">
+          <include name="**/*.debug.js"/>
+        </fileset>
+      </concat>
 	</target>
 
-	<target name="-js.scripts.concat" depends="-load-build-info" if="build.concat.scripts">
+  <target name="-js.scripts.concat" depends="-load-build-info" if="build.concat.scripts">
 		<echo message="Concatenating library file with main script file"/>
  		<concat destfile="./${dir.publish}/${dir.js}/${scripts.filename}-${build.number}.min.js">
 			<fileset dir="./${dir.publish}/${dir.js}/">
-				<include name="libs-${build.number}.js"/>
-				<include name="${scripts.filename}-${build.number}.js"/>
+				<include name="a.mylibs-${build.number}.min.js"/>
+				<include name="b.main-${build.number}.min.js"/>
 			</fileset>    	
 	    </concat>
 		
 		<echo message="Concatenating library file with main debug script file"/>
- 		<concat destfile="./${dir.publish}/${dir.js}/${scripts.filename}-${build.number}-debug.min.js">
+ 		<concat destfile="./${dir.publish}/${dir.js}/${scripts.filename}-${build.number}.debug.js">
 			<fileset dir="./${dir.publish}/${dir.js}/">
-				<include name="libs-${build.number}.js"/>
-				<include name="${scripts.filename}-${build.number}-debug.js"/>
+				<include name="a.mylibs-${build.number}.debug.js"/>
+				<include name="b.main-${build.number}.debug.js"/>
 			</fileset>    	
 	    </concat>
 	</target>
-	
-	
-	<target name="-js.all.minify" depends="-js.libs.minify"
-            description="(PRIVATE) Minifies the scripts.js files created by js.scripts.concat">
-		<echo message="Minifying concatenated script- and library-file"/>
-		<apply verbose="true" executable="java" parallel="false">
-			<fileset dir="./${dir.publish}/${dir.js}">
-				<include name="**/*.js"/>
-				<exclude name="**/*.min.js"/>
-				<exclude name="**/${dir.js.libs}/*.js"/>
-			</fileset>
-			<arg line="-jar"/>
-			<arg path="./${dir.build.tools}/${tool.yuicompressor}"/>
-			<srcfile/>
-			<arg line="--line-break"/>
-			<arg line="4000"/>
-			<arg line="-o"/>
-			<mapper type="glob" from="*.js" to="${basedir}/${dir.publish}/${dir.js}/*.min.js"/>
-			<targetfile/>
-		</apply>
-	</target>
-
-	
-	<target name="-js.libs.minify" depends="-check-js-mylibs-exists, -check-js-libs-exists, -load-build-info" if="js.mylibs.folder.exists and js.mylibs.folder.exists"
-            description="(PRIVATE) Minifies the helper files in dir.js.libs">
-		<echo message="Minifying helper JS files..."/>
-		
-		<apply executable="java" parallel="false">
-			<fileset dir="./${dir.publish}/${dir.js.libs}/" includes="*.js" excludes="*.min.js"/>
-			<arg line="-jar"/>
-			<arg path="./${dir.build.tools}/${tool.yuicompressor}"/>
-			<srcfile/>
-			<arg line="-o"/>
-			<mapper type="glob" from="*.js" to="${basedir}/${dir.publish}/${dir.js.libs}/*-${build.number}.min.js"/>
-			<targetfile/>
-		</apply>
-	</target>
-        <target name="-check-js-mylibs-exists" unless="js.mylibs.folder.exists">
-            <available property="js.mylibs.folder.exists" file="./${dir.publish}/${dir.js.mylibs}/" type="dir"/>
-		</target>
-        <target name="-check-js-libs-exists" unless="js.libs.folder.exists">
-            <available property="js.libs.folder.exists" file="./${dir.publish}/${dir.js.libs}/" type="dir"/>
-		</target>
-	
 	
 	<target name="-js.delete" depends="-load-build-info" description="(PRIVATE) Deletes the unoptimized js files from build if set">
 		<if>
