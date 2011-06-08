@@ -27,7 +27,7 @@ describe("CIAPI acceptance tests", function() {
         var isConnected = CIAPI.connect({
                                 UserName: "CC735158",
                                 Password: "password",
-                                ServiceUri: "http://174.129.8.69/TradingApiOnly200",
+                                ServiceUri: "http://174.129.8.69/TradingApi",
                                 StreamUri: "http://pushpreprod.cityindextest9.co.uk",
                                 onError: function() {
                                     console.log('a connection error occurred');
