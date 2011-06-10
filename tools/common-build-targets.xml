@@ -495,20 +495,26 @@
           description="(PRIVATE) Concatenates the JS files in dir.js">
 		  <echo message="Concatenating Main JS scripts... (minified)"/>
 	    <concat destfile="./${dir.publish}/${dir.js}/b.main-${build.number}.min.js">
-			  <fileset dir="./${dir.publish}/">
+			<sort xmlns:rcmp="antlib:org.apache.tools.ant.types.resources.comparators">
+              <fileset dir="./${dir.publish}/">
 				  <include name="**/${dir.js.main}/**/*.min.js"/>
 				  <exclude name="**/${dir.js.mylibs}/**/*.js"/>
 				  <exclude name="**/${dir.js.libs}/**/*.js"/>
-			  </fileset>    	
+			  </fileset>
+              <rcmp:name />
+            </sort>
 	    </concat>
       <echo message="Concatenating Main JS scripts... (debug)"/>
       <concat destfile="./${dir.publish}/${dir.js}/b.main-${build.number}.debug.js">
-        <fileset dir="./${dir.publish}/">
-          <include name="**/${dir.js.main}/**/*.js"/>
-          <exclude name="**/${dir.js.main}/**/*.min.js"/>
-          <exclude name="**/${dir.js.mylibs}/**/*.js"/>
-          <exclude name="**/${dir.js.libs}/**/*.js"/>
-        </fileset>
+         <sort xmlns:rcmp="antlib:org.apache.tools.ant.types.resources.comparators">
+              <fileset dir="./${dir.publish}/">
+                  <include name="**/${dir.js.main}/**/*.js"/>
+                  <exclude name="**/${dir.js.main}/**/*.min.js"/>
+                  <exclude name="**/${dir.js.mylibs}/**/*.js"/>
+                  <exclude name="**/${dir.js.libs}/**/*.js"/>
+              </fileset>
+              <rcmp:name />
+            </sort>
       </concat>
 	</target>
 	
