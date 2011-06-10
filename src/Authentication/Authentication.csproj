@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <ProjectGuid>{703FAA6A-1456-43EC-8275-C74E2FB53FAD}</ProjectGuid>
+    <ProjectGuid>{157F90A6-B9FA-4EC5-9182-F15C1C78B09D}</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="build.project.xml" />
@@ -10,29 +10,6 @@
     <Content Include="images\Schrodinger-Lolcat.jpg" />
     <Content Include="images\Schrodinger-Lolcat.png" />
     <Content Include="images\widget-content-bg.png" />
-    <Content Include="js\libs\dd_belatedpng.js" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-bg_flat_30_cccccc_40x100.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-bg_flat_50_5c5c5c_40x100.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-bg_glass_40_ffc73d_1x400.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-bg_highlight-hard_20_0972a5_1x100.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-bg_highlight-soft_33_003147_1x100.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-bg_highlight-soft_35_222222_1x100.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-bg_highlight-soft_44_444444_1x100.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-bg_highlight-soft_80_eeeeee_1x100.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-bg_loop_25_000000_21x21.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-icons_222222_256x240.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-icons_4b8e0b_256x240.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-icons_a83300_256x240.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-icons_cccccc_256x240.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\jquery-ui-1.8.11.custom.css" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\index.html" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\js\jquery-ui-1.8.11.custom.min.js" />
-    <Content Include="js\libs\knockout-1.2.0.debug.js" />
-    <Content Include="js\libs\knockout-1.2.0.js" />
-    <Content Include="js\libs\knockout.mapping-latest.debug.js" />
-    <Content Include="js\libs\knockout.mapping-latest.js" />
-    <Content Include="js\libs\modernizr-1.7.min.js" />
     <Content Include="js\authentication.js" />
   </ItemGroup>
   <ItemGroup>

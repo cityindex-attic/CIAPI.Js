@@ -18,39 +18,59 @@
 	<target name="publish" description="(PUBLIC) Copy selected files for publishing from /target folders of each sub-project">
 		<delete dir="${dir.publish}" />
 		
+    <!-- CIAPI -->
 		<copy todir="${dir.publish}/CIAPI">
 			<fileset dir="./CIAPI/target">
 				<include name="js/CIAPI-*.min.js" />
+				<include name="js/CIAPI-*.debug.js" />
 			</fileset>
 		</copy>
 
+    <!-- CIAPI.widget -->
+    <copy todir="${dir.publish}/CIAPI.widget/">
+      <fileset dir="./CIAPI.widget/target">
+        <include name="js/CIAPI.widget-*.min.js" />
+        <include name="js/CIAPI.widget-*.debug.js" />
+      </fileset>
+    </copy>
+
+    <!-- Authentication -->
     <copy todir="${dir.publish}/Authentication">
 			<fileset dir="./Authentication/target">
 				<include name="sample.html" />
-                <include name="js/libs/head.min.js" />
 				<include name="js/CIAPI.Authentication-*.min.js" />
+				<include name="js/CIAPI.Authentication-*.debug.js" />
 				<include name="css/**/*.min.css" />
 				<include name="images/**/*" />
 			</fileset>
-		</copy>
+    </copy>
+    <copy todir="${dir.publish}/Authentication/js/libs">
+      <fileset dir="${dir.publish}/CIAPI">
+        <include name="**/*" />
+      </fileset>
+      <fileset dir="${dir.publish}/CIAPI.widget">
+        <include name="**/*" />
+      </fileset>
+      <mapper type="regexp" from="js(.*)" to="\1"/>
+    </copy>
 
+    <!-- MarketGrid -->
 		<copy todir="${dir.publish}/MarketGrid">
 			<fileset dir="./MarketGrid/target">
 				<include name="marketGrid.html" />
                 <include name="js/libs/head.min.js" />
 				<include name="js/CIAPI.MarketGrid-*.min.js" />
+				<include name="js/CIAPI.MarketGrid-*.debug.js" />
 				<include name="css/**/*.min.css" />
 				<include name="images/**/*" />
 			</fileset>
 		</copy>
 
-        <copy todir="${dir.publish}/Chart">
+   <copy todir="${dir.publish}/Chart">
 			<fileset dir="./Chart/target">
 				<include name="chart.html" />
-                <include name="js/libs/head.min.js" />
-                <include name="js/libs/jqplot/**/*.min.js" />
-                <include name="js/libs/jqplot/**/*.min.css" />
 				<include name="js/CIAPI.Chart-*.min.js" />
+				<include name="js/CIAPI.Chart-*.debug.js" />
 				<include name="css/**/*.min.css" />
 				<include name="images/**/*" />
 			</fileset>
