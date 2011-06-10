@@ -3,7 +3,7 @@ describe("PriceBar dto unit tests", function() {
 
     beforeEach(function() {
         date = new Date();
-        priceBar = new CIAPI.dtos.PriceBarDTO(date, 1, 2, 0, 1.5);
+        priceBar = new CIAPI.dto.PriceBarDTO(date, 1, 2, 0, 1.5);
     });
 
     it("should have readonly properties", function() {

@@ -1,9 +1,4 @@
 /**
-    @namespace DTOs relating to the API
-*/
-CIAPI.dtos = CIAPI.dtos || {};
-
-/**
  * The details of a specific price bar, useful for plotting candlestick charts
  * @constructor
  *
@@ -15,7 +10,7 @@ CIAPI.dtos = CIAPI.dtos || {};
  *
  * @returns a frozen readonly object
  */
-CIAPI.dtos.PriceBarDTO = function(barDate, open, high, low, close){
+CIAPI.dto.PriceBarDTO = function(barDate, open, high, low, close){
     /**
      * The date of the start of the price bar interval
      * @type Date

@@ -19,42 +19,28 @@ CIAPI.connect = function(connectionOptions) {
         Password: undefined,
         ServiceUri: undefined,
         StreamUri: undefined,
-        onSuccess: function () {},
-        onError: function() {}
-   });
-
-   amplify.request.define( "createSession", "ajax", {
-        url: connectionOptions.ServiceUri + "/session?only200=true",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        type: "POST",
-        decoder: function ( data, status, xhr, success, error ) {
-            if ( !data.ErrorCode ) {
-                success( data );
-            } else {
-                error( data, data.ErrorCode );
-            }
-        }
-
+        success: function () {},
+        error: function() {}
    });
 
    amplify.request( {
            resourceId: "createSession",
-           data: JSON.stringify(
-                           {
-                               "UserName": connectionOptions.UserName,
-                               "Password": connectionOptions.Password
-                           }),
+           data:  {
+                      ServiceUri: connectionOptions.ServiceUri,
+                      UserName: connectionOptions.UserName,
+                      Password: connectionOptions.Password
+                  },
            success:  function( data ) {
-                         CIAPI.connection.isConnected = true;
-                         CIAPI.connection.Session = data.Session;
-                         connectionOptions.onSuccess(data);
+                CIAPI.connection.isConnected = true;
+                CIAPI.connection.Session = data.Session;
+                connectionOptions.success(data);
            },
-           error: function(data, errorCode) {
-               connectionOptions.onError(data, errorCode);
+           error: function( data ) {
+                CIAPI.connection.isConnected = false;
+                CIAPI.connection.Session = "";
+                connectionOptions.error(data);
            }
    });
-
 
 };
 
