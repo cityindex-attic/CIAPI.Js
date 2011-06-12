@@ -8,20 +8,33 @@ CIAPI.services = (function() {
     return {
         /**
          * Search for markets of type CFD
-         * @param searchByMarketName
-         * @param searchByMarketCode
-         * @param maxResults
          */
-        ListCfdMarkets: function(searchByMarketName, searchByMarketCode, maxResults) {
-            if (maxResults > 1000) throw { message: "Can only return a maximum of 1000 pricebars" };
+        ListCfdMarkets: function(options) {
+            _(options).defaults({
+                NameStartsWith: undefined,
+                CodeStartsWith: undefined,
+                MaxResults: 25,
+                success: function () {},
+                error: function() {}
+           });
 
-
-            var markets = CIAPI.dojo.clone(CIAPI.__testData.MarketList.slice(0, maxResults));
-            for (var idx in markets) {
-                markets[idx].Name = markets[idx].Name.replace("{marketName}", searchByMarketName);
-            }
-            return markets;
+           amplify.request( {
+                   resourceId: "ListCfdMarkets",
+                   data:  {
+                              ServiceUri: CIAPI.connection.ServiceUri,
+                              searchByMarketName: options.NameStartsWith,
+                              searchByMarketCode: options.CodeStartsWith,
+                              maxResults: options.MaxResults
+                          },
+                   success:  function( data ) {
+                        options.success(data);
+                   },
+                   error: function( data ) {
+                        options.error(data);
+                   }
+           });
         },
+
         GetPriceBars: function(marketId, interval, span, priceBars) {
             var idx, marketPriceBars=[];
 

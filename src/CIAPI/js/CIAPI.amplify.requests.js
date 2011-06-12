@@ -7,7 +7,7 @@
         }
     };
 
-    amplify.request.define( "createSession", "cors", {
+   amplify.request.define( "createSession", "cors", {
         url: "{ServiceUri}/session?only200=true",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
@@ -21,4 +21,11 @@
 
    });
 
+   amplify.request.define( "ListCfdMarkets", "cors", {
+        url: "{ServiceUri}/cfd/markets?MarketName={searchByMarketName}&MarketCode={searchByMarketCode}&ClientAccountId={clientAccountId}&MaxResults={maxResults}&only200=true",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        type: "GET",
+        decoder: "ciapiDecoder"
+   });
 })(amplify, _);
