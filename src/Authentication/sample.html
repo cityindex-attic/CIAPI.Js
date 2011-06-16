@@ -44,11 +44,10 @@
     <script id="customAuthWidgetTemplate" type="text/x-jquery-tmpl">
         <div class="ui-dialog ui-widget ui-widget-content ui-corner-all">
             <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
-                
+
             </div>
-            <div class="content ui-dialog-content ui-widget-content">
+            <div class="ui-dialog-content ui-widget-content">
                 <p class="login_message"></p>
-                
                 <fieldset>
                     <label for="username">UserName</label>
                     <input type="text"
@@ -57,20 +56,17 @@
                             class="inputFields"
                             data-bind="value: username"
                             tabindex="1" />
-                    <label for="password">Password<br />
+                    <label for="password">Password</label>
                     <input type="password"
                             name="password"
                             id="password"
                             class="inputFields"
                             data-bind="value: password"
                             tabindex="2" />
-                    </label>
                 </fieldset>
             </div>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                <p class="submit">
-                    <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="doAuthenticationButton" data-bind="click: doAuthentication" tabindex="3">Log on</button>
-                </p>
+                <button id="doAuthenticationButton" data-bind="click: doAuthentication" tabindex="3">Log on</button>
             </div>
         </div>
     </script>
