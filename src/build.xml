@@ -88,4 +88,14 @@
 		</exec>
 	</target>
 
+  <target name="start-webserver" description="(PUBLIC) Start local web server on http://localhost:${webserver.port}">
+    <echo message="Starting local Jetty webserver on http://localhost:${webserver.port}" />
+    <echo message="Ctl-C to terminate" />
+    <exec executable="java" dir="${tool.webserver.basedir}">
+      <arg line="-jar &quot;${tool.webserver.jar}&quot; ${webserver.config}" />
+      <arg line="-Djetty.path_to_serve=&quot;../../src/&quot;" />
+      <arg line="-Djetty.port=${webserver.port}" />
+    </exec>
+  </target>
+
 </project>

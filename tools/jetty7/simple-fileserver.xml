@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+
+<!-- =============================================================== -->
+<!-- Configure the Jetty Server                                      -->
+<!--                                                                 -->
+<!-- Super simple static resource only server, useful for working    -->
+<!--   with Javascript                                               -->
+<!-- =============================================================== -->
+
+
+<Configure id="Server" class="org.eclipse.jetty.server.Server">
+
+    <Call name="addConnector">
+      <Arg>
+          <New class="org.eclipse.jetty.server.nio.SelectChannelConnector">
+            <Set name="port"><SystemProperty name="jetty.port" default="4567"/></Set>
+          </New>
+      </Arg>
+    </Call>
+	
+    <Set name="handler">
+        <New id="ResourceHandler" class="org.eclipse.jetty.server.handler.ResourceHandler">
+            <Set name="resourceBase"><SystemProperty name="jetty.path_to_serve" default="."/></Set>
+			<Set name="directoriesListed">true</Set>
+        </New>
+    </Set>
+
+    <Set name="stopAtShutdown">true</Set>
+    <Set name="sendServerVersion">true</Set>
+</Configure>
