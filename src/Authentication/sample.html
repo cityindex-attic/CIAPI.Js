@@ -15,6 +15,7 @@
 	
     <!--Enable mock data -->
     <script src="../CIAPI/test/CIAPI.amplify.requests.mock.js"></script>
+    <!-- CC735158 / password are valid mock credentials -->
 
     <!--This is for CIAPI.authentication widget -->
     <script src="js/authentication.js"></script>
@@ -23,6 +24,13 @@
 </head>
 <body>
 
+    <script>
+        //These default connection options must be set before interacting with CIAPI,
+        //unless mock requests are being included above
+        CIAPI.connection.ServiceUri = "http://174.129.8.69/TradingApi";
+        CIAPI.connection.StreamUri = "http://pushpreprod.cityindextest9.co.uk";
+    </script>
+
     <p>A default authentication widget</p>
     <div id="DefaultAuthenticationWidget" style="width: 250px"></div>
     <script>
@@ -30,7 +38,6 @@
           $('#DefaultAuthenticationWidget').CIAPI_widget_AuthenticationWidget(); //inject the widget into the div
         });
     </script>
-
 
     <hr>
 

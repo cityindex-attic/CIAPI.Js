@@ -37,8 +37,6 @@
             CIAPI.connect({
                 UserName: viewModel.username(),
                 Password: viewModel.password(),
-                ServiceUri: "http://174.129.8.69/TradingApi",
-                StreamUri: "http://pushpreprod.cityindextest9.co.uk",
                 success: function (data) {
                     alert("Your session is:" + data.Session);
                 },

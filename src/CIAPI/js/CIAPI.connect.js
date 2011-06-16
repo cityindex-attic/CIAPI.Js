@@ -9,6 +9,7 @@ CIAPI.connection = {
         ServiceUri: "",
         StreamUri: ""
 };
+
 /**
  * Connect to the CIAPI
  * @param connectionOptions
@@ -17,8 +18,8 @@ CIAPI.connect = function(connectionOptions) {
    _(connectionOptions).defaults({
         UserName: undefined,
         Password: undefined,
-        ServiceUri: undefined,
-        StreamUri: undefined,
+        ServiceUri: CIAPI.connection.ServiceUri,
+        StreamUri: CIAPI.connection.StreamUri,
         success: function () {},
         error: function() {}
    });
