@@ -10,9 +10,11 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
     <!--<link type="text/css"  href="http://cdn.wijmo.com/themes/rocket/jquery-wijmo.css" rel="Stylesheet"/>-->
     <!--<link type="text/css"  href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/black-tie/jquery-ui.css" rel="Stylesheet"/>-->
-    <link type="text/css"  href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/eggplant/jquery-ui.css" rel="Stylesheet"/>
+    <!--<link type="text/css"  href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/eggplant/jquery-ui.css" rel="Stylesheet"/>-->
 
-	<script src="../CIAPI/target/js/CIAPI-0001.debug.js"></script>
+    <link type="text/css" href="themes/ci-default/ci-default.css" rel="Stylesheet"/>
+
+    <script src="../CIAPI/target/js/CIAPI-0001.min.js"></script>
 	<script src="../CIAPI.widget/target/js/CIAPI.widget-0001.min.js"></script>
 	<script src="js/authentication.js"></script>
 
@@ -32,17 +34,6 @@
 
     <p>A authentication widget with a custom template</p>
 
-    <style>
-       .CIAPI_AuthenticationWidget .container {
-          padding: 5px 5px 5px 5px;
-       }
-       .CIAPI_AuthenticationWidget .submit {
-           text-align: right;
-       }
-       .CIAPI_AuthenticationWidget .inputFields {
-           width:97%;
-       }
-    </style>
 	<div id="CustomAuthenticationWidget" style="width: 250px"></div>
     <script>
         $(document).ready(function() {
@@ -51,21 +42,21 @@
         });
     </script>
     <script id="customAuthWidgetTemplate" type="text/x-jquery-tmpl">
-        <div class="ui-widget-shadow ui-corner-all" style="position:absolute; width:250px; height:300px"></div>
-        <div class="container ui-widget ui-widget-content ui-corner-all" style="position:absolute; padding:10px">
-            <div class="content">
-                <div id="login_message" class="ui-corner-all"></div>
-                <p>
-                    <label for="username">UserName<br />
+        <div class="ui-dialog ui-widget ui-widget-content ui-corner-all">
+            <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+                
+            </div>
+            <div class="content ui-dialog-content ui-widget-content">
+                <p class="login_message"></p>
+                
+                <fieldset>
+                    <label for="username">UserName</label>
                     <input type="text"
                             name="username"
                             id="username"
                             class="inputFields"
                             data-bind="value: username"
                             tabindex="1" />
-                    </label>
-                </p>
-                <p>
                     <label for="password">Password<br />
                     <input type="password"
                             name="password"
@@ -74,9 +65,11 @@
                             data-bind="value: password"
                             tabindex="2" />
                     </label>
-                </p>
+                </fieldset>
+            </div>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                 <p class="submit">
-                    <button id="doAuthenticationButton" data-bind="click: doAuthentication" tabindex="3">Log on</button>
+                    <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="doAuthenticationButton" data-bind="click: doAuthentication" tabindex="3">Log on</button>
                 </p>
             </div>
         </div>
