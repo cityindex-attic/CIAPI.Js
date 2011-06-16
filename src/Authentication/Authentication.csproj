@@ -11,6 +11,7 @@
     <Content Include="images\Schrodinger-Lolcat.png" />
     <Content Include="images\widget-content-bg.png" />
     <Content Include="js\authentication.js" />
+    <Content Include="sample.html" />
     <Content Include="themes\ci-default\ci-default.css" />
     <Content Include="themes\ci-default\images\ui-bg_flat_30_cccccc_40x100.png" />
     <Content Include="themes\ci-default\images\ui-bg_flat_50_5c5c5c_40x100.png" />

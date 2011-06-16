@@ -26,19 +26,19 @@
                 '    </label>                                                                                ' +
                 '</p>                                                                                        ' +
                 '<p class="submit">                                                                          ' +
-                '    <button id="doAuthenticationButton"  data-bind="click: doAuthentication" tabindex="3">Log on</button>' +
+                '    <button id="doLogOnButton" data-bind="click: doLogOn" tabindex="3">Log on</button>' +
                 '</p>                                                                                        '),
         viewModel: {
-            username: ko.observable("Your username"),
-            password: ko.observable("your password")
+            username: ko.observable(CIAPI.connection.UserName),
+            password: ko.observable("")
         },
-        _doAuthentication: function () {
+        _doLogOn: function () {
             var viewModel = this;
             CIAPI.connect({
                 UserName: viewModel.username(),
                 Password: viewModel.password(),
                 success: function (data) {
-                    alert("Your session is:" + data.Session);
+                    viewModel.widget._update();
                 },
                 error: function (data) {
                     viewModel.widgetElement.find(".ui-widget").effect("shake", { times: 2 }, 100);
@@ -48,15 +48,22 @@
                 }
             });
         },
+        _doLogOff: function () {
+            CIAPI.disconnect();
+            this.widget._update();
+        },
         _create: function () {
-            this.viewModel.doAuthentication = this._doAuthentication;
+            this.viewModel.doLogOn = this._doLogOn;
+            this.viewModel.doLogOff = this._doLogOff;
             this.viewModel.widgetElement = this.element;
+            this.viewModel.widget = this;
 
             this.element.addClass('CIAPI_AuthenticationWidget');
             $.tmpl(this.options.template, {}).appendTo(this.element);
 
             ko.applyBindings(this.viewModel, this.element.get(0));
-            this.element.find("#doAuthenticationButton").button();
+            this.element.find("#doLogOnButton").button();
+            this.element.find("#doLogOffButton").button();
             this._update();
         },
         destroy: function () {
@@ -64,7 +71,15 @@
             $.Widget.prototype.destroy.call(this);
         },
         _update: function () {
-            this.element.text(new Date());
+            if (CIAPI.connection.isConnected) {
+                this.element.find('#LogOnView').hide();
+                this.element.find('#LogOffView').show();
+            }
+            else {
+                this.element.find('#LogOnView').show();
+                this.element.find('#LogOffView').hide();
+            }
+            //this.element.text(new Date());
         }
     });
 })(jQuery);

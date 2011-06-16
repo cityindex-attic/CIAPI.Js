@@ -1,39 +1,35 @@
-describe("CIAPI.connect unit tests", function() {
-    beforeEach(function() {
-
+describe("CIAPI.connect unit tests", function () {
+    beforeEach(function () {
+        CIAPI.connection.ServiceUri = "http://174.129.8.69/TradingApi";
+        CIAPI.connection.StreamUri = "http://pushpreprod.cityindextest9.co.uk";
     });
 
-    it("should create a session", function(){
-        runs(function(){
+    it("should create a session", function () {
+        runs(function () {
             CIAPI.connect({
                 UserName: "CC735158",
-                Password: "password",
-                ServiceUri: "http://174.129.8.69/TradingApi",
-                StreamUri: "http://pushpreprod.cityindextest9.co.uk"
+                Password: "password"
             });
         });
 
-        waitsFor(function() {
+        waitsFor(function () {
             return CIAPI.connection.isConnected;
         });
 
-        runs(function() {
-            console.log(CIAPI.connection);
+        runs(function () {
             expect(CIAPI.connection.Session).toBeTruthy();
         });
 
     });
 
-    it("should report an error for an invalid login", function(){
+    it("should report an error for an invalid login", function () {
 
-        runs(function(){
+        runs(function () {
             var that = this;
             CIAPI.connect({
                 UserName: "invalid",
                 Password: "invalid",
-                ServiceUri: "http://174.129.8.69/TradingApi",
-                StreamUri: "http://pushpreprod.cityindextest9.co.uk",
-                error: function(data) {
+                error: function (data) {
                     console.log(data);
                     that.responseRecieved = true;
                     that.error = data;
@@ -41,11 +37,11 @@ describe("CIAPI.connect unit tests", function() {
             });
         });
 
-        waitsFor(function() {
+        waitsFor(function () {
             return this.responseRecieved;
         });
 
-        runs(function() {
+        runs(function () {
             console.log(CIAPI.connection);
             expect(this.error.HttpStatus).toBe(401);
             expect(CIAPI.connection.Session).toBeFalsy();
@@ -53,7 +49,55 @@ describe("CIAPI.connect unit tests", function() {
 
     });
 
+    it("should destroy a session", function () {
+        runs(function () {
+            var that = this;
+            CIAPI.connect({
+                UserName: "CC735158",
+                Password: "password"
+            });
+        });
 
+        waitsFor(function () {
+            return CIAPI.connection.isConnected;
+        });
+
+        runs(function () {
+            CIAPI.disconnect();
+        });
+
+        waitsFor(function () {
+            return !CIAPI.connection.isConnected;
+        });
+
+        runs(function () {
+            expect(CIAPI.connection.UserName).toBeFalsy();
+            expect(CIAPI.connection.Session).toBeFalsy();
+        });
+
+    });
+
+    it("connect should store the session and username", function () {
+        spyOn(CIAPI,"store");
+
+        runs(function () {
+            CIAPI.connect({
+                UserName: "CC735158",
+                Password: "password"
+            });
+        });
+
+        waitsFor(function () {
+            return CIAPI.connection.isConnected;
+        });
+
+        runs(function () {
+            expect(CIAPI.store).toHaveBeenCalled();
+            expect(CIAPI.store.mostRecentCall.args[1].UserName).toBe("CC735158");
+            expect(CIAPI.store.mostRecentCall.args[1].Session).toBeTruthy();
+        });
+
+    });
 });
 
 

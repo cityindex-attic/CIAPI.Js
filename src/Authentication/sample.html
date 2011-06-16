@@ -54,27 +54,37 @@
         <div class="ui-dialog ui-widget ui-widget-content ui-corner-all">
             <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
             </div>
-            <div class="ui-dialog-content ui-widget-content">
-                <p id="login_message"></p>
-                <fieldset>
-                    <label for="username">UserName</label>
-                    <input type="text"
-                            name="username"
-                            id="username"
-                            class="inputFields"
-                            data-bind="value: username"
-                            tabindex="1" />
-                    <label for="password">Password</label>
-                    <input type="password"
-                            name="password"
-                            id="password"
-                            class="inputFields"
-                            data-bind="value: password"
-                            tabindex="2" />
-                </fieldset>
+            <div id="LogOnView">
+                <div class="ui-dialog-content ui-widget-content">
+                    <p id="login_message"></p>
+                    <fieldset>
+                        <label for="username">UserName</label>
+                        <input type="text"
+                                name="username"
+                                id="username"
+                                class="inputFields"
+                                data-bind="value: username"
+                                tabindex="1" />
+                        <label for="password">Password</label>
+                        <input type="password"
+                                name="password"
+                                id="password"
+                                class="inputFields"
+                                data-bind="value: password"
+                                tabindex="2" />
+                    </fieldset>
+                </div>
+                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                    <button id="doLogOnButton" data-bind="click: doLogOn" tabindex="3">Log on</button>
+                </div>
             </div>
-            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                <button id="doAuthenticationButton" data-bind="click: doAuthentication" tabindex="3">Log on</button>
+            <div id="LogOffView">
+                <div class="ui-dialog-content ui-widget-content">
+                    You are logged in as <span data-bind="text: username" />
+                </div>
+                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                    <button id="doLogOffButton" data-bind="click: doLogOff" tabindex="4">Log off</button>
+                </div>
             </div>
         </div>
     </script>

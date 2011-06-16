@@ -39,6 +39,7 @@ var mockData = {
    }, 1000);
 
    amplify.request.define( "createSession", function(settings) {
+       console.log("Mocking response for CreateSession request", settings.data); 
        var matchingUsers = _(mockData.Users).filter(function(user) {
             return user.UserName === settings.data.UserName && user.Password === settings.data.Password;
        });
@@ -49,7 +50,15 @@ var mockData = {
        }
    });
 
+   amplify.request.define("DeleteSession", function(settings) {
+       console.log("Mocking response for DeleteSession request", settings.data); 
+       
+       //Can this ever error?
+       settings.success();
+   });
+
    amplify.request.define( "ListCfdMarkets", function(settings) {
+        console.log("Mocking response for ListCfdMarkets request", settings.data);
         var regex = new RegExp(settings.data.searchByMarketName+".*");
         var markets = _(mockData.CfdMarkets).filter(function(m) {
            return regex.test(m.Name);
@@ -58,6 +67,7 @@ var mockData = {
    });
 
    amplify.request.define( "GetPriceBars", function(settings) {
+        console.log("Mocking response for GetPriceBars request", settings.data);
         settings.success(mockData.PriceHistory.slice(0, settings.data.maxResults));
    });
 

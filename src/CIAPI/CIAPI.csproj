@@ -5,14 +5,31 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="build.project.xml" />
+    <Content Include="js\!amplify.types.cors.js" />
+    <Content Include="js\!CIAPI.init.js" />
+    <Content Include="js\a.CIAPI.dto.ApiErrorResponseDTO.js" />
+    <Content Include="js\a.CIAPI.dto.CreateSessionResponseDTO.js" />
+    <Content Include="js\a.CIAPI.dto.ListCfdMarketsResponseDTO.js" />
+    <Content Include="js\a.CIAPI.dto.PriceBarDTO.js" />
+    <Content Include="js\a.CIAPI.dto.PriceDTO.js" />
+    <Content Include="js\CIAPI.amplify.requests.js" />
+    <Content Include="js\CIAPI.connect.js" />
     <Content Include="js\CIAPI.dojo.js" />
-    <Content Include="js\CIAPI.js" />
     <Content Include="js\CIAPI.log.js" />
     <Content Include="js\CIAPI.services.js" />
     <Content Include="js\CIAPI.streams.js" />
     <Content Include="js\CIAPI.__testData.js" />
-    <Content Include="js\dto\PriceBar.js" />
+    <Content Include="js\CIAPI.a.store.js" />
+    <Content Include="js\mylibs\amplify.debug.js" />
+    <Content Include="js\mylibs\amplify.min.js" />
+    <Content Include="js\mylibs\underscore.debug.js" />
+    <Content Include="js\mylibs\underscore.min.js" />
+    <Content Include="test\CIAPI.amplify.requests.mock.js" />
+    <Content Include="test\CIAPI.connect.UnitTests.js" />
+    <Content Include="test\CIAPI.services.UnitTests.js" />
+    <Content Include="test\CIAPI.streams.UnitTests.js" />
     <Content Include="test\CIAPI.UnitTests.js" />
+    <Content Include="test\dto.PriceBar.UnitTests.js" />
     <Content Include="test\Run_AcceptanceTests.html" />
     <Content Include="test\Run_UnitTests.html" />
     <Content Include="test\CIAPI.AcceptanceTests.js" />
