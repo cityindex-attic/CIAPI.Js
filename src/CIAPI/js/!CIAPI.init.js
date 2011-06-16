@@ -21,6 +21,6 @@ CIAPI.parseDate = function(value) {
             return new Date(parseInt(a[1], 10));
         }
     }
- };
+};
 
-
+if (typeof Object.freeze == "undefined") { Object.freeze = function () { }; } 
