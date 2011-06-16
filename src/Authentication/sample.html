@@ -63,19 +63,17 @@
                                 name="username"
                                 id="username"
                                 class="inputFields"
-                                data-bind="value: username"
-                                tabindex="1" />
+                                data-bind="value: username"/>
                         <label for="password">Password</label>
                         <input type="password"
                                 name="password"
                                 id="password"
                                 class="inputFields"
-                                data-bind="value: password"
-                                tabindex="2" />
+                                data-bind="value: password" />
                     </fieldset>
                 </div>
                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                    <button id="doLogOnButton" data-bind="click: doLogOn" tabindex="3">Log on</button>
+                    <button id="doLogOnButton" data-bind="click: doLogOn">Log on</button>
                 </div>
             </div>
             <div id="LogOffView">
@@ -83,7 +81,7 @@
                     You are logged in as <span data-bind="text: username" />
                 </div>
                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                    <button id="doLogOffButton" data-bind="click: doLogOff" tabindex="4">Log off</button>
+                    <button id="doLogOffButton" data-bind="click: doLogOff">Log off</button>
                 </div>
             </div>
         </div>
