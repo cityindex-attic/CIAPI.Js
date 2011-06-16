@@ -28,4 +28,13 @@
         type: "GET",
         decoder: "ciapiDecoder"
    });
+
+   amplify.request.define( "GetPriceBars", "cors", {
+        url: "{ServiceUri}/market/{marketId}/barhistory?interval={interval}&span={span}&priceBars={maxResults}&only200=true",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        type: "GET",
+        decoder: "ciapiDecoder"
+   });
+
 })(amplify, _);

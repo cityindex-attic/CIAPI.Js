@@ -23,6 +23,31 @@ describe("CIAPI services unit tests", function() {
 
     });
 
+    it("should return the right number of PriceBars", function() {
+        runs(function(){
+            var that = this;
+            CIAPI.services.GetPriceBars({
+                            MarketId: 400509815,
+                            MaxResults: 15,
+                            success: function(priceBars) {
+                                 that.responseRecieved = true;
+                                 that.bars = priceBars;
+                            }
+                     });
+        });
+
+        waitsFor(function() {
+            return this.responseRecieved;
+        }, 100);
+
+        runs(function() {
+            expect(this.bars.length).toEqual(15);
+        });
+
+
+    });
+
+
 });
 
 

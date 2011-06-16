@@ -33,16 +33,21 @@
             password: ko.observable("your password")
         },
         _doAuthentication: function() {
-                var authDTO = {
+            CIAPI.connect({
                     UserName: this.username(),
-                    Password: this.password()
-                };
-                console.log("TODO: authenticate with CIAPI using", authDTO);
-                console.log('inside _doAuthentication, this is',this);
-                this.widgetElement.find(".CIAPI_AuthenticationWidget").effect("shake", {times:2}, 100);
-                this.widgetElement.find("#login_message")
-                    .addClass('ui-state-error')
-                    .html('<strong>ERROR</strong>: Your details were incorrect.<br />');
+                    Password: this.password(),
+                    ServiceUri: "http://174.129.8.69/TradingApi",
+                    StreamUri: "http://pushpreprod.cityindextest9.co.uk",
+                    success: function(data) {
+                        alert("Your session is:" + data.Session);
+                    },
+                    error: function(data) {
+                        this.viewModel.widgetElement.find(".CIAPI_AuthenticationWidget").effect("shake", {times:2}, 100);
+                        this.viewModel.widgetElement.find("#login_message")
+                            .addClass('ui-state-error')
+                            .html('<strong>ERROR</strong>: '+data.ErrorMessage);
+                    }
+                });
         },
         _create: function() {
             this.viewModel.doAuthentication = this._doAuthentication;
