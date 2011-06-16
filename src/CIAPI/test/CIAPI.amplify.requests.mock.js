@@ -45,7 +45,7 @@ var mockData = {
        if (matchingUsers.length > 0) {
            settings.success(new CIAPI.dto.CreateSessionResponseDTO(matchingUsers[0].Session));
        } else {
-           settings.error(new CIAPI.dto.ApiErrorResponseDTO(401, 4001, "Invalid username or password"));
+           settings.error(new CIAPI.dto.ApiErrorResponseDTO(401, 4010, "The credentials used to authenticate are invalid. Either the username, password or both are incorrect."));
        }
    });
 

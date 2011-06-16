@@ -2,21 +2,23 @@
 <head>
     <title>Authentication demo</title>
 
-    <!--<script type="text/javascript" src="../libs/jquery/1.5.1/jquery.debug.js"></script>-->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <!--We expect these to already be loaded in the "deployment" page -->
+    <script type="text/javascript" src="../../libs/jquery/1.5.1/jQuery.debug.js"></script>
+    <script type="text/javascript" src="../../libs/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="../../libs/json2.js"></script>
+    <script type="text/javascript" src="../../libs/jquery-ui/1.8.11/js/jquery-ui.min.js"></script>
+    <link type="text/css" href="../../libs/jquery-ui/1.8.11/css/dark-hive/jquery-ui-1.8.11.custom.css" rel="Stylesheet"/>
 
-	<script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
-	<script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
-    <!--<link type="text/css"  href="http://cdn.wijmo.com/themes/rocket/jquery-wijmo.css" rel="Stylesheet"/>-->
-    <!--<link type="text/css"  href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/black-tie/jquery-ui.css" rel="Stylesheet"/>-->
-    <!--<link type="text/css"  href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/eggplant/jquery-ui.css" rel="Stylesheet"/>-->
-
-    <link type="text/css" href="themes/ci-default/ci-default.css" rel="Stylesheet"/>
-
+    <!--These are shared by all CIAPI widgets -->
     <script src="../CIAPI/target/js/CIAPI-0001.debug.js"></script>
-	<script src="../CIAPI.widget/target/js/CIAPI.widget-0001.min.js"></script>
-	<script src="js/authentication.js"></script>
+	<script src="../CIAPI.widget/target/js/CIAPI.widget-0001.debug.js"></script>
+	
+    <!--Enable mock data -->
+    <script src="../CIAPI/test/CIAPI.amplify.requests.mock.js"></script>
+
+    <!--This is for CIAPI.authentication widget -->
+    <script src="js/authentication.js"></script>
+    <link type="text/css" href="themes/ci-default/ci-default.css" rel="Stylesheet"/>
 
 </head>
 <body>
@@ -44,10 +46,9 @@
     <script id="customAuthWidgetTemplate" type="text/x-jquery-tmpl">
         <div class="ui-dialog ui-widget ui-widget-content ui-corner-all">
             <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
-
             </div>
             <div class="ui-dialog-content ui-widget-content">
-                <p class="login_message"></p>
+                <p id="login_message"></p>
                 <fieldset>
                     <label for="username">UserName</label>
                     <input type="text"
