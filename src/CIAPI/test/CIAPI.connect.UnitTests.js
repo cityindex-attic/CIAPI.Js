@@ -49,7 +49,7 @@ describe("CIAPI.connect unit tests", function () {
 
     });
 
-    it("should destroy a session", function () {
+    it("should destroy a session (including cookies)", function () {
         runs(function () {
             var that = this;
             CIAPI.connect({
@@ -63,6 +63,8 @@ describe("CIAPI.connect unit tests", function () {
         });
 
         runs(function () {
+            expect(document.cookie).toContain("UserName=CC735158;");
+            expect(document.cookie + ';').toContain("Session=%7Bef4923-mock-session-token-fe552%7D;");
             CIAPI.disconnect();
         });
 
@@ -71,6 +73,9 @@ describe("CIAPI.connect unit tests", function () {
         });
 
         runs(function () {
+            expect(document.cookie).toContain("UserName=;");
+            expect(document.cookie + ';').toContain("Session=;");
+
             expect(CIAPI.connection.UserName).toBeFalsy();
             expect(CIAPI.connection.Session).toBeFalsy();
         });
@@ -78,7 +83,7 @@ describe("CIAPI.connect unit tests", function () {
     });
 
     it("connect should store the session and username", function () {
-        spyOn(CIAPI,"store");
+        spyOn(CIAPI, "store");
 
         runs(function () {
             CIAPI.connect({

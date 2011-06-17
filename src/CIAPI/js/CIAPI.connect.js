@@ -37,12 +37,16 @@ CIAPI.connect = function(connectionOptions) {
                 CIAPI.connection.UserName = connectionOptions.UserName;
                 CIAPI.connection.Session = data.Session;
                 CIAPI.store("CIAPI.connection", CIAPI.connection);
+                CIAPI.storeInCookie("UserName", CIAPI.connection.UserName);
+                CIAPI.storeInCookie("Session", CIAPI.connection.Session);
                 connectionOptions.success(data);
            },
            error: function( data ) {
                 CIAPI.connection.isConnected = false;
                 CIAPI.connection.Session = "";
                 CIAPI.store("CIAPI.connection", CIAPI.connection);
+                CIAPI.storeInCookie("UserName", "");
+                CIAPI.storeInCookie("Session", "");
                 connectionOptions.error(data);
            }
    });
@@ -71,6 +75,8 @@ CIAPI.disconnect = function(options) {
                 CIAPI.connection.UserName = "";
                 CIAPI.connection.Session = "";
                 CIAPI.store("CIAPI.connection", CIAPI.connection);
+                CIAPI.storeInCookie("UserName", "");
+                CIAPI.storeInCookie("Session", "");
                 options.success(data);
            },
            error: function( data ) {

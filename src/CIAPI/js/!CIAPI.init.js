@@ -23,4 +23,10 @@ CIAPI.parseDate = function(value) {
     }
 };
 
-if (typeof Object.freeze == "undefined") { Object.freeze = function () { }; } 
+if (typeof Object.freeze == "undefined") { Object.freeze = function () { }; }
+
+if (typeof String.trim == "undefined") {
+    String.prototype.trim = function () {
+        return this.replace(/^\s*(\S*(\s+\S+)*)\s*$/, "$1");
+    };
+}
