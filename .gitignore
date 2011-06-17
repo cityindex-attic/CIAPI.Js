@@ -1,3 +1,6 @@
+#Ignore everything in publish/ except punlish/libs
+publish/*
+!publish/libs/
 
 dist/
 reports/
@@ -65,7 +68,6 @@ dwsync.xml
 # Folders to ignore
 .hg
 .svn
-publish
 .idea
 
 # build script local files
