@@ -22,7 +22,8 @@
     <Set name="handler">
         <New id="ResourceHandler" class="org.eclipse.jetty.server.handler.ResourceHandler">
             <Set name="resourceBase"><SystemProperty name="jetty.path_to_serve" default="."/></Set>
-			<Set name="directoriesListed">true</Set>
+			      <Set name="directoriesListed">true</Set>
+			      <Set name="cacheControl">no-store,no-cache,must-revalidate</Set>
         </New>
     </Set>
 
