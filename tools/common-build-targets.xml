@@ -18,6 +18,7 @@
         <equals arg1="${env}" arg2="dev"/>
         <then>
             <!-- Build a dev environment -->
+            <echo message="########################################################################"/>
             <echo message="Building a Development Environment..."/>
             <antcall target="-basics.dev"/>
         </then>
@@ -26,6 +27,7 @@
             <equals arg1="${env}" arg2="test"/>
             <then>
                 <!-- Build a test environment -->
+                <echo message="########################################################################"/>
                 <echo message="Building a Test Environment..."/>
                 <antcall target="-basics.test"/>
             </then>
@@ -33,6 +35,7 @@
 
         <else>
             <!-- Build a production environment -->
+            <echo message="########################################################################"/>
             <echo message="Building a Production Environment..."/>
             <antcall target="-basics.production"/>
         </else>
@@ -44,6 +47,7 @@
         <equals arg1="${env}" arg2="dev"/>
         <then>
             <!-- Build a dev environment -->
+            <echo message="########################################################################"/>
             <echo message="Building a Development Environment..."/>
             <antcall target="-text.dev"/>
         </then>
@@ -52,6 +56,7 @@
             <equals arg1="${env}" arg2="test"/>
             <then>
                 <!-- Build a test environment -->
+                <echo message="########################################################################"/>
                 <echo message="Building a Test Environment..."/>
                 <antcall target="-text.test"/>
             </then>
@@ -59,6 +64,7 @@
 
         <else>
             <!-- Build a production environment -->
+            <echo message="########################################################################"/>
             <echo message="Building a Production Environment..."/>
             <antcall target="-text.production"/>
         </else>
@@ -71,6 +77,7 @@
         <equals arg1="${env}" arg2="dev"/>
         <then>
             <!-- Build a dev environment -->
+            <echo message="########################################################################"/>
             <echo message="Building a Development Environment..."/>
             <antcall target="-buildkit.dev"/>
         </then>
@@ -79,6 +86,7 @@
             <equals arg1="${env}" arg2="test"/>
             <then>
                 <!-- Build a test environment -->
+                <echo message="########################################################################"/>
                 <echo message="Building a Test Environment..."/>
                 <antcall target="-buildkit.test"/>
             </then>
@@ -86,6 +94,7 @@
 
         <else>
             <!-- Build a production environment -->
+            <echo message="########################################################################"/>
             <echo message="Building a Production Environment..."/>
             <antcall target="-buildkit.production"/>
         </else>
@@ -98,6 +107,7 @@
         <equals arg1="${env}" arg2="dev"/>
         <then>
             <!-- Build a dev environment -->
+            <echo message="########################################################################"/>
             <echo message="Building a Development Environment..."/>
             <antcall target="-build.dev" />
         </then>
@@ -106,6 +116,7 @@
             <equals arg1="${env}" arg2="test"/>
             <then>
                 <!-- Build a test environment -->
+                <echo message="########################################################################"/>
                 <echo message="Building a Test Environment..."/>
                 <antcall target="-build.test" />
             </then>
@@ -113,6 +124,7 @@
 
         <else>
             <!-- Build a production environment -->
+            <echo message="########################################################################"/>
             <echo message="Building a Production Environment..."/>
             <antcall target="-build.production" />
         </else>
@@ -124,6 +136,7 @@
         <equals arg1="${env}" arg2="dev"/>
         <then>
             <!-- Build a dev environment -->
+            <echo message="########################################################################"/>
             <echo message="Building a Development Environment..."/>
             <antcall target="-minify.dev"/>
         </then>
@@ -132,6 +145,7 @@
             <equals arg1="${env}" arg2="test"/>
             <then>
                 <!-- Build a test environment -->
+                <echo message="########################################################################"/>
                 <echo message="Building a Test Environment..."/>
                 <antcall target="-minify.test"/>
             </then>
@@ -139,6 +153,7 @@
 
         <else>
             <!-- Build a production environment -->
+            <echo message="########################################################################"/>
             <echo message="Building a Production Environment..."/>
             <antcall target="-minify.production"/>
         </else>
@@ -183,13 +198,11 @@
 
     <!-- Target: basics -->
     <target name="-basics.dev"
-            depends="-rev,
-                     -clean,
+            depends="-clean,
                      -copy"/>
 
     <target name="-basics.test"
-            depends="-rev,
-                     -clean,
+            depends="-clean,
                      -copy,
                      -usemin,
                      -js.all.minify,
@@ -201,8 +214,7 @@
                      -html"/>
 
     <target name="-basics.production"
-            depends="-rev,
-                     -clean,
+            depends="-clean,
                      -copy,
                      -usemin,
                      -js.all.minify,
@@ -216,13 +228,11 @@
 
     <!-- Target: text -->
     <target name="-text.dev"
-            depends="-rev,
-                     -clean,
+            depends="-clean,
                      -copy"/>
 
     <target name="-text.test"
-            depends="-rev,
-                     -clean,
+            depends="-clean,
                      -copy,
                      -usemin,
                      -js.all.minify,
@@ -235,8 +245,7 @@
                      -htmlclean"/>
 
     <target name="-text.production"
-            depends="-rev,
-                     -clean,
+            depends="-clean,
                      -copy,
                      -usemin,
                      -js.all.minify,
@@ -251,15 +260,13 @@
 
     <!-- Target: buildkit -->
     <target name="-buildkit.dev"
-            depends="-rev,
-                     -clean,
+            depends="-clean,
                      -copy,
                      -imagespng,
                      -imagesjpg"/>
 
     <target name="-buildkit.test"
-            depends="-rev,
-                     -clean,
+            depends="-clean,
                      -copy,
                      -usemin,
                      -js.all.minify,
@@ -274,8 +281,7 @@
                      -imagesjpg"/>
 
     <target name="-buildkit.production"
-            depends="-rev,
-                     -clean,
+            depends="-clean,
                      -copy,
                      -usemin,
                      -js.all.minify,
@@ -292,16 +298,14 @@
 
     <!-- Target: build -->
     <target name="-build.dev"
-            depends="-rev,
-                     -clean,
+            depends="-clean,
                      -copy,
 					 -runtests-remote,
                      -imagespng,
                      -imagesjpg"/>
 
     <target name="-build.test"
-            depends="-rev,
-                     -clean,
+            depends="-clean,
                      -copy,
 					 -runtests-remote,
                      -usemin,
@@ -317,8 +321,7 @@
                      -imagesjpg"/>
 
     <target name="-build.production"
-            depends="-rev,
-                     -clean,
+            depends="-clean,
                      -copy,
 					 -runtests-remote,
                      -usemin,
@@ -336,15 +339,13 @@
 
     <!-- Target: minify -->
     <target name="-minify.dev"
-            depends="-rev,
-                     -clean,
+            depends="-clean,
                      -copy,
                      -imagespng,
                      -imagesjpg"/>
 
     <target name="-minify.test"
-            depends="-rev,
-                     -clean,
+            depends="-clean,
                      -copy,
                      -usemin,
                      -js.all.minify,
@@ -359,8 +360,7 @@
                      -imagesjpg"/>
 
     <target name="-minify.production"
-            depends="-rev,
-                     -clean,
+            depends="-clean,
                      -copy,
                      -usemin,
                      -js.all.minify,
@@ -395,37 +395,25 @@
 	</target>	
 	 
 	<target name="-runtests-remote" depends="-create-reports-folder" description="(PRIVATE) Run tests through remote jsTestDriver">
-<echo message="Ignore whilst remote test runner infrastructure is repaired"/>
-
-	</target>		
+        <echo message="Ignore whilst remote test runner infrastructure is repaired"/>
+	</target>
 
 	<target name="-load-build-info" description="(PRIVATE) Loads the build versioning information">
-		<property file="./${dir.build}/${build.version.info}"/>
+		<property name="build.number" value="0000"/> <!-- normally this will be overridden by passing -Dbuild.number={nnn} when build server calls Ant -->
+		<tstamp/>
+		<property name="build.date" value="${DSTAMP} ${TSTAMP}"/>
 	</target>
 	
 	<target name="-clean" description="(PRIVATE) Wipe the previous build">
-	<!-- This is a private target -->
-	
 		<echo message="Cleaning up previous build directory..."/>
 		<delete dir="./${dir.publish}/"/>
 	</target>
-	
+
 	<target name="-create-reports-folder" description="(PRIVATE) Wipe the previous build">
 		<!-- This is a private target -->
 		<mkdir dir="./${dir.publish.reports}/"/>
 	</target>
-	
-	<target name="-rev" description="(PRIVATE) Increase the current build number by one and set build date">
-		<!-- This is a private target -->
-	
-		<echo message="Reading build number &amp; setting build date ..."/>
-		<propertyfile file="./${dir.build}/${build.version.info}" comment="Build Information File - DO NOT CHANGE">
-			<entry key="build.date" type="date" value="now" pattern="dd.MM.yyyy HH:mm"/>
-		</propertyfile>
-		<echo>Creating build ${build.number}</echo>
-	</target>
-	
-	
+
 	<target name="current-number" depends="-load-build-info" description="(PUBLIC) Returns the current build number">
 		<echo>Current build number: ${build.number}</echo>
 	</target>
@@ -456,18 +444,6 @@
   <target name="-js.libs.minify" depends="-check-js-libs-exists, -load-build-info" if="js.mylibs.folder.exists"
           description="(PRIVATE) Minifies the (unminified) lib files in dir.js.libs">
     <echo message="-js.libs.minify currently does nothing (we assume that the libraries in libs are as we want them"/>
-    <!--
-    <echo message="Minifying helper JS files..."/>
-    <apply executable="java" parallel="false">
-      <fileset dir="./${dir.publish}/${dir.js.libs}/" includes="*.js" excludes="*.min.js"/>
-      <arg line="-jar"/>
-      <arg path="./${dir.build.tools}/${tool.yuicompressor}"/>
-      <srcfile/>
-      <arg line="-o"/>
-      <mapper type="glob" from="*.js" to="${basedir}/${dir.publish}/${dir.js.libs}/*-${build.number}.min.js"/>
-      <targetfile/>
-    </apply>
-    -->
   </target>
 
   <target name="-js.all.minify" depends="-js.libs.minify"
@@ -494,7 +470,8 @@
   <target name="-js.main.concat" depends="-load-build-info" 
           description="(PRIVATE) Concatenates the JS files in dir.js">
 		  <echo message="Concatenating Main JS scripts... (minified)"/>
-	    <concat destfile="./${dir.publish}/${dir.js}/b.main-${build.number}.min.js">
+	    <concat destfile="./${dir.publish}/${dir.js}/b.main.min.js"
+                fixlastline="true">
 			<sort xmlns:rcmp="antlib:org.apache.tools.ant.types.resources.comparators">
               <fileset dir="./${dir.publish}/">
 				  <include name="**/${dir.js.main}/**/*.min.js"/>
@@ -505,7 +482,8 @@
             </sort>
 	    </concat>
       <echo message="Concatenating Main JS scripts... (debug)"/>
-      <concat destfile="./${dir.publish}/${dir.js}/b.main-${build.number}.debug.js">
+      <concat destfile="./${dir.publish}/${dir.js}/b.main.debug.js"
+              fixlastline="true">
          <sort xmlns:rcmp="antlib:org.apache.tools.ant.types.resources.comparators">
               <fileset dir="./${dir.publish}/">
                   <include name="**/${dir.js.main}/**/*.js"/>
@@ -517,37 +495,47 @@
             </sort>
       </concat>
 	</target>
-	
-	<target name="-js.mylibs.concat" depends="-check-js-mylibs-exists,-load-build-info" if="js.mylibs.folder.exists"
+
+    <target name="-js.mylibs.concat" depends="-check-js-mylibs-exists,-load-build-info" if="js.mylibs.folder.exists"
             description="(PRIVATE) Concatenates the JS files in dir.js.mylibs">
-		  <echo message="Concatenating JS libraries ( {mylibs}/{minified} )"/>
-	    <concat destfile="./${dir.publish}/${dir.js}/a.mylibs-${build.number}.min.js">
-			  <fileset dir="./${dir.publish}/${dir.js.mylibs}/">
-				  <include name="**/*.min.js"/>
-			  </fileset>    	
-	    </concat>
-      <echo message="Concatenating JS libraries ( {mylibs}/{debug} )"/>
-      <concat destfile="./${dir.publish}/${dir.js}/a.mylibs-${build.number}.debug.js">
-        <fileset dir="./${dir.publish}/${dir.js.mylibs}/">
-          <include name="**/*.debug.js"/>
-        </fileset>
-      </concat>
-	</target>
+        <echo message="Concatenating JS libraries ( {mylibs}/{minified} )"/>
+        <concat destfile="./${dir.publish}/${dir.js}/a.mylibs.min.js"
+                fixlastline="true">
+            <sort xmlns:rcmp="antlib:org.apache.tools.ant.types.resources.comparators">
+                <fileset dir="./${dir.publish}/${dir.js.mylibs}/">
+                    <include name="**/*.min.js"/>
+                </fileset>
+                <rcmp:name/>
+            </sort>
+        </concat>
+        <echo message="Concatenating JS libraries ( {mylibs}/{debug} )"/>
+        <concat destfile="./${dir.publish}/${dir.js}/a.mylibs.debug.js"
+                fixlastline="true">
+            <sort xmlns:rcmp="antlib:org.apache.tools.ant.types.resources.comparators">
+                <fileset dir="./${dir.publish}/${dir.js.mylibs}/">
+                    <include name="**/*.debug.js"/>
+                </fileset>
+                <rcmp:name/>
+            </sort>
+        </concat>
+    </target>
 
   <target name="-js.scripts.concat" depends="-load-build-info" if="build.concat.scripts">
 		<echo message="Concatenating library file with main script file"/>
- 		<concat destfile="./${dir.publish}/${dir.js}/${scripts.filename}-${build.number}.min.js">
+ 		<concat destfile="./${dir.publish}/${dir.js}/${scripts.filename}.min.js"
+                 fixlastline="true">
 			<fileset dir="./${dir.publish}/${dir.js}/">
-				<include name="a.mylibs-${build.number}.min.js"/>
-				<include name="b.main-${build.number}.min.js"/>
+				<include name="a.mylibs.min.js"/>
+				<include name="b.main.min.js"/>
 			</fileset>    	
 	    </concat>
 		
 		<echo message="Concatenating library file with main debug script file"/>
- 		<concat destfile="./${dir.publish}/${dir.js}/${scripts.filename}-${build.number}.debug.js">
+ 		<concat destfile="./${dir.publish}/${dir.js}/${scripts.filename}.debug.js"
+                 fixlastline="true">
 			<fileset dir="./${dir.publish}/${dir.js}/">
-				<include name="a.mylibs-${build.number}.debug.js"/>
-				<include name="b.main-${build.number}.debug.js"/>
+				<include name="a.mylibs.debug.js"/>
+				<include name="b.main.debug.js"/>
 			</fileset>    	
 	    </concat>
 	</target>
@@ -557,11 +545,11 @@
 			<equals arg1="${build.delete.unoptimized}" arg2="true"/>
 			<then>
 				<echo message="Deleting unoptimized files..."/>
-				<delete file="./${dir.publish}/${dir.js}/${scripts.filename}-${build.number}.js"/>
-				<delete file="./${dir.publish}/${dir.js}/${scripts.filename}-${build.number}-debug.js"/>
+				<delete file="./${dir.publish}/${dir.js}/${scripts.filename}.js"/>
+				<delete file="./${dir.publish}/${dir.js}/${scripts.filename}-debug.js"/>
 				<!-- 
 				<delete dir="./${dir.publish}/${dir.js.lib}/"/> 
-				<delete file="./${dir.publish}/${dir.js}/libs-${build.number}.js"/>
+				<delete file="./${dir.publish}/${dir.js}/libs.js"/>
 				this guy probably COULD be on but I think it's better if we keep him off for now. ^pi
 				<delete includeemptydirs="true">
 				<fileset dir="./${dir.publish}/${dir.js.libs}/" includes="*.js" excludes="*.min.js"/>
@@ -576,8 +564,8 @@
 				<equals arg1="${build.concat.scripts}" arg2="true"/>
 			</and>
 			<then>
-				<delete file="./${dir.publish}/${dir.js}/libs-${build.number}.js"/>
-				<delete file="./${dir.publish}/${dir.js}/${scripts.filename}-${build.number}.js"/>
+				<delete file="./${dir.publish}/${dir.js}/libs.js"/>
+				<delete file="./${dir.publish}/${dir.js}/${scripts.filename}.js"/>
 			</then>
 		</if>
 	</target>
@@ -619,7 +607,8 @@
 	<target name="-html" depends="-load-build-info" description="(PRIVATE) Very basic clean up of the HTML">
 		<echo message="Clean up the html..."/>
 		<!-- style.css replacement handled as a replacetoken above -->
-		<replaceregexp match="&lt;!-- scripts concatenated [\d\w\s\W]*?!-- end ((scripts)|(concatenated and minified scripts))--&gt;" replace="&lt;script src='${dir.js}/${scripts.filename}-${build.number}.min.js\'&gt;&lt;/script&gt;" flags="m">
+		<replaceregexp match="&lt;!-- scripts concatenated [\d\w\s\W]*?!-- end ((scripts)|(concatenated and minified scripts))--&gt;"
+                       replace="&lt;script src='${dir.js}/${scripts.filename}.min.js\'&gt;&lt;/script&gt;" flags="m">
 			<fileset dir="./${dir.publish}" includes="${page-files}"/>
 		</replaceregexp>
 		<!--[! use comments like this one to avoid having them get minified -->
@@ -634,7 +623,6 @@
 			<arg line="--type html"/>
 			<arg line="--preserve-multi-spaces"/>
 			<arg line="--remove-quotes"/>
-			<arg line="--compress-js"/>
 			<arg line="--compress-css"/>
 			<srcfile/>
 			<arg value="-o"/>
@@ -652,7 +640,6 @@
 			<arg value="--preserve-comments"/>
 			<arg line="--preserve-multi-spaces"/>
 			<arg line="--type html"/>
-			<arg line="--compress-js"/>
 			<arg line="--compress-css"/>
 			<srcfile/>
 			<arg value="-o"/>
@@ -669,7 +656,6 @@
 			<arg path="./${dir.build}/tools/${tool.htmlcompressor}"/>
 			<arg line="--type html"/>
 			<arg line="--remove-quotes"/>
-			<arg line="--compress-js"/>
 			<arg line="--compress-css"/>
 			<srcfile/>
 			<arg value="-o"/>
@@ -691,19 +677,19 @@
 	<target name="-css" depends="-check-css-exists,-load-build-info" if="css.folder.exists"
             description="(PRIVATE) Concatenates and Minifies any stylesheets listed in the file.stylesheets property">
 		<echo message="Minifying css..."/>
-		<concat destfile="./${dir.publish}/${dir.css}/style-${build.number}.css">
+		<concat destfile="./${dir.publish}/${dir.css}/all_styles.css">
 			<filelist dir="./${dir.publish}/${dir.css}" files="${stylesheet-files}"/>
 		</concat>
 		<apply executable="java" parallel="false">
-			<fileset dir="./${dir.publish}/${dir.css}/" includes="style-${build.number}.css"/>
+			<fileset dir="./${dir.publish}/${dir.css}/" includes="all_styles.css"/>
 			<arg line="-jar"/>
 			<arg path="./${dir.build.tools}/${tool.yuicompressor}"/>
 			<srcfile/>
 		<redirector>
-			<outputmapper type="glob" from="style-${build.number}.css" to="./${dir.publish}/${dir.css}/style-${build.number}.min.css"/>
+			<outputmapper type="glob" from="all_styles.css" to="./${dir.publish}/${dir.css}/style.min.css"/>
 		</redirector>
 		</apply>
-		<replace token="style.css" value="style-${build.number}.min.css" dir="${dir.publish}" includes="${page-files}"/>
+		<replace token="style.css" value="style.min.css" dir="${dir.publish}" includes="${page-files}"/>
 	</target>
         <target name="-check-css-exists" unless="css.folder.exists">
 		    <!--<echo message="Checking if folder &quot;./${dir.publish}/${dir.css}/&quot; exists" />-->

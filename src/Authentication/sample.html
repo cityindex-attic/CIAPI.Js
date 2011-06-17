@@ -2,25 +2,27 @@
 <head>
     <title>Authentication demo</title>
 
-    <!--We expect these to already be loaded in the "deployment" page -->
-    <script type="text/javascript" src="../../libs/jquery/1.5.1/jQuery.debug.js"></script>
-    <script type="text/javascript" src="../../libs/jquery.tmpl.min.js"></script>
-    <script type="text/javascript" src="../../libs/json2.js"></script>
-    <script type="text/javascript" src="../../libs/jquery-ui/1.8.11/js/jquery-ui.min.js"></script>
+    <!--[! We expect these to already be loaded in the "deployment" page -->
+    <script type="text/javascript" src="/publish/libs/jquery/1.5.1/jQuery.debug.js"></script>
+    <script type="text/javascript" src="/publish/libs/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="/publish/libs/json2.js"></script>
+    <script type="text/javascript" src="/publish/libs/jquery-ui/1.8.11/js/jquery-ui.min.js"></script>
     <!--<link type="text/css" href="../../libs/jquery-ui/1.8.11/css/dark-hive/jquery-ui-1.8.11.custom.css" rel="Stylesheet"/>-->
 
-    <!--These are shared by all CIAPI widgets -->
-    <script src="../CIAPI/target/js/CIAPI-0001.debug.js"></script>
-	<script src="../CIAPI.widget/target/js/CIAPI.widget-0001.debug.js"></script>
+    <!--[! These are shared by all CIAPI widgets -->
+    <script src="/publish/CIAPI/js/CIAPI.debug.js"></script>
+	<script src="/publish/CIAPI.widget/js/CIAPI.widget.debug.js"></script>
 	
-    <!--Enable mock data -->
-    <script src="../CIAPI/test/CIAPI.amplify.requests.mock.js"></script>
-    <!-- CC735158 / password are valid mock credentials -->
+    <!--[! Enable mock data -->
+    <script src="/publish/CIAPI/test/CIAPI.amplify.requests.mock.js"></script>
+    <!--[!  CC735158 / password are valid mock credentials -->
 
-    <!--This is for CIAPI.authentication widget -->
+    <!--[! This is for CIAPI.authentication widget -->
+    <!-- scripts concatenated and minified via ant build script-->
     <script src="js/authentication.js"></script>
-    <link type="text/css" href="themes/ci.default/ci.default.css" rel="Stylesheet"/>
+    <!-- end scripts-->
 
+    <link type="text/css" href="themes/ci.default/ci.default.css" rel="Stylesheet"/>
 </head>
 <body>
 

@@ -1,0 +1,47 @@
+<!doctype html> 
+<html>
+<head>
+	<title>Acceptance Test Runner</title>
+  
+    <!--[! standard dependencies -->
+    <script type="text/javascript" src="/publish/libs/jquery/1.5.1/jQuery.debug.js"></script>
+
+    <!--[! test framework -->
+    <script type="text/javascript" src="/publish/libs/jasmine/jasmine.js" ></script>
+    <script type="text/javascript" src="/publish/libs/jasmine/jasmine-html.js" ></script>
+    <link rel="stylesheet" type="text/css" href="/publish/libs/jasmine/jasmine.css">
+
+    <!--[! CIAPI code under tests -->
+    <!-- scripts concatenated and minified via ant build script-->
+    <script type="text/javascript" src="js/mylibs/amplify.debug.js" ></script>
+    <script type="text/javascript" src="js/!amplify.types.cors.js" ></script>
+    <script type="text/javascript" src="js/mylibs/underscore.debug.js" ></script>
+
+    <script type="text/javascript" src="js/!CIAPI.init.js" ></script>
+
+    <script type="text/javascript" src="js/a.CIAPI.dto.PriceBarDTO.js" ></script>
+    <script type="text/javascript" src="js/a.CIAPI.dto.ApiErrorResponseDTO.js" ></script>
+    <script type="text/javascript" src="js/a.CIAPI.dto.CreateSessionResponseDTO.js" ></script>
+    <script type="text/javascript" src="js/a.CIAPI.dto.ListCfdMarketsResponseDTO.js" ></script>
+    <script type="text/javascript" src="js/a.CIAPI.dto.PriceDTO.js" ></script>
+
+    <script type="text/javascript" src="js/CIAPI.amplify.requests.js" ></script>
+    <script type="text/javascript" src="js/CIAPI.a.store.js" ></script>
+    <script type="text/javascript" src="js/CIAPI.dojo.js" ></script>
+    <script type="text/javascript" src="js/CIAPI.__testData.js" ></script>
+    <script type="text/javascript" src="js/CIAPI.connect.js" ></script>
+    <script type="text/javascript" src="js/CIAPI.services.js" ></script>
+    <script type="text/javascript" src="js/CIAPI.streams.js" ></script>
+    <!-- end scripts-->
+
+    <!-- Tests -->
+    <script type="text/javascript" src="test/CIAPI.AcceptanceTests.js" ></script>
+</head>
+
+<body>
+	<script>
+			jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+			jasmine.getEnv().execute();
+	</script>
+</body>
+</html>
