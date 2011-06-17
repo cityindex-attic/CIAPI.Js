@@ -2174,127 +2174,102 @@ button.ui-button::-moz-focus-inner
     -webkit-border-radius: 10px;
     border-radius: 10px;
 }
-/*
- * jQuery UI AutoComplete @VERSION
- *
-*/
-.wijmo-wijinput, .wijmo-wijtextbox
-{
-    background: #fff;
-    -moz-box-shadow: inset 0 2px 2px #8f8f8f;
-    -webkit-box-shadow: inset 0 2px 2px #8f8f8f;
-    box-shadow: inset 0 2px 2px #8f8f8f;
-}
-.wijmo-wijinput.ui-state-focus, .wijmo-wijtextbox.ui-state-focus
-{
-    background: #fff;
-    -moz-box-shadow: 0px 0px 5px #85b2cb, inset 0 2px 2px #8f8f8f;
-    -webkit-box-shadow: 0px 0px 5px #85b2cb, inset 0 2px 2px #8f8f8f;
-    box-shadow: 0px 0px 5px #85b2cb, inset 0 2px 2px #8f8f8f;
-}
-.ui-autocomplete
-{
-    -moz-box-shadow: 0px 5px 10px rgba(0,0,0,0.8);
-    -webkit-box-shadow: 0px 5px 10px rgba(0,0,0,0.8);
-    box-shadow: 0px 5px 10px rgba(0,0,0,0.8);
-}
-.wijmo-wijcalendar .ui-datepicker-header .ui-state-default
-{
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-}
-.wijmo-wijmenu
-{
-    background: #c4c4c4 url(images/ui-bg_highlight-hard_80_c4c4c4_1x100.png) top repeat-x;
-    background: #c4c4c4 linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
-    background: #c4c4c4 -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0)));
-    background: #c4c4c4 -moz-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
-}
-.wijmo-wijmenu .ui-state-default
-{
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-}
-
-.wijmo-wijmenu .wijmo-wijmenu-child
-{
-    -moz-box-shadow: 0px 5px 10px rgba(0,0,0,0.8);
-    -webkit-box-shadow: 0px 5px 10px rgba(0,0,0,0.8);
-    box-shadow: 0px 5px 10px rgba(0,0,0,0.8);
-}
-.wij-menu-ipod .wijmo-wijmenu-list
-{
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-}
-
-*html .wijmo-wijmenu .wijmo-wijsuperpanel, *html .wijmo-wijmenu .wijmo-wijmenu-list
-{
-    background: none;
-}
-
-*html .wijmo-wijmenu-horizontal .wijmo-wijmenu-child
-{
-    background: #ffffff;
-}
-
-
-*html .wijmo-wijmenu .wijmo-wijmenu-link
-{
-    border-color: #c4c4c4;
-    filter: chroma(color=#c4c4c4);
-}
-
-
-.wijmo-wijtooltip
-{
-    background: #000;
-    background: rgba(0,0,0,0.8);
-    border: none;
-    color: #fff;
-    -moz-box-shadow: 0px 0px 8px #85b2cb, inset 0px 1px 0px #999;
-    -webkit-box-shadow: 0px 0px 8px #85b2cb, inset 0px 1px 0px #999;
-    box-shadow: 0px 0px 8px #85b2cb, inset 0px 1px 0px #999;
-}
-
-.wijmo-wijtooltip-arrow-lb .wijmo-wijtooltip-pointer-inner, .wijmo-wijtooltip-arrow-lc .wijmo-wijtooltip-pointer-inner, .wijmo-wijtooltip-arrow-lt .wijmo-wijtooltip-pointer-inner
-{
-    border-right-color: #000 !important;
-}
-
-.wijmo-wijtooltip-arrow-rb .wijmo-wijtooltip-pointer-inner, .wijmo-wijtooltip-arrow-rc .wijmo-wijtooltip-pointer-inner, .wijmo-wijtooltip-arrow-rt .wijmo-wijtooltip-pointer-inner
-{
-    border-left-color: #000 !important;
-}
-
-.wijmo-wijtooltip-arrow-br .wijmo-wijtooltip-pointer-inner, .wijmo-wijtooltip-arrow-bc .wijmo-wijtooltip-pointer-inner, .wijmo-wijtooltip-arrow-bl .wijmo-wijtooltip-pointer-inner
-{
-    border-top-color: #000 !important;
-}
-
-.wijmo-wijtooltip-arrow-tb .wijmo-wijtooltip-pointer-inner, .wijmo-wijtooltip-arrow-tc .wijmo-wijtooltip-pointer-inner, .wijmo-wijtooltip-arrow-tt .wijmo-wijtooltip-pointer-inner
-{
-    border-bottom-color: #000 !important;
-}
-
-
-.wijmo-wijtooltip .wijmo-wijtooltip-pointer
-{
-    opacity: 0.8;
-}
 
 /* Custom */
-.CIAPI_AuthenticationWidget .container {
-  padding: 5px 5px 5px 5px;
+
+/* reset extra padding in Firefox */
+/*
+ * CIAPI Authentication @VERSION 0.1
+ *
+ * {Copyright message could go here}
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * {Link to license}
+ *
+ * {url to docs on on the dev portal for Authentication widget}
+ */
+.ui-ciapi-authentication {
+    -moz-box-shadow: 0px 5px 10px rgba(0,0,0,0.8);
+    -webkit-box-shadow: 0px 5px 10px rgba(0,0,0,0.8);
+    
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.8);
+    overflow: hidden;
+    padding: 0;
 }
 
-.CIAPI_AuthenticationWidget .submit {
-   text-align: right;
+.ui-ciapi-authentication .ui-dialog-titlebar {
+    padding: .5em 1em .3em;
+    position: relative;
 }
 
-.CIAPI_AuthenticationWidget .inputFields {
-   width:97%;
+.ui-ciapi-authentication .ui-dialog-title {
+    float: left;
+    margin: .1em 16px .2em 0;
+}
+
+.ui-ciapi-authentication .ui-dialog-titlebar-close
+{
+    position: absolute;
+    right: .3em;
+    top: 50%;
+    width: 19px;
+    margin: -10px 0 0 0;
+    padding: 1px;
+    height: 18px;
+    -moz-border-radius: 10px;
+}
+.ui-ciapi-authentication .ui-dialog-titlebar-close span
+{
+    display: block;
+    margin: 1px;
+}
+.ui-ciapi-authentication .ui-dialog-titlebar-close:hover, .ui-ciapi-authentication .ui-dialog-titlebar-close:focus
+{
+    padding: 0;
+}
+.ui-ciapi-authentication .ui-dialog-content
+{
+    position: relative;
+    border: 0;
+    padding: .5em 1em;
+    background: none;
+    overflow: auto;
+    zoom: 1;
+}
+.ui-ciapi-authentication .ui-dialog-buttonpane
+{
+    text-align: left;
+    border-width: 1px 0 0 0;
+    background-image: none;
+    margin: .5em 0 0 0;
+    padding: .3em 1em .5em .4em;
+}
+.ui-ciapi-authentication .ui-dialog-buttonpane .ui-dialog-buttonset
+{
+    float: right;
+}
+.ui-ciapi-authentication .ui-dialog-buttonpane button
+{
+    margin: .5em .4em .5em 0;
+    cursor: pointer;
+}
+.ui-ciapi-authentication .ui-resizable-se
+{
+    width: 14px;
+    height: 14px;
+    right: 3px;
+    bottom: 3px;
+}
+.ui-draggable .ui-dialog-titlebar
+{
+    cursor: move;
+}
+
+.ui-ciapi-authentication .ui-dialog-titlebar
+{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
 }
