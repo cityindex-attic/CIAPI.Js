@@ -7,7 +7,7 @@
     <script type="text/javascript" src="../../libs/jquery.tmpl.min.js"></script>
     <script type="text/javascript" src="../../libs/json2.js"></script>
     <script type="text/javascript" src="../../libs/jquery-ui/1.8.11/js/jquery-ui.min.js"></script>
-    <link type="text/css" href="../../libs/jquery-ui/1.8.11/css/dark-hive/jquery-ui-1.8.11.custom.css" rel="Stylesheet"/>
+    <!--<link type="text/css" href="../../libs/jquery-ui/1.8.11/css/dark-hive/jquery-ui-1.8.11.custom.css" rel="Stylesheet"/>-->
 
     <!--These are shared by all CIAPI widgets -->
     <script src="../CIAPI/target/js/CIAPI-0001.debug.js"></script>
@@ -19,7 +19,7 @@
 
     <!--This is for CIAPI.authentication widget -->
     <script src="js/authentication.js"></script>
-    <link type="text/css" href="themes/ci-default/ci-default.css" rel="Stylesheet"/>
+    <link type="text/css" href="themes/ci.default/ci.default.css" rel="Stylesheet"/>
 
 </head>
 <body>
@@ -43,7 +43,7 @@
 
     <p>A authentication widget with a custom template</p>
 
-	<div id="CustomAuthenticationWidget" style="width: 250px"></div>
+	<div id="CustomAuthenticationWidget" style="width: 300px;"></div>
     <script>
         $(document).ready(function() {
           $("#customAuthWidgetTemplate" ).template("customAuthWidgetTemplate"); //compile & name the template
@@ -51,10 +51,11 @@
         });
     </script>
     <script id="customAuthWidgetTemplate" type="text/x-jquery-tmpl">
-        <div class="ui-dialog ui-widget ui-widget-content ui-corner-all">
-            <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+        <div class="ui-ciapi-authentication ui-widget ui-corner-all">
+            <div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix">
+                <span id="ui-dialog-title-dialog-form" class="ui-dialog-title">Logon Form</span>
             </div>
-            <div id="LogOnView">
+            <div class="ui-ciapi-logon-view">
                 <div class="ui-dialog-content ui-widget-content">
                     <p id="login_message"></p>
                     <fieldset>
@@ -73,15 +74,15 @@
                     </fieldset>
                 </div>
                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                    <button id="doLogOnButton" data-bind="click: doLogOn">Log on</button>
+                    <button class="ui-ciapi-authentication-button" data-bind="click: doLogOn">Log on</button>
                 </div>
             </div>
-            <div id="LogOffView">
+            <div class="ui-ciapi-logoff-view">
                 <div class="ui-dialog-content ui-widget-content">
-                    You are logged in as <span data-bind="text: username" />
+                    <p>You are logged in as <span data-bind="text: username" /></p>
                 </div>
                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                    <button id="doLogOffButton" data-bind="click: doLogOff">Log off</button>
+                    <button class="ui-ciapi-authentication-button" data-bind="click: doLogOff">Log off</button>
                 </div>
             </div>
         </div>

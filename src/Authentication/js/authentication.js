@@ -1,6 +1,6 @@
 (function ($, undefined) {
     $.widget("ui.CIAPI_widget_AuthenticationWidget", $.ui.CIAPI_widget, {
-        options: { template: 'defaultAuthWidgetTemplate' },
+        options: { template: 'defaultAuthWidgetTemplate', width: 400 },
         template: $.template('defaultAuthWidgetTemplate',
                 '<div id="login_message"></div>                                                              ' +
                 '<p>                                                                                         ' +
@@ -62,8 +62,7 @@
             $.tmpl(this.options.template, {}).appendTo(this.element);
 
             ko.applyBindings(this.viewModel, this.element.get(0));
-            this.element.find("#doLogOnButton").button();
-            this.element.find("#doLogOffButton").button();
+            this.element.find(".ui-ciapi-authentication-button").button();
             this._update();
         },
         destroy: function () {
@@ -72,12 +71,12 @@
         },
         _update: function () {
             if (CIAPI.connection.isConnected) {
-                this.element.find('#LogOnView').hide();
-                this.element.find('#LogOffView').show();
+                this.element.find('.ui-ciapi-logon-view').hide();
+                this.element.find('.ui-ciapi-logoff-view').show();
             }
             else {
-                this.element.find('#LogOnView').show();
-                this.element.find('#LogOffView').hide();
+                this.element.find('.ui-ciapi-logon-view').show();
+                this.element.find('.ui-ciapi-logoff-view').hide();
             }
             //this.element.text(new Date());
         }
