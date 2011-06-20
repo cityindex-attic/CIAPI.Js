@@ -9,9 +9,6 @@
     <script type="text/javascript" src="/publish/libs/jquery-ui/1.8.11/js/jquery-ui.min.js"></script>
     <!--<link type="text/css" href="../../libs/jquery-ui/1.8.11/css/dark-hive/jquery-ui-1.8.11.custom.css" rel="Stylesheet"/>-->
 
-    <!--[! JQueryUI themeswitcher tool -->
-    <script type="text/javascript" src="http://jqueryui.com/themeroller/themeswitchertool/"></script>
-
     <!--[! These are shared by all CIAPI widgets -->
     <script src="/publish/CIAPI/js/CIAPI.debug.js"></script>
     <script src="/publish/CIAPI.widget/js/CIAPI.widget.debug.js"></script>
@@ -29,12 +26,19 @@
     <link type="text/css" href="themes/ci.default/style.css" rel="Stylesheet"/>
 </head>
 <body>
-<div id="switcher" style="float:right"></div>
-<script>
-    $(document).ready(function() {
-        $('#switcher').themeswitcher();
-    });
-</script>
+    <!--[! Themeswitcher tool -->
+    <div id="switcher" style="float:right"></div>
+    <script type="text/javascript" src="/publish/libs/jquery-ui/Super-Theme-Switcher/jquery.themeswitcher.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#switcher').themeswitcher({
+                imgpath: "/publish/libs/jquery-ui/Super-Theme-Switcher/images/",
+                additionalThemes: [
+                    { title: "City Index", name: "ci.default", icon: "???", url: "themes/ci.default/ci.default.css" }
+                ]
+            });
+        });
+    </script>
 
 <script>
     //These default connection options must be set before interacting with CIAPI,
@@ -54,10 +58,19 @@
 
 <hr>
 
-<p>A authentication widget with a custom template</p>
+<table border="1" width="100%">
+    <tr>
+        <td>
+            <p>A authentication widget with a custom template</p>
+            <div id="CustomAuthenticationWidget" style="width: 300px;"></div>
+        </td>
+        <td>
+            <p>A second instance with same custom template</p>
+            <div id="CustomAuthenticationWidget2" style="width: 500px;"></div>
+        </td>
+    </tr>
+</table>
 
-<div id="CustomAuthenticationWidget" style="width: 300px;"></div>
-<div id="CustomAuthenticationWidget2" style="width: 500px;"></div>
 <script>
     $(document).ready(function () {
         $("#customAuthWidgetTemplate").template("customAuthWidgetTemplate"); //compile & name the template
