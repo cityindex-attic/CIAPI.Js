@@ -26,6 +26,7 @@
     <!-- end scripts-->
 
     <link type="text/css" href="themes/ci.default/ci.default.css" rel="Stylesheet"/>
+    <link type="text/css" href="themes/ci.default/style.css" rel="Stylesheet"/>
 </head>
 <body>
 <div id="switcher" style="float:right"></div>
@@ -64,11 +65,11 @@
 </script>
 <script id="customAuthWidgetTemplate" type="text/x-jquery-tmpl">
     <div class="ui-ciapi-authentication ui-widget ui-corner-all">
-        <div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix">
-            <span id="ui-dialog-title-dialog-form" class="ui-dialog-title">Logon Form</span>
+        <div class="ui-ciapi-authentication-titlebar ui-widget-header ui-helper-clearfix">
+            <span class="ui-ciapi-authentication-title">Logon Form</span>
         </div>
         <div class="ui-ciapi-logon-view">
-            <div class="ui-dialog-content ui-widget-content">
+            <div class="ui-ciapi-authentication-content ui-widget-content">
                 <p id="login_message"></p>
                 <fieldset>
                     <label for="username">UserName</label>
@@ -85,15 +86,15 @@
                            data-bind="value: password"/>
                 </fieldset>
             </div>
-            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <div class="ui-ciapi-authentication-buttonpane ui-widget-content ui-helper-clearfix">
                 <button class="ui-ciapi-authentication-button" data-bind="click: doLogOn">Log on</button>
             </div>
         </div>
         <div class="ui-ciapi-logoff-view">
-            <div class="ui-dialog-content ui-widget-content">
+            <div class="ui-ciapi-authentication-content ui-widget-content">
                 <p>You are logged in as <span data-bind="text: username"/></p>
             </div>
-            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <div class="ui-ciapi-authentication-buttonpane ui-widget-content ui-helper-clearfix">
                 <button class="ui-ciapi-authentication-button" data-bind="click: doLogOff">Log off</button>
             </div>
         </div>

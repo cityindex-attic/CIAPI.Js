@@ -168,7 +168,9 @@ a:hover { color: #036; }
  * Author: 
  */
 
-
+body {
+    font-size: 10px;
+}
 
 
 
