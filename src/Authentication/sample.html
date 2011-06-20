@@ -48,6 +48,10 @@
 <script>
     $(document).ready(function() {
         $('#DefaultAuthenticationWidget').CIAPI_widget_AuthenticationWidget(); //inject the widget into the div
+        CIAPI.subscribe("WIDGET.DefaultAuthenticationWidget", function(message) {
+            console.log(message);
+            return true;
+        });
     });
 </script>
 

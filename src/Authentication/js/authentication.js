@@ -38,11 +38,12 @@
                 UserName: viewModel.username(),
                 Password: viewModel.password(),
                 success: function (data) {
+                    CIAPI.publish(viewModel.widgetTopic, { event: "logon", data: CIAPI.connection } );
                     viewModel.widget._update();
                 },
                 error: function (data) {
-                    viewModel.widgetElement.find(".ui-widget").effect("shake", { times: 2 }, 100);
-                    viewModel.widgetElement.find("#login_message")
+                    viewModel.widget.element.find(".ui-widget").effect("shake", { times: 2 }, 100);
+                    viewModel.widget.element.find("#login_message")
                             .addClass('ui-state-error')
                             .html('<strong>ERROR</strong>: ' + data.ErrorMessage);
                 }
@@ -50,13 +51,14 @@
         },
         _doLogOff: function () {
             CIAPI.disconnect();
+            CIAPI.publish(this.viewModel.widgetTopic, { event: "logoff", data: CIAPI.connection } );
             this.widget._update();
         },
         _create: function () {
             this.viewModel.doLogOn = this._doLogOn;
             this.viewModel.doLogOff = this._doLogOff;
-            this.viewModel.widgetElement = this.element;
             this.viewModel.widget = this;
+            this.viewModel.widgetTopic = "WIDGET." + this.viewModel.widget.element[0].id;
 
             this.element.addClass('CIAPI_AuthenticationWidget');
             $.tmpl(this.options.template, {}).appendTo(this.element);
