@@ -48,10 +48,6 @@
 <script>
     $(document).ready(function() {
         $('#DefaultAuthenticationWidget').CIAPI_widget_AuthenticationWidget(); //inject the widget into the div
-        CIAPI.subscribe("WIDGET.DefaultAuthenticationWidget", function(message) {
-            console.log(message);
-            return true;
-        });
     });
 </script>
 
@@ -60,10 +56,25 @@
 <p>A authentication widget with a custom template</p>
 
 <div id="CustomAuthenticationWidget" style="width: 300px;"></div>
+<div id="CustomAuthenticationWidget2" style="width: 500px;"></div>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#customAuthWidgetTemplate").template("customAuthWidgetTemplate"); //compile & name the template
-        $('#CustomAuthenticationWidget').CIAPI_widget_AuthenticationWidget({template: 'customAuthWidgetTemplate'}); //override the default template
+        $('#CustomAuthenticationWidget').CIAPI_widget_AuthenticationWidget(
+            {
+                template: 'customAuthWidgetTemplate', //override the default template
+                afterLogOn: function (data) {
+                    console.log("afterLogOn for CustomAuthenticationWidget", data);
+                },
+                afterLogOff: function (data) {
+                    console.log("afterLogOff for CustomAuthenticationWidget", data);
+                }
+            });
+
+        $('#CustomAuthenticationWidget2').CIAPI_widget_AuthenticationWidget(
+        {
+            template: 'customAuthWidgetTemplate', //override the default template
+        });
     });
 </script>
 <script id="customAuthWidgetTemplate" type="text/x-jquery-tmpl">
@@ -71,9 +82,9 @@
         <div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix">
             <span id="ui-dialog-title-dialog-form" class="ui-dialog-title">Logon Form</span>
         </div>
-        <div class="ui-ciapi-logon-view">
+        <div class="ui-ciapi-logon-view" data-bind="visible: activeView() === 'LogOn'">
             <div class="ui-dialog-content ui-widget-content">
-                <p id="login_message"></p>
+                <p class="ui-state-error" data-bind="text: errorMessage, visible: errorMessage().length > 0"></p>
                 <fieldset>
                     <label for="username">UserName</label>
                     <input type="text"
@@ -93,7 +104,7 @@
                 <button class="ui-ciapi-authentication-button" data-bind="click: doLogOn">Log on</button>
             </div>
         </div>
-        <div class="ui-ciapi-logoff-view">
+        <div class="ui-ciapi-logoff-view" data-bind="visible: activeView() === 'LogOff'">
             <div class="ui-dialog-content ui-widget-content">
                 <p>You are logged in as <span data-bind="text: username"/></p>
             </div>
@@ -103,5 +114,7 @@
         </div>
     </div>
 </script>
+
+
 </body>
 </html>

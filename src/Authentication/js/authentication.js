@@ -1,7 +1,42 @@
 (function ($, undefined) {
     $.widget("ui.CIAPI_widget_AuthenticationWidget", $.ui.CIAPI_widget, {
-        options: { template: 'defaultAuthWidgetTemplate', width: 400 },
-        template: $.template('defaultAuthWidgetTemplate',
+        options: {
+            template: 'defaultAuthWidgetTemplate',
+            width: 400,
+            afterLogOn: function (message) { },
+            afterLogOff: function (message) { },
+            viewModel: {
+                username: ko.observable(CIAPI.connection.UserName),
+                password: ko.observable(""),
+                activeView: ko.observable("LogOn"),
+                errorMessage: ko.observable(""),
+                doLogOn: function () {
+                    var viewModel = this;
+                    CIAPI.connect({
+                        UserName: viewModel.username(),
+                        Password: viewModel.password(),
+                        success: function (data) {
+                            viewModel.widget.options.afterLogOn(CIAPI.connection);
+                            viewModel.errorMessage("");
+                            viewModel.widget._update();
+                        },
+                        error: function (data) {
+                            viewModel.errorMessage('ERROR: ' + data.ErrorMessage);
+                            viewModel.widget._update();
+                        }
+                    });
+                },
+                doLogOff: function () {
+                    var viewModel = this;
+                    CIAPI.disconnect({
+                        success: function (data) {
+                            viewModel.widget.options.afterLogOff(CIAPI.connection);
+                            viewModel.widget._update();
+                        }
+                    });
+                }
+            },
+            template: $.template('defaultAuthWidgetTemplate',
                 '<div id="login_message"></div>                                                              ' +
                 '<p>                                                                                         ' +
                 '    <label for="username">Username<br />                                                    ' +
@@ -27,60 +62,30 @@
                 '</p>                                                                                        ' +
                 '<p class="submit">                                                                          ' +
                 '    <button id="doLogOnButton" data-bind="click: doLogOn" tabindex="3">Log on</button>' +
-                '</p>                                                                                        '),
-        viewModel: {
-            username: ko.observable(CIAPI.connection.UserName),
-            password: ko.observable("")
-        },
-        _doLogOn: function () {
-            var viewModel = this;
-            CIAPI.connect({
-                UserName: viewModel.username(),
-                Password: viewModel.password(),
-                success: function (data) {
-                    CIAPI.publish(viewModel.widgetTopic, { event: "logon", data: CIAPI.connection } );
-                    viewModel.widget._update();
-                },
-                error: function (data) {
-                    viewModel.widget.element.find(".ui-widget").effect("shake", { times: 2 }, 100);
-                    viewModel.widget.element.find("#login_message")
-                            .addClass('ui-state-error')
-                            .html('<strong>ERROR</strong>: ' + data.ErrorMessage);
-                }
-            });
-        },
-        _doLogOff: function () {
-            CIAPI.disconnect();
-            CIAPI.publish(this.viewModel.widgetTopic, { event: "logoff", data: CIAPI.connection } );
-            this.widget._update();
+                '</p>                                                                                        ')
         },
         _create: function () {
-            this.viewModel.doLogOn = this._doLogOn;
-            this.viewModel.doLogOff = this._doLogOff;
-            this.viewModel.widget = this;
-            this.viewModel.widgetTopic = "WIDGET." + this.viewModel.widget.element[0].id;
+            //Store a reference to this instance of the widget for use in viewModel event handling functions
+            this.options.viewModel.widget = this;
 
-            this.element.addClass('CIAPI_AuthenticationWidget');
             $.tmpl(this.options.template, {}).appendTo(this.element);
 
-            ko.applyBindings(this.viewModel, this.element.get(0));
+            ko.applyBindings(this.options.viewModel, this.element.get(0));
+
             this.element.find(".ui-ciapi-authentication-button").button();
+
             this._update();
         },
         destroy: function () {
-            this.element.removeClass('CIAPI_AuthenticationWidget');
             $.Widget.prototype.destroy.call(this);
         },
         _update: function () {
-            if (CIAPI.connection.isConnected) {
-                this.element.find('.ui-ciapi-logon-view').hide();
-                this.element.find('.ui-ciapi-logoff-view').show();
+            var activeView = CIAPI.connection.isConnected ? 'LogOff' : 'LogOn';
+            this.options.viewModel.activeView(activeView);
+
+            if (this.options.viewModel.errorMessage()) {
+                this.element.effect("shake", { times: 2 }, 100);
             }
-            else {
-                this.element.find('.ui-ciapi-logon-view').show();
-                this.element.find('.ui-ciapi-logoff-view').hide();
-            }
-            //this.element.text(new Date());
         }
     });
 })(jQuery);
