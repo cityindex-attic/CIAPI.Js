@@ -2196,18 +2196,17 @@ button.ui-button::-moz-focus-inner
     padding: 0;
 }
 
-.ui-ciapi-authentication .ui-dialog-titlebar {
+.ui-ciapi-authentication .ui-ciapi-authentication-titlebar {
     padding: .5em 1em .3em;
     position: relative;
 }
 
-.ui-ciapi-authentication .ui-dialog-title {
+.ui-ciapi-authentication .ui-ciapi-authentication-title {
     float: left;
     margin: .1em 16px .2em 0;
 }
 
-.ui-ciapi-authentication .ui-dialog-titlebar-close
-{
+.ui-ciapi-authentication .ui-ciapi-authentication-titlebar-close {
     position: absolute;
     right: .3em;
     top: 50%;
@@ -2217,55 +2216,53 @@ button.ui-button::-moz-focus-inner
     height: 18px;
     -moz-border-radius: 10px;
 }
-.ui-ciapi-authentication .ui-dialog-titlebar-close span
-{
+
+.ui-ciapi-authentication .ui-ciapi-authentication-titlebar-close span {
     display: block;
     margin: 1px;
 }
-.ui-ciapi-authentication .ui-dialog-titlebar-close:hover, .ui-ciapi-authentication .ui-dialog-titlebar-close:focus
-{
+
+.ui-ciapi-authentication .ui-ciapi-authentication-titlebar-close:hover,
+.ui-ciapi-authentication .ui-ciapi-authentication-titlebar-close:focus {
     padding: 0;
 }
-.ui-ciapi-authentication .ui-dialog-content
-{
+
+.ui-ciapi-authentication .ui-ciapi-authentication-content {
     position: relative;
     border: 0;
     padding: .5em 1em;
-    background: none;
     overflow: auto;
     zoom: 1;
 }
-.ui-ciapi-authentication .ui-dialog-buttonpane
-{
+
+.ui-ciapi-authentication .ui-ciapi-authentication-buttonpane {
     text-align: left;
     border-width: 1px 0 0 0;
     background-image: none;
-    margin: .5em 0 0 0;
     padding: .3em 1em .5em .4em;
 }
-.ui-ciapi-authentication .ui-dialog-buttonpane .ui-dialog-buttonset
-{
+
+.ui-ciapi-authentication .ui-ciapi-authentication-buttonpane .ui-ciapi-authentication-buttonset {
     float: right;
 }
-.ui-ciapi-authentication .ui-dialog-buttonpane button
-{
+
+.ui-ciapi-authentication .ui-ciapi-authentication-buttonpane button {
     margin: .5em .4em .5em 0;
     cursor: pointer;
 }
-.ui-ciapi-authentication .ui-resizable-se
-{
+
+.ui-ciapi-authentication .ui-resizable-se {
     width: 14px;
     height: 14px;
     right: 3px;
     bottom: 3px;
 }
-.ui-draggable .ui-dialog-titlebar
-{
+
+.ui-draggable .ui-ciapi-authentication-titlebar {
     cursor: move;
 }
 
-.ui-ciapi-authentication .ui-dialog-titlebar
-{
+.ui-ciapi-authentication .ui-ciapi-authentication-titlebar {
     border-top: none;
     border-right: none;
     border-left: none;
