@@ -1,11 +1,40 @@
 (function ($, undefined) {
     $.widget("ui.CIAPI_widget_AuthenticationWidget", $.ui.CIAPI_widget, {
         options: {
-            template: 'defaultAuthWidgetTemplate',
             width: 600,
             afterLogOn: function (message) { },
             afterLogOff: function (message) { },
-            viewModel: {
+            template: $.template('defaultAuthWidgetTemplate',
+                '<div id="login_message"></div>                                                              ' +
+                '<p>                                                                                         ' +
+                '    <label for="username">Username<br />                                                    ' +
+                '    <input type="text"                                                                      ' +
+                '            name="username"                                                                 ' +
+                '            id="username"                                                                   ' +
+                '            class="inputFields"                                                             ' +
+                '            data-bind="value: username"                                                     ' +
+                '            size="20"                                                                       ' +
+                '            tabindex="1" />                                                                 ' +
+                '    </label>                                                                                ' +
+                '</p>                                                                                        ' +
+                '<p>                                                                                         ' +
+                '    <label for="password">Password<br />                                                    ' +
+                '    <input type="password"                                                                  ' +
+                '            name="password"                                                                 ' +
+                '            id="password"                                                                   ' +
+                '            class="inputFields"                                                             ' +
+                '            data-bind="value: password"                                                     ' +
+                '            size="20"                                                                       ' +
+                '            tabindex="2" />                                                                 ' +
+                '    </label>                                                                                ' +
+                '</p>                                                                                        ' +
+                '<p class="submit">                                                                          ' +
+                '    <button id="doLogOnButton" data-bind="click: doLogOn" tabindex="3">Log on</button>' +
+                '</p>                                                                                        ')
+        },
+        _createViewModel: function(widgetRef) {
+          return {
+                widget: widgetRef,     //Store a reference to this instance of the widget for use in viewModel event handling functions
                 username: ko.observable(CIAPI.connection.UserName),
                 password: ko.observable(""),
                 activeView: ko.observable("LogOn"),
@@ -35,38 +64,11 @@
                         }
                     });
                 }
-            },
-            template: $.template('defaultAuthWidgetTemplate',
-                '<div id="login_message"></div>                                                              ' +
-                '<p>                                                                                         ' +
-                '    <label for="username">Username<br />                                                    ' +
-                '    <input type="text"                                                                      ' +
-                '            name="username"                                                                 ' +
-                '            id="username"                                                                   ' +
-                '            class="inputFields"                                                             ' +
-                '            data-bind="value: username"                                                     ' +
-                '            size="20"                                                                       ' +
-                '            tabindex="1" />                                                                 ' +
-                '    </label>                                                                                ' +
-                '</p>                                                                                        ' +
-                '<p>                                                                                         ' +
-                '    <label for="password">Password<br />                                                    ' +
-                '    <input type="password"                                                                  ' +
-                '            name="password"                                                                 ' +
-                '            id="password"                                                                   ' +
-                '            class="inputFields"                                                             ' +
-                '            data-bind="value: password"                                                     ' +
-                '            size="20"                                                                       ' +
-                '            tabindex="2" />                                                                 ' +
-                '    </label>                                                                                ' +
-                '</p>                                                                                        ' +
-                '<p class="submit">                                                                          ' +
-                '    <button id="doLogOnButton" data-bind="click: doLogOn" tabindex="3">Log on</button>' +
-                '</p>                                                                                        ')
+            };
         },
         _create: function () {
-            //Store a reference to this instance of the widget for use in viewModel event handling functions
-            this.options.viewModel.widget = this;
+            //The viewModel needs to be created here rather than defined in options above to prevent cross widget pollution
+            this.options.viewModel = this._createViewModel(this);
 
             $.tmpl(this.options.template, {}).appendTo(this.element);
 
