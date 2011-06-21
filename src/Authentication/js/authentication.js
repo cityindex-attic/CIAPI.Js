@@ -2,7 +2,7 @@
     $.widget("ui.CIAPI_widget_AuthenticationWidget", $.ui.CIAPI_widget, {
         options: {
             template: 'defaultAuthWidgetTemplate',
-            width: 400,
+            width: 600,
             afterLogOn: function (message) { },
             afterLogOff: function (message) { },
             viewModel: {
@@ -71,6 +71,8 @@
             $.tmpl(this.options.template, {}).appendTo(this.element);
 
             ko.applyBindings(this.options.viewModel, this.element.get(0));
+
+            this.element.css('width', this.options.width);
 
             this.element.find(".ui-ciapi-authentication-button").button();
 
