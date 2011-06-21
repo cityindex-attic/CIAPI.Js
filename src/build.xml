@@ -78,6 +78,7 @@
             </fileset>
         </copy>
 
+        <!-- Chart -->
         <copy todir="${dir.publish}/Chart">
             <fileset dir="./Chart/target">
                 <include name="js/CIAPI.Chart.min.js"/>
@@ -90,8 +91,8 @@
         </copy>
 
         <echo message="Change absolute references to /publish to ../"/>
-        <replaceregexp match="(src|href)=([&quot;'])/publish/"
-                       replace="\1=\2../" flags="g">
+        <replaceregexp match="([&quot;'])/publish/"
+                       replace="\1../" flags="g">
 			<fileset dir="./${dir.publish}" includes="**/*.html"/>
 		</replaceregexp>
     </target>
