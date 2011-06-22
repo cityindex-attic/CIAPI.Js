@@ -58,7 +58,7 @@
 
 <hr>
 
-<table border="1" width="100%">
+<table border="0" width="100%">
     <tr>
         <td>
             <p>A authentication widget with a custom template</p>
@@ -93,32 +93,34 @@
 </script>
 <script id="customAuthWidgetTemplate" type="text/x-jquery-tmpl">
     <div class="ui-ciapi-authentication ui-widget ui-corner-all">
-        <div class="ui-ciapi-authentication-titlebar ui-widget-header ui-helper-clearfix">
-            <span class="ui-ciapi-authentication-title">Logon Form</span>
-        </div>
-        <div class="ui-ciapi-logon-view" data-bind="visible: activeView() === 'LogOn'">
-            <div class="ui-ciapi-authentication-content ui-widget-content">
+        <div class="ui-ciapi-logon-view  ui-corner-all" data-bind="visible: activeView() === 'LogOn'">
+            <div class="ui-ciapi-authentication-content ui-widget-content ui-corner-top">
                 <p class="ui-state-error" data-bind="text: errorMessage, visible: errorMessage().length > 0"></p>
                 <fieldset>
                     <label for="username">UserName</label>
-                    <input type="text"
+                    <div class="ui-ciapi-authentication-input  ui-corner-all">
+                        <input type="text"
                            name="username"
                            id="username"
                            class="inputFields"
                            data-bind="value: username"/>
+                    </div>
                     <label for="password">Password</label>
-                    <input type="password"
+                    <div class="ui-ciapi-authentication-input  ui-corner-all">
+                        <input type="password"
                            name="password"
                            id="password"
                            class="inputFields"
                            data-bind="value: password"/>
+                    </div>
+
                 </fieldset>
             </div>
-            <div class="ui-ciapi-authentication-buttonpane ui-widget-content ui-helper-clearfix">
+            <div class="ui-ciapi-authentication-buttonpane ui-widget-content ui-helper-clearfix ui-corner-bottom">
                 <button class="ui-ciapi-authentication-button" data-bind="click: doLogOn">Log on</button>
             </div>
         </div>
-        <div class="ui-ciapi-logoff-view" data-bind="visible: activeView() === 'LogOff'">
+        <div class="ui-ciapi-logoff-view  ui-corner-all" data-bind="visible: activeView() === 'LogOff'">
             <div class="ui-ciapi-authentication-content ui-widget-content">
                 <p>You are logged in as <span data-bind="text: username"/></p>
             </div>

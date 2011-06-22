@@ -128,34 +128,28 @@ a
     font-size: 1em;
 }
 
-.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button
-{
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
     font-family: Arial,sans-serif;
     font-size: 1em;
 }
-.ui-widget-content
-{
+.ui-widget-content {
     border: 1px solid #a8a8a8;
-    background: #ffffff;
+    background: #fff;
     color: #4f4f4f;
 }
-.ui-widget-content a
-{
+
+.ui-widget-content a {
     color: #4f4f4f;
 }
-.ui-widget-header
-{
-    border: 1px solid #a8a8a8;
-    background: #c4c4c4 url(images/ui-bg_highlight-soft_100_c4c4c4_1x100.png) 50% 50% repeat-x;
-    background: #c4c4c4 linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
-    background: #c4c4c4 -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0)));
-    background: #c4c4c4 -moz-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0)); /*    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#DDFFFFFF, endColorstr=#00FFFFFF);     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#DDFFFFFF, endColorstr=#00FFFFFF)"; */
+
+.ui-widget-header {
+    background: #c7c8c7 url(images/ui-ciapi-bg_highlight.png) 50% 50% repeat-x;
     color: #333;
     font-weight: bold;
     text-shadow: 0px 1px 0px rgba(255,255,255,0.7);
 }
-.ui-widget-header a
-{
+
+.ui-widget-header a {
     color: #4f4f4f;
 }
 
@@ -2188,58 +2182,58 @@ button.ui-button::-moz-focus-inner
  * {url to docs on on the dev portal for Authentication widget}
  */
 .ui-ciapi-authentication {
-    -moz-box-shadow: 0px 5px 10px rgba(0,0,0,0.8);
-    -webkit-box-shadow: 0px 5px 10px rgba(0,0,0,0.8);
-    
-    box-shadow: 0px 5px 10px rgba(0,0,0,0.8);
+    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.4);
+
+    border: 1px solid #a1a1a1;
+    box-shadow: 0 0 4px rgba(0,0,0,0.4);
     overflow: hidden;
     padding: 0;
 }
 
 .ui-ciapi-authentication .ui-ciapi-authentication-titlebar {
-    padding: .5em 1em .3em;
+    border-bottom: 1px solid #a1a1a1;
+    border-top: 1px solid #fff;
+    padding: .5em 1em;
     position: relative;
 }
 
 .ui-ciapi-authentication .ui-ciapi-authentication-title {
     float: left;
-    margin: .1em 16px .2em 0;
-}
-
-.ui-ciapi-authentication .ui-ciapi-authentication-titlebar-close {
-    position: absolute;
-    right: .3em;
-    top: 50%;
-    width: 19px;
-    margin: -10px 0 0 0;
-    padding: 1px;
-    height: 18px;
-    -moz-border-radius: 10px;
-}
-
-.ui-ciapi-authentication .ui-ciapi-authentication-titlebar-close span {
-    display: block;
-    margin: 1px;
-}
-
-.ui-ciapi-authentication .ui-ciapi-authentication-titlebar-close:hover,
-.ui-ciapi-authentication .ui-ciapi-authentication-titlebar-close:focus {
-    padding: 0;
 }
 
 .ui-ciapi-authentication .ui-ciapi-authentication-content {
-    position: relative;
     border: 0;
-    padding: .5em 1em;
     overflow: auto;
+    padding: 2em 2em 0;
+    position: relative;
     zoom: 1;
 }
+
+.ui-ciapi-authentication .ui-ciapi-authentication-content fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ui-ciapi-authentication .ui-ciapi-authentication-input {
+    border: 1px solid #ccc;
+    margin: 0 0 2em;
+    padding: 0.5em 0.8em;
+}
+
+.ui-ciapi-authentication .ui-ciapi-authentication-input input {
+    border: none;
+    padding: 0;
+    width: 100%;
+}
+
 
 .ui-ciapi-authentication .ui-ciapi-authentication-buttonpane {
     text-align: left;
     border-width: 1px 0 0 0;
     background-image: none;
-    padding: .3em 1em .5em .4em;
+    padding: .5em 1em;
 }
 
 .ui-ciapi-authentication .ui-ciapi-authentication-buttonpane .ui-ciapi-authentication-buttonset {
@@ -2262,11 +2256,3 @@ button.ui-button::-moz-focus-inner
     cursor: move;
 }
 
-.ui-ciapi-authentication .ui-ciapi-authentication-titlebar {
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    -moz-border-radius: 0;
-    -webkit-border-radius: 0;
-    border-radius: 0;
-}
