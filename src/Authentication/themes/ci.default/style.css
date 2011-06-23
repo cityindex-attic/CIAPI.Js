@@ -1,3 +1,36 @@
 body {
     font-size: 11px;
 }
+
+.wrapper {
+    margin: 0 auto;
+    width: 960px;
+}
+
+.header {
+    height: 400px;
+}
+
+.logo {
+    width: 600px;
+    float: left;
+}
+
+.header-right {
+    float: right;
+}
+
+.content-sidebar {
+    width: 960px;
+    margin: 20px;
+}
+
+.content {
+    width: 600px;
+    float: left;
+}
+
+.sidebar {
+    width: 300px;
+    float: right;
+}

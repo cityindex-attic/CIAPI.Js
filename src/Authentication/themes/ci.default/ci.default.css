@@ -133,7 +133,7 @@ a
     font-size: 1em;
 }
 .ui-widget-content {
-    border: 1px solid #a8a8a8;
+    border: 1px solid #a1a1a1;
     background: #fff;
     color: #4f4f4f;
 }
@@ -2185,7 +2185,6 @@ button.ui-button::-moz-focus-inner
     -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
     -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.4);
 
-    border: 1px solid #a1a1a1;
     box-shadow: 0 0 4px rgba(0,0,0,0.4);
     overflow: hidden;
     padding: 0;
@@ -2217,8 +2216,8 @@ button.ui-button::-moz-focus-inner
 }
 
 .ui-ciapi-authentication .ui-ciapi-authentication-input {
-    border: 1px solid #ccc;
-    margin: 0 0 2em;
+    background: #fff;
+    margin: 0.5em 0 2em;
     padding: 0.5em 0.8em;
 }
 
@@ -2233,7 +2232,7 @@ button.ui-button::-moz-focus-inner
     text-align: left;
     border-width: 1px 0 0 0;
     background-image: none;
-    padding: .5em 1em;
+    padding: 1em 2em;
 }
 
 .ui-ciapi-authentication .ui-ciapi-authentication-buttonpane .ui-ciapi-authentication-buttonset {
@@ -2241,7 +2240,8 @@ button.ui-button::-moz-focus-inner
 }
 
 .ui-ciapi-authentication .ui-ciapi-authentication-buttonpane button {
-    margin: .5em .4em .5em 0;
+    float: right;
+    margin: 0.5em 0;
     cursor: pointer;
 }
 
