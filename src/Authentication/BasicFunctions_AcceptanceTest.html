@@ -1,0 +1,72 @@
+<!doctype html>
+<head>
+    <title>Basic functions acceptance test</title>
+
+    <!--[! We expect these to already be loaded in the "deployment" page -->
+    <script type="text/javascript" src="/publish/libs/jquery/1.5.1/jQuery.debug.js"></script>
+    <script type="text/javascript" src="/publish/libs/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="/publish/libs/json2.js"></script>
+    <script type="text/javascript" src="/publish/libs/jquery-ui/1.8.11/js/jquery-ui.min.js"></script>
+    <!--<link type="text/css" href="../../libs/jquery-ui/1.8.11/css/dark-hive/jquery-ui-1.8.11.custom.css" rel="Stylesheet"/>-->
+
+    <!--[! These are shared by all CIAPI widgets -->
+    <script src="/publish/CIAPI/js/CIAPI.debug.js"></script>
+    <script src="/publish/CIAPI.widget/js/CIAPI.widget.debug.js"></script>
+
+    <!--[! Enable mock data -->
+    <script src="/publish/CIAPI/test/CIAPI.amplify.requests.mock.js"></script>
+    <!--[!  CC735158 / password are valid mock credentials -->
+
+    <!--[! This is for CIAPI.authentication widget -->
+    <!-- scripts concatenated and minified via ant build script-->
+    <script src="js/authentication.js"></script>
+    <!-- end scripts-->
+
+    <link type="text/css" href="themes/ci.default/ci.default.css" rel="Stylesheet"/>
+    <link type="text/css" href="themes/ci.default/style.css" rel="Stylesheet"/>
+</head>
+<body>
+
+<script>
+    //These default connection options must be set before interacting with CIAPI,
+    //unless mock requests are being included above
+    CIAPI.connection.ServiceUri = "http://174.129.8.69/TradingApi";
+    CIAPI.connection.StreamUri = "http://pushpreprod.cityindextest9.co.uk";
+</script>
+
+<ol>
+
+    <li id="1"><h2>A standard authentication widget</h2>
+
+        <div id="AuthenticationWidget1"></div>
+        <script>
+            $(document).ready(function() {
+                $('#AuthenticationWidget1').CIAPI_widget_AuthenticationWidget(); //inject the widget into the div
+            });
+        </script>
+
+    </li>
+
+    <li id="2"><h2>with afterLogOn / afterLogOff handlers</h2>
+
+        <div id="AuthenticationWidget2"></div>
+        <script>
+            $(document).ready(function () {
+                $('#AuthenticationWidget2').CIAPI_widget_AuthenticationWidget(
+                        {
+                            afterLogOn: function (data) {
+                                $('#AuthenticationWidget2Messages').html("#AuthenticationWidget2 fired afterLogOn");
+                            },
+                            afterLogOff: function (data) {
+                                $('#AuthenticationWidget2Messages').html("#AuthenticationWidget2 fired afterLogOff");
+                            }
+
+                        });
+            });
+        </script>
+        <div id="AuthenticationWidget2Messages" style="margin: 25px">No messages yet</div>
+    </li>
+</ol>
+
+</body>
+</html>
