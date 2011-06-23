@@ -383,12 +383,21 @@
 			<arg line="--tests all"/>
 		</exec>
 	</target>	
-	 
-	<target name="-runtests-remote" depends="-create-reports-folder" description="(PRIVATE) Run tests through remote jsTestDriver">
-        <echo message="Ignore whilst remote test runner infrastructure is repaired"/>
-	</target>
 
-	<target name="-load-build-info" description="(PRIVATE) Loads the build versioning information">
+  <target name="-runtests-remote" depends="-create-reports-folder" description="(PRIVATE) Run tests through remote jsTestDriver">
+    <exec executable="java" dir="${basedir}" failonerror="true">
+      <arg line="-jar &quot;${tool.jstestdriver}&quot;"/>
+      <arg line="--config &quot;${jstestdriver.config}&quot;"/>
+      <arg line="--server ${jstestdriver.remote}"/>
+      <arg line="--basePath ${basedir}/../"/>
+      <arg line="--testOutput &quot;./${dir.publish.reports}/&quot;"/>
+      <arg line="--verbose"/>
+      <arg line="--reset"/>
+      <arg line="--tests all"/>
+    </exec>
+  </target>
+
+  <target name="-load-build-info" description="(PRIVATE) Loads the build versioning information">
 		<property name="build.number" value="0000"/> <!-- normally this will be overridden by passing -Dbuild.number={nnn} when build server calls Ant -->
 		<tstamp/>
 		<property name="build.date" value="${DSTAMP} ${TSTAMP}"/>
