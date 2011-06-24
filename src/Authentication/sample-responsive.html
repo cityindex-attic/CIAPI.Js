@@ -1,6 +1,12 @@
 <!doctype html>
-<head>
-    <title>Authentication demo</title>
+<html>
+
+	<head>
+		<meta charset="utf-8"/>
+		<title></title>
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
 
     <!--[! We expect these to already be loaded in the "deployment" page -->
     <script type="text/javascript" src="/publish/libs/jquery/1.5.1/jQuery.debug.js"></script>
@@ -24,8 +30,14 @@
 
     <link type="text/css" href="themes/ci.default/ci.default.css" rel="Stylesheet"/>
     <link type="text/css" href="themes/ci.default/style.css" rel="Stylesheet"/>
-</head>
-<body>
+
+        
+		<link rel="stylesheet" media="all" href="/src/Authentication/css/responsive.style.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
+	</head>
+
+	<body lang="en">
     <!--[! Themeswitcher tool -->
     <div id="switcher" style="float:right"></div>
     <script type="text/javascript" src="/publish/libs/jquery-ui/Super-Theme-Switcher/jquery.themeswitcher.min.js"></script>
@@ -39,60 +51,88 @@
             });
         });
     </script>
+    
+    <header>
+        <nav class="nav-feature">
+            <ul>
+                <li><a href="#">log in</a></li>
+                <li><a href="#">apply now</a></li>
+            </ul>
+        </nav>
 
-<script>
-    //These default connection options must be set before interacting with CIAPI,
-    //unless mock requests are being included above
-    CIAPI.connection.ServiceUri = "http://174.129.8.69/TradingApi";
-    CIAPI.connection.StreamUri = "http://pushpreprod.cityindextest9.co.uk";
-</script>
-
-<div class="wrapper">
-    <div class="header">
-        <div class="logo"></div>
-        <div class="header-right">
-            <div id="CustomAuthenticationWidget"></div>
+        <div class="logo">
+            <h1 class="title"><a href="#">CI Responsive Design</a></h1>
+            <p class="tagline">Content view across multiple devices</p>
         </div>
+
+        <nav class="nav-primary">
+            <ul>
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <aside class="authentication">
+        <div id="CustomAuthenticationWidget2"></div>
+    </aside>
+    
+    <div class="featured">
+        <h3>Trade Major Indices</h3>
+        <p>Spread bet and trade CFDs on major indices from just 1 point &raquo; FTSE 100 &raquo; Wall Street &raquo; DAX 30 &raquo; CAC 40</p>
+        <a href="#">Find out more</a>
     </div>
-    <div class="content-sidebar">
-        <div class="content">
-            <div id="CustomAuthenticationWidget2"></div>
-        </div>
-        <div class="sidebar">
-            <div id="CustomAuthenticationWidget3"></div>
-        </div>
+    
+    <div class="content">
+        <h3>Indices Trading</h3>
+
+        <p>We offer some of the tightest spreads on our indices markets, including 1-point on the 4 major indices – UK 100, Wall Street, Germany 30 and France 40 – during market hours.</p>
+
+        <p>Indices are the most widely traded markets in the world, with indices such as the UK 100 being one of the most popular among new traders. With your City Index account you can spread bet on a majority of the major indices across the globe and our most popularly traded indices include the UK 100, Germany 30, US S&P, Wall Street, Japan 225 and Australia 200.</p>
+
+        <p>We also run a number of our indices markets outside their normal underlying trading hours, thus enabling you to trade these indices 24 hours a day. Spreads may vary according to the underlying market spread, market conditions and liquidity.</p>
 
     </div>
-
-</div>
-
+    
+    <aside class="sidebar">
+        <h3>Why choose CityIndex</h3>
+        <p>One of the leading providers of spread betting and CFD trading in the UK, City Index has over 25 years’ experience in the industry.</p>
+        <ul>
+            <li>Thousands of global markets</li>
+            <li>Tight spread from 1 point</li>
+            <li>Low margins from 1%</li>
+            <li>Spread betting & CFD trading from one platform</li>
+            <a href="#">Apply now</a>
+        </ul>
+        
+    </aside>
+    
+    <footer>
+        <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Help & Support</a></li>
+            <li><a href="#">City Index Global Partnerships</a></li>
+            <li><a href="#">Terms and Policies</a></li>
+            <li><a href="#">Press Area</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Glossary</a></li>
+            <li><a href="#">Site Map</a></li>
+        </ul>
+        
+    </footer>
 
 <script>
     $(document).ready(function () {
         $("#customAuthWidgetTemplate").template("customAuthWidgetTemplate"); //compile & name the template
-        $('#CustomAuthenticationWidget').CIAPI_widget_AuthenticationWidget(
-            {
-                template: 'customAuthWidgetTemplate', //override the default template
-                width: 400,
-                afterLogOn: function (data) {
-                    console.log("afterLogOn for CustomAuthenticationWidget", data);
-                },
-                afterLogOff: function (data) {
-                    console.log("afterLogOff for CustomAuthenticationWidget", data);
-                }
-            });
 
         $('#CustomAuthenticationWidget2').CIAPI_widget_AuthenticationWidget(
         {
             template: 'customAuthWidgetTemplate', //override the default template
-            width: 600
+            width: 'auto'
         });
 
-        $('#CustomAuthenticationWidget3').CIAPI_widget_AuthenticationWidget(
-        {
-            template: 'customAuthWidgetTemplate', //override the default template
-            width: 300
-        });
+
     });
 </script>
 <script id="customAuthWidgetTemplate" type="text/x-jquery-tmpl">
@@ -133,6 +173,6 @@
     </div>
 </script>
 
+	</body>
 
-</body>
 </html>

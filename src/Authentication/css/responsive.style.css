@@ -1,0 +1,377 @@
+/*	Less Framework 4
+	http://lessframework.com
+	by Joni Korpi
+	License: http://opensource.org/licenses/mit-license.php	*/
+
+
+/*	Resets
+	------	*/
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em,
+img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, hr,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figure, figcaption, hgroup,
+menu, footer, header, nav, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+article, aside, canvas, figure, figure img, figcaption, hgroup,
+footer, header, nav, section, audio, video {
+	display: block;
+}
+
+a img {border: 0;}
+
+
+
+/*	Typography presets
+	------------------	*/
+
+.gigantic {
+	font-size: 110px;
+	line-height: 120px;
+	letter-spacing: -2px;
+}
+
+.huge, h1 {
+	font-size: 68px;
+	line-height: 72px;
+	letter-spacing: -1px;
+}
+
+.large, h2 {
+	font-size: 42px;
+	line-height: 48px;
+}
+
+.bigger, h3 {
+	font-size: 26px;
+	line-height: 36px;
+}
+
+.big, h4 {
+	font-size: 22px;
+	line-height: 30px;
+}
+
+body {
+	font: 16px/24px Georgia, serif;
+}
+
+.small, small {
+	font-size: 13px;
+	line-height: 18px;
+}
+
+/* Selection colours (easy to forget) */
+
+::selection 	 	{background: rgb(255,255,158);}
+::-moz-selection 	{background: rgb(255,255,158);}
+img::selection 		{background: transparent;}
+img::-moz-selection	{background: transparent;}
+body {-webkit-tap-highlight-color: rgb(255,255,158);}
+
+
+
+/*		Default Layout: 992px.
+		Gutters: 24px.
+		Outer margins: 48px.
+		Leftover space for scrollbars @1024px: 32px.
+-------------------------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8      9      10
+px      68    160    252    344    436    528    620    712    804    896    */
+
+body {
+    -webkit-text-size-adjust: 100%; /* Stops Mobile Safari from auto-adjusting font-sizes */
+
+    background: rgb(232,232,232);
+    color: rgb(60,60,60);
+    margin: 0 auto;
+    padding: 48px 0 60px;
+    width: 992px;
+}
+
+header {
+    background: #7da7d9;
+    color: #fff;
+    margin: 0 0 24px;
+}
+
+header a {
+    color: #fff;
+}
+
+.logo {
+    padding: 10px;
+}
+
+.title {
+    font-size: 48px;
+    line-height: 52px;
+}
+
+.tagline {
+    font-size: 16px;
+}
+
+.nav-feature {
+    background: #5e8dc4;
+    float: right;
+    margin: 40px 10px 0 0;
+    padding: 0 0 0 10px;
+}
+
+.nav-feature li {
+    list-style: none;
+    display: inline;
+    margin: 0 10px 0 0;
+}
+
+.nav-primary {
+    background: #5e8dc4;
+    padding: 5px 10px;
+}
+
+.nav-primary li {
+    list-style: none;
+    display: inline;
+    margin: 0 10px 0 0;
+}
+
+.authentication {
+    float: right;
+    width: 300px;
+    margin: 0 0 24px;
+}
+
+.featured {
+    background: #1e9e5b;
+    float: left;
+    margin: 0 0 24px;
+    padding: 10px;
+    width: 648px;
+
+}
+
+.content {
+    background: #3cb878;
+    float: left;
+    padding: 10px;
+    width: 648px;
+
+}
+
+.sidebar {
+    background: #c7b299;
+    float: right;
+    margin: 0 0 24px;
+    padding: 10px;
+    width: 280px;
+}
+
+.sidebar li {
+    list-style: none;
+    display: inline;
+}
+
+footer {
+    background: #f9ae5c;
+    clear: both;
+    padding: 10px;
+}
+
+footer li {
+    list-style: none;
+    display: inline;
+    margin: 0 10px 0 0;
+}
+
+
+
+/*		Tablet Layout: 768px.
+		Gutters: 24px.
+		Outer margins: 28px.
+		Inherits styles from: Default Layout.
+-----------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8
+px      68    160    252    344    436    528    620    712    */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+	body {
+		width: 712px;
+		padding: 48px 28px 60px;
+	}
+
+    .title {
+        font-size: 44px;
+        line-height: 48px;
+    }
+
+    .authentication {
+        float: left;
+        width: 712px;
+        margin: 0 0 24px;
+    }
+
+    .featured {
+        background: #1e9e5b;
+        float: left;
+        margin: 0 0 24px;
+        padding: 10px;
+        width: 692px;
+
+    }
+
+    .content {
+        background: #3cb878;
+        float: left;
+        margin: 0 0 24px;
+        padding: 10px;
+        width: 692px;
+
+    }
+
+    .sidebar {
+        background: #c7b299;
+        float: left;
+        margin: 0 0 24px;
+        padding: 10px;
+        width: 692px;
+    }
+
+}
+
+
+
+
+/*		Mobile Layout: 320px.
+		Gutters: 24px.
+		Outer margins: 34px.
+		Inherits styles from: Default Layout.
+---------------------------------------------
+cols    1     2      3
+px      68    160    252    */
+
+@media only screen and (max-width: 767px) {
+
+	body {
+		width: 252px;
+		padding: 48px 34px 60px;
+	}
+
+    .title {
+        font-size: 20px;
+        line-height: 22px;
+    }
+
+    .nav-feature {
+        background: #5e8dc4;
+        float: left;
+        margin: 0;
+        padding: 0 0 0 10px;
+    }
+
+    .authentication {
+        float: left;
+        width: 252px;
+        margin: 0 0 24px;
+    }
+
+    .featured {
+        background: #1e9e5b;
+        float: left;
+        margin: 0 0 24px;
+        padding: 10px;
+        width: 232px;
+
+    }
+
+    .content {
+        background: #3cb878;
+        float: left;
+        margin: 0 0 24px;
+        padding: 10px;
+        width: 232px;
+
+    }
+
+    .sidebar {
+        background: #c7b299;
+        float: left;
+        margin: 0 0 24px;
+        padding: 10px;
+        width: 232px;
+    }
+
+    footer li {
+        list-style: none;
+        display: block;
+        margin: 0 0 10px 0;
+    }
+}
+
+
+
+/*		Wide Mobile Layout: 480px.
+		Gutters: 24px.
+		Outer margins: 22px.
+		Inherits styles from: Default Layout, Mobile Layout.
+------------------------------------------------------------
+cols    1     2      3      4      5
+px      68    160    252    344    436    */
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+
+	body {
+		width: 436px;
+		padding: 36px 22px 48px;
+	}
+
+    .title {
+        font-size: 32px;
+        line-height: 38px;
+    }
+    
+    .authentication {
+        float: left;
+        width: 436px;
+        margin: 0 0 24px;
+    }
+
+    .featured {
+        background: #1e9e5b;
+        float: left;
+        margin: 0 0 24px;
+        padding: 10px;
+        width: 416px;
+
+    }
+
+    .content {
+        background: #3cb878;
+        float: left;
+        margin: 0 0 24px;
+        padding: 10px;
+        width: 416px;
+
+    }
+
+    .sidebar {
+        background: #c7b299;
+        float: left;
+        margin: 0 0 24px;
+        padding: 10px;
+        width: 416px;
+    }
+
+    footer li {
+        list-style: none;
+        display: block;
+        margin: 0 0 10px 0;
+    }
+}
