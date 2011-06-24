@@ -1,5 +1,5 @@
 /*!
- * Amplify 1.0beta - Core, Store, Request
+ * AmplifyJS 1.0.0 - Core, Store, Request
  * 
  * Copyright 2011 appendTo LLC. (http://appendto.com/team)
  * Dual licensed under the MIT or GPL licenses.
@@ -8,7 +8,7 @@
  * http://amplifyjs.com
  */
 /*!
- * Amplify Core 1.0beta
+ * Amplify Core 1.0.0
  * 
  * Copyright 2011 appendTo LLC. (http://appendto.com/team)
  * Dual licensed under the MIT or GPL licenses.
@@ -55,25 +55,32 @@ var amplify = global.amplify = {
 		}
 		priority = priority || 10;
 
-		if ( !subscriptions[ topic ] ) {
-			subscriptions[ topic ] = [];
-		}
-
-		var i = subscriptions[ topic ].length - 1,
-			subscriptionInfo = {
-				callback: callback,
-				context: context,
-				priority: priority
-			};
-
-		for ( ; i >= 0; i-- ) {
-			if ( subscriptions[ topic ][ i ].priority <= priority ) {
-				subscriptions[ topic ].splice( i + 1, 0, subscriptionInfo );
-				return callback;
+		var topicIndex = 0,
+			topics = topic.split( /\s/ ),
+			topicLength = topics.length;
+		for ( ; topicIndex < topicLength; topicIndex++ ) {
+			topic = topics[ topicIndex ];
+			if ( !subscriptions[ topic ] ) {
+				subscriptions[ topic ] = [];
 			}
+	
+			var i = subscriptions[ topic ].length - 1,
+				subscriptionInfo = {
+					callback: callback,
+					context: context,
+					priority: priority
+				};
+	
+			for ( ; i >= 0; i-- ) {
+				if ( subscriptions[ topic ][ i ].priority <= priority ) {
+					subscriptions[ topic ].splice( i + 1, 0, subscriptionInfo );
+					return callback;
+				}
+			}
+	
+			subscriptions[ topic ].unshift( subscriptionInfo );
 		}
 
-		subscriptions[ topic ].unshift( subscriptionInfo );
 		return callback;
 	},
 
@@ -96,7 +103,7 @@ var amplify = global.amplify = {
 
 }( this ) );
 /*!
- * Amplify Store - Persistent Client-Side Storage 1.0beta
+ * Amplify Store - Persistent Client-Side Storage 1.0.0
  * 
  * Copyright 2011 appendTo LLC. (http://appendto.com/team)
  * Dual licensed under the MIT or GPL licenses.
@@ -132,68 +139,69 @@ store.error = function() {
 	return "amplify.store quota exceeded"; 
 };
 
-function createSimpleStorage( storageType, storage ) {
-	var values = storage.__amplify__ ? JSON.parse( storage.__amplify__ ) : {};
-	function remove( key ) {
-		if ( storage.removeItem ) {
-			storage.removeItem( key );
-		} else {
-			delete storage[ key ];
-		}
-		delete values[ key ];
-	}
+var rprefix = /^__amplify__/;
+function createFromStorageInterface( storageType, storage ) {
 	store.addType( storageType, function( key, value, options ) {
-		var ret = value,
-			now = (new Date()).getTime(),
-			storedValue,
-			parsed;
+		var storedValue, parsed, i, remove,
+			ret = value,
+			now = (new Date()).getTime();
 
 		if ( !key ) {
 			ret = {};
-			for ( key in values ) {
-				storedValue = storage[ key ];
-				parsed = storedValue ? JSON.parse( storedValue ) : { expires: -1 };
-				if ( parsed.expires && parsed.expires <= now ) {
-					remove( key );
-				} else {
-					ret[ key.replace( /^__amplify__/, "" ) ] = parsed.data;
+			remove = [];
+			i = 0;
+			try {
+				// accessing the length property works around a localStorage bug
+				// in Firefox 4.0 where the keys don't update cross-page
+				// we assign to key just to avoid Closure Compiler from removing
+				// the access as "useless code"
+				// https://bugzilla.mozilla.org/show_bug.cgi?id=662511
+				key = storage.length;
+
+				while ( key = storage.key( i++ ) ) {
+					if ( rprefix.test( key ) ) {
+						parsed = JSON.parse( storage.getItem( key ) );
+						if ( parsed.expires && parsed.expires <= now ) {
+							remove.push( key );
+						} else {
+							ret[ key.replace( rprefix, "" ) ] = parsed.data;
+						}
+					}
 				}
-			}
-			storage.__amplify__ = JSON.stringify( values );
+				while ( key = remove.pop() ) {
+					storage.removeItem( key );
+				}
+			} catch ( error ) {}
 			return ret;
 		}
 
-		// protect against overwriting built-in properties
+		// protect against name collisions with direct storage
 		key = "__amplify__" + key;
 
 		if ( value === undefined ) {
-			if ( values[ key ] ) {
-				storedValue = storage[ key ];
-				parsed = storedValue ? JSON.parse( storedValue ) : { expires: -1 };
-				if ( parsed.expires && parsed.expires <= now ) {
-					remove( key );
-				} else {
-					return parsed.data;
-				}
+			storedValue = storage.getItem( key );
+			parsed = storedValue ? JSON.parse( storedValue ) : { expires: -1 };
+			if ( parsed.expires && parsed.expires <= now ) {
+				storage.removeItem( key );
+			} else {
+				return parsed.data;
 			}
 		} else {
 			if ( value === null ) {
-				remove( key );
+				storage.removeItem( key );
 			} else {
 				parsed = JSON.stringify({
 					data: value,
 					expires: options.expires ? now + options.expires : null
 				});
 				try {
-					storage[ key ] = parsed;
-					values[ key ] = true;
+					storage.setItem( key, parsed );
 				// quota exceeded
 				} catch( error ) {
 					// expire old data and try again
 					store[ storageType ]();
 					try {
-						storage[ key ] = parsed;
-						values[ key ] = true;
+						storage.setItem( key, parsed );
 					} catch( error ) {
 						throw store.error();
 					}
@@ -201,7 +209,6 @@ function createSimpleStorage( storageType, storage ) {
 			}
 		}
 
-		storage.__amplify__ = JSON.stringify( values );
 		return ret;
 	});
 }
@@ -212,7 +219,7 @@ for ( var webStorageType in { localStorage: 1, sessionStorage: 1 } ) {
 	// try/catch for file protocol in Firefox
 	try {
 		if ( window[ webStorageType ].getItem ) {
-			createSimpleStorage( webStorageType, window[ webStorageType ] );
+			createFromStorageInterface( webStorageType, window[ webStorageType ] );
 		}
 	} catch( e ) {}
 }
@@ -223,10 +230,10 @@ for ( var webStorageType in { localStorage: 1, sessionStorage: 1 } ) {
 if ( window.globalStorage ) {
 	// try/catch for file protocol in Firefox
 	try {
-		createSimpleStorage( "globalStorage",
+		createFromStorageInterface( "globalStorage",
 			window.globalStorage[ window.location.hostname ] );
 		// Firefox 2.0 and 3.0 have sessionStorage and globalStorage
-		// make sure we defualt to globalStorage
+		// make sure we default to globalStorage
 		// but don't default to globalStorage in 3.5+ which also has localStorage
 		if ( store.type === "sessionStorage" ) {
 			store.type = "globalStorage";
@@ -238,37 +245,42 @@ if ( window.globalStorage ) {
 // non-standard: IE 5+
 // http://msdn.microsoft.com/en-us/library/ms531424(v=vs.85).aspx
 (function() {
+	// IE 9 has quirks in userData that are a huge pain
+	// rather than finding a way to detect these quirks
+	// we just don't register userData if we have localStorage
+	if ( store.types.localStorage ) {
+		return;
+	}
+
 	// append to html instead of body so we can do this from the head
 	var div = document.createElement( "div" ),
-		attrKey = "amplify",
-		attrs;
+		attrKey = "amplify";
 	div.style.display = "none";
 	document.getElementsByTagName( "head" )[ 0 ].appendChild( div );
 	if ( div.addBehavior ) {
 		div.addBehavior( "#default#userdata" );
-		div.load( attrKey );
-		attrs = div.getAttribute( attrKey ) ? JSON.parse( div.getAttribute( attrKey ) ) : {};
 
 		store.addType( "userData", function( key, value, options ) {
-			var ret = value,
-				now = (new Date()).getTime(),
-				attr,
-				parsed,
-				prevValue;
+			div.load( attrKey );
+			var attr, parsed, prevValue, i, remove,
+				ret = value,
+				now = (new Date()).getTime();
 
 			if ( !key ) {
 				ret = {};
-				for ( key in attrs ) {
-					attr = div.getAttribute( key );
-					parsed = attr ? JSON.parse( attr ) : { expires: -1 };
+				remove = [];
+				i = 0;
+				while ( attr = div.XMLDocument.documentElement.attributes[ i++ ] ) {
+					parsed = JSON.parse( attr.value );
 					if ( parsed.expires && parsed.expires <= now ) {
-						div.removeAttribute( key );
-						delete attrs[ key ];
+						remove.push( attr.name );
 					} else {
-						ret[ key ] = parsed.data;
+						ret[ attr.name ] = parsed.data;
 					}
 				}
-				div.setAttribute( attrKey, JSON.stringify( attrs ) );
+				while ( key = remove.pop() ) {
+					div.removeAttribute( key );
+				}
 				div.save( attrKey );
 				return ret;
 			}
@@ -280,20 +292,16 @@ if ( window.globalStorage ) {
 			key = key.replace( /[^-._0-9A-Za-z\xb7\xc0-\xd6\xd8-\xf6\xf8-\u037d\u37f-\u1fff\u200c-\u200d\u203f\u2040\u2070-\u218f]/g, "-" );
 
 			if ( value === undefined ) {
-				if ( key in attrs ) {
-					attr = div.getAttribute( key );
-					parsed = attr ? JSON.parse( attr ) : { expires: -1 };
-					if ( parsed.expires && parsed.expires <= now ) {
-						div.removeAttribute( key );
-						delete attrs[ key ];
-					} else {
-						return parsed.data;
-					}
+				attr = div.getAttribute( key );
+				parsed = attr ? JSON.parse( attr ) : { expires: -1 };
+				if ( parsed.expires && parsed.expires <= now ) {
+					div.removeAttribute( key );
+				} else {
+					return parsed.data;
 				}
 			} else {
 				if ( value === null ) {
 					div.removeAttribute( key );
-					delete attrs[ key ];
 				} else {
 					// we need to get the previous value in case we need to rollback
 					prevValue = div.getAttribute( key );
@@ -302,11 +310,9 @@ if ( window.globalStorage ) {
 						expires: (options.expires ? (now + options.expires) : null)
 					});
 					div.setAttribute( key, parsed );
-					attrs[ key ] = true;
 				}
 			}
 
-			div.setAttribute( attrKey, JSON.stringify( attrs ) );
 			try {
 				div.save( attrKey );
 			// quota exceeded
@@ -314,7 +320,6 @@ if ( window.globalStorage ) {
 				// roll the value back to the previous value
 				if ( prevValue === null ) {
 					div.removeAttribute( key );
-					delete attrs[ key ];
 				} else {
 					div.setAttribute( key, prevValue );
 				}
@@ -323,13 +328,11 @@ if ( window.globalStorage ) {
 				store.userData();
 				try {
 					div.setAttribute( key, parsed );
-					attrs[ key ] = true;
 					div.save( attrKey );
 				} catch ( error ) {
 					// roll the value back to the previous value
 					if ( prevValue === null ) {
 						div.removeAttribute( key );
-						delete attrs[ key ];
 					} else {
 						div.setAttribute( key, prevValue );
 					}
@@ -343,11 +346,41 @@ if ( window.globalStorage ) {
 
 // in-memory storage
 // fallback for all browsers to enable the API even if we can't persist data
-createSimpleStorage( "memory", {} );
+(function() {
+	var memory = {};
+
+	function copy( obj ) {
+		return obj === undefined ? undefined : JSON.parse( JSON.stringify( obj ) );
+	}
+
+	store.addType( "memory", function( key, value, options ) {
+		if ( !key ) {
+			return copy( memory );
+		}
+
+		if ( value === undefined ) {
+			return copy( memory[ key ] );
+		}
+
+		if ( value === null ) {
+			delete memory[ key ];
+			return null;
+		}
+
+		memory[ key ] = value;
+		if ( options.expires ) {
+			setTimeout(function() {
+				delete memory[ key ];
+			}, options.expires );
+		}
+
+		return value;
+	});
+}() );
 
 }( this.amplify = this.amplify || {} ) );
 /*!
- * Amplify Request 1.0beta
+ * Amplify Request 1.0.0
  * 
  * Copyright 2011 appendTo LLC. (http://appendto.com/team)
  * Dual licensed under the MIT or GPL licenses.
@@ -437,7 +470,8 @@ amplify.request.define = function( resourceId, type, settings ) {
 
 (function( amplify, $, undefined ) {
 
-var xhrProps = [ "status", "statusText", "responseText", "responseXML", "readyState" ];
+var xhrProps = [ "status", "statusText", "responseText", "responseXML", "readyState" ],
+    rurlData = /\{([^\}]+)\}/g;
 
 amplify.request.types.ajax = function( defnSettings ) {
 	defnSettings = $.extend({
@@ -445,11 +479,12 @@ amplify.request.types.ajax = function( defnSettings ) {
 	}, defnSettings );
 
 	return function( settings, request ) {
-		var regex, xhr,
+		var xhr,
 			url = defnSettings.url,
 			data = settings.data,
 			abort = request.abort,
 			ajaxSettings = {},
+			mappedKeys = [],
 			aborted = false,
 			ampXHR = {
 				readyState: 0,
@@ -483,12 +518,17 @@ amplify.request.types.ajax = function( defnSettings ) {
 
 		if ( typeof data !== "string" ) {
 			data = $.extend( true, {}, defnSettings.data, data );
-			$.each( data, function( key, value ) {
-				regex = new RegExp( "{" + key + "}", "g");
-				if ( regex.test( url ) ) {
-					url = url.replace( regex, value );
-					delete data[ key ];
+			
+			url = url.replace( rurlData, function ( m, key ) {
+				if ( key in data ) {
+				    mappedKeys.push( key );
+				    return data[ key ];
 				}
+			});
+			
+			// We delete the keys later so duplicates are still replaced
+			$.each( mappedKeys, function ( i, key ) {
+				delete data[ key ];
 			});
 		}
 
@@ -520,7 +560,9 @@ amplify.request.types.ajax = function( defnSettings ) {
 					ampXHR[ key ] = xhr[ key ];
 				} catch( e ) {}
 			});
-			if ( ampXHR.statusText === "OK" ) {
+			// Playbook returns "HTTP/1.1 200 OK"
+			// TODO: something also returns "OK", what?
+			if ( /OK$/.test( ampXHR.statusText ) ) {
 				ampXHR.statusText = "success";
 			}
 			if ( data === undefined ) {

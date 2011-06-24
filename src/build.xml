@@ -15,6 +15,12 @@
         </subant>
     </target>
 
+    <target name="runtests-local">
+      <subant target="runtests-local">
+        <fileset dir="." includes="**/build.project.xml"/>
+      </subant>
+    </target>
+  
     <target name="publish"
             description="(PUBLIC) Copy selected files for publishing from /target folders of each sub-project">
         <delete includeemptydirs="true">
