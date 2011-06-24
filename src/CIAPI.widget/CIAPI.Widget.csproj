@@ -6,8 +6,10 @@
   <ItemGroup>
     <Content Include="build.project.xml" />
     <Content Include="js\CIAPI.widget.js" />
+    <Content Include="js\mylibs\a.knockout-1.2.0.debug.js" />
     <Content Include="js\mylibs\a.knockout-1.2.0.min.js" />
     <Content Include="js\mylibs\b.knockout.mapping-1.0pre.min.js" />
+    <Content Include="js\mylibs\b.knockout.mapping-latest.debug.js" />
     <Content Include="test\CIAPI.UnitTests.js" />
     <Content Include="test\Run_AcceptanceTests.html" />
     <Content Include="test\Run_UnitTests.html" />

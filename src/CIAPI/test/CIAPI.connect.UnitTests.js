@@ -73,8 +73,8 @@ describe("CIAPI.connect unit tests", function () {
         });
 
         runs(function () {
-            expect(document.cookie).toContain("UserName=;");
-            expect(document.cookie + ';').toContain("Session=;");
+            expect(document.cookie).toMatch("UserName=?;");
+            expect(document.cookie + ';').toMatch("Session=?;");
 
             expect(CIAPI.connection.UserName).toBeFalsy();
             expect(CIAPI.connection.Session).toBeFalsy();

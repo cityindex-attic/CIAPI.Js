@@ -24,6 +24,7 @@ CIAPI.parseDate = function(value) {
 };
 
 if (typeof Object.freeze == "undefined") { Object.freeze = function () { }; }
+if (typeof Object.isFrozen == "undefined") {Object.isFrozen = function () { return false; }; }
 
 if (typeof String.trim == "undefined") {
     String.prototype.trim = function () {
