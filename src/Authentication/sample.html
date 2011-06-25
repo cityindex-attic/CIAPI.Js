@@ -47,6 +47,10 @@
     CIAPI.connection.StreamUri = "http://pushpreprod.cityindextest9.co.uk";
 </script>
 
+    <div style="width:80%; border: 1px solid black">
+        <div id="AuthenticationWidget1"></div>
+    </div>
+
 <div class="wrapper">
     <div class="header">
         <div class="logo"></div>
@@ -69,6 +73,8 @@
 
 <script>
     $(document).ready(function () {
+        $("#AuthenticationWidget1").CIAPI_widget_AuthenticationWidget();
+
         $("#customAuthWidgetTemplate").template("customAuthWidgetTemplate"); //compile & name the template
         $('#CustomAuthenticationWidget').CIAPI_widget_AuthenticationWidget(
             {
@@ -85,7 +91,7 @@
         $('#CustomAuthenticationWidget2').CIAPI_widget_AuthenticationWidget(
         {
             template: 'customAuthWidgetTemplate', //override the default template
-            width: 600
+            width: 650
         });
 
         $('#CustomAuthenticationWidget3').CIAPI_widget_AuthenticationWidget(
