@@ -2204,7 +2204,7 @@ button.ui-button::-moz-focus-inner
 .ui-ciapi-authentication .ui-ciapi-authentication-content {
     border: 0;
     overflow: auto;
-    padding: 2em 2em 0;
+    padding: 0.6em 1.2em 0;
     position: relative;
     zoom: 1;
 }
@@ -2217,8 +2217,8 @@ button.ui-button::-moz-focus-inner
 
 .ui-ciapi-authentication .ui-ciapi-authentication-input {
     background: #fff;
-    margin: 0.5em 0 2em;
-    padding: 0.5em 0.8em;
+    margin: 0.2em 0 1.2em;
+    padding: 0.3em 0.5em;
 }
 
 .ui-ciapi-authentication .ui-ciapi-authentication-input input {
@@ -2232,7 +2232,7 @@ button.ui-button::-moz-focus-inner
     text-align: left;
     border-width: 1px 0 0 0;
     background-image: none;
-    padding: 1em 2em;
+    padding: 0.5em 1.2em;
 }
 
 .ui-ciapi-authentication .ui-ciapi-authentication-buttonpane .ui-ciapi-authentication-buttonset {

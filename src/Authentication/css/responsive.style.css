@@ -59,7 +59,7 @@ a img {border: 0;}
 }
 
 body {
-	font: 16px/24px Georgia, serif;
+	font: 11px/16px Arial;
 }
 
 .small, small {
@@ -99,6 +99,7 @@ header {
     background: #7da7d9;
     color: #fff;
     margin: 0 0 24px;
+    overflow: hidden;
 }
 
 header a {
@@ -264,16 +265,19 @@ px      68    160    252    */
 		padding: 48px 34px 60px;
 	}
 
+    .logo {
+        width: 252px;
+    }
+    
     .title {
         font-size: 20px;
         line-height: 22px;
     }
 
     .nav-feature {
-        background: #5e8dc4;
-        float: left;
+        display: block;
+        width: 242px;
         margin: 0;
-        padding: 0 0 0 10px;
     }
 
     .authentication {
@@ -332,9 +336,18 @@ px      68    160    252    344    436    */
 		padding: 36px 22px 48px;
 	}
 
+    .logo {
+        width: 416px;
+        
+    }
+
     .title {
         font-size: 32px;
         line-height: 38px;
+    }
+
+    .nav-feature {
+        width: 426px;
     }
     
     .authentication {
