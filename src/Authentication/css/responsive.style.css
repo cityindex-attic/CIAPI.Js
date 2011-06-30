@@ -196,7 +196,8 @@ header a {
 }
 
 .featured {
-    background: #1e9e5b;
+    background: #fdfdfd;
+    border: 1px solid #d5d5d5;
     float: left;
     margin: 0 0 24px;
     padding: 10px;
@@ -204,16 +205,27 @@ header a {
 
 }
 
+.featured p {
+    font-size: 12px;
+    margin: 10px 0;
+}
+
 .content {
-    background: #3cb878;
+    background: #fdfdfd;
+    border: 1px solid #d5d5d5;
     float: left;
     padding: 10px;
     width: 648px;
+}
 
+.content p {
+    font-size: 12px;
+    margin: 10px 0;
 }
 
 .sidebar {
-    background: #c7b299;
+    background: #fdfdfd;
+    border: 1px solid #d5d5d5;
     float: right;
     margin: 0 0 24px;
     padding: 10px;
@@ -223,6 +235,11 @@ header a {
 .sidebar li {
     list-style: none;
     display: inline;
+}
+
+.sidebar p {
+    font-size: 12px;
+    margin: 10px 0;
 }
 
 footer {
@@ -244,7 +261,7 @@ footer li {
     list-style: none;
     display: inline;
     margin: 0 10px 0 0;
-    padding: 0 10px 0 0;
+    padding: 0 0 0 10px;
     border-left: 1px solid #666666;
 }
 
@@ -293,7 +310,6 @@ px      68    160    252    344    436    528    620    712    */
     }
 
     .featured {
-        background: #1e9e5b;
         float: left;
         margin: 0 0 24px;
         padding: 10px;
@@ -306,7 +322,6 @@ px      68    160    252    344    436    528    620    712    */
     }
 
     .content {
-        background: #3cb878;
         float: left;
         margin: 0 0 24px;
         padding: 10px;
@@ -315,7 +330,6 @@ px      68    160    252    344    436    528    620    712    */
     }
 
     .sidebar {
-        background: #c7b299;
         float: left;
         margin: 0 0 24px;
         padding: 10px;
@@ -324,7 +338,7 @@ px      68    160    252    344    436    528    620    712    */
 
     footer li {
         margin: 0 2px 0 0;
-        padding: 0 4px 0 0;
+        padding: 0 0 0 4px;
        
     }
 
@@ -428,7 +442,6 @@ px      68    160    252    */
     }
 
     .featured {
-        background: #1e9e5b;
         float: left;
         margin: 0 0 24px;
         padding: 10px;
@@ -437,7 +450,6 @@ px      68    160    252    */
     }
 
     .content {
-        background: #3cb878;
         float: left;
         margin: 0 0 24px;
         padding: 10px;
@@ -446,7 +458,6 @@ px      68    160    252    */
     }
 
     .sidebar {
-        background: #c7b299;
         float: left;
         margin: 0 0 24px;
         padding: 10px;
@@ -539,7 +550,6 @@ px      68    160    252    344    436    */
     }
 
     .featured {
-        background: #1e9e5b;
         float: left;
         margin: 0 0 24px;
         padding: 10px;
@@ -548,7 +558,6 @@ px      68    160    252    344    436    */
     }
 
     .content {
-        background: #3cb878;
         float: left;
         margin: 0 0 24px;
         padding: 10px;
@@ -557,7 +566,6 @@ px      68    160    252    344    436    */
     }
 
     .sidebar {
-        background: #c7b299;
         float: left;
         margin: 0 0 24px;
         padding: 10px;
