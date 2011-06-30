@@ -155,79 +155,56 @@ a
 
 /* Interaction states
 ----------------------------------*/
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
-{
-    border: 1px solid #a8a8a8;
-    background: #c4c4c4 url(images/ui-bg_highlight-hard_80_c4c4c4_1x100.png) 50% 50% repeat-x;
-    background: #c4c4c4 linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
-    background: #c4c4c4 -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0)));
-    background: #c4c4c4 -moz-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0)); /*    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#DDFFFFFF, endColorstr=#00FFFFFF);     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#DDFFFFFF, endColorstr=#00FFFFFF)"; */
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border: 1px solid #1a1a1a;
+    background: #171717 url(images/ui-ciapi-bg_highlight.png) 50% 50% repeat-x;
+
     font-weight: bold;
-    color: #4f4f4f;
+    color: #fff;
+    text-shadow: 0px 1px 0px rgba(0,0,0,0.7);
+}
+
+.ui-state-default.ui-ciapi-button-yellow {
+    background: #ffd500 url(images/ui-ciapi-bg_highlight_yellow.png) 50% 50% repeat-x;
+    color: #000;
     text-shadow: 0px 1px 0px rgba(255,255,255,0.7);
 }
-.ui-state-default
-{
-    -moz-box-shadow: inset 0px 1px 0px #fff;
-    -webkit-box-shadow: inset 0px 1px 0px #fff;
-    box-shadow: inset 0px 1px 0px #fff;
-}
-.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
-{
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
     color: #4f4f4f;
     text-decoration: none;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus
-{
-    border: 1px solid #7096ab;
-    background: #85b2cb url(images/ui-bg_highlight-hard_80_85b2cb_1x100.png) 50% 50% repeat-x;
-    background: #85b2cb linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0));
-    background: #85b2cb -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.6)), to(rgba(255,255,255,0)));
-    background: #85b2cb -moz-linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0)); /*    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#00FFFFFF);     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#00FFFFFF)"; */
-    font-weight: bold;
-    color: #313131;
-    -moz-box-shadow: 0 0 5px #85b2cb;
-    -webkit-box-shadow: 0px 0px 8px #85b2cb;
-    box-shadow: 0px 0px 8px #85b2cb;
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    border: 1px solid #1a1a1a;
+    background: #171717 url(images/ui-ciapi-bg_highlight_hover.png) 50% 50% repeat-x;
 }
-.ui-state-hover
-{
-    -moz-box-shadow: 0px 0px 8px #85b2cb, inset 0px 1px 0px #fff;
-    -webkit-box-shadow: 0px 0px 8px #85b2cb, inset 0px 1px 0px #fff;
-    box-shadow: 0px 0px 8px #85b2cb, inset 0px 1px 0px #fff;
+
+.ui-state-hover.ui-ciapi-button-yellow {
+    background: #ffd500 url(images/ui-ciapi-bg_highlight_hover_yellow.png) 50% 50% repeat-x;
 }
-.ui-state-hover a, .ui-state-hover a:hover
-{
-    color: #2f556a;
+
+.ui-state-hover a, .ui-state-hover a:hover {
+    color: #fff;
     text-decoration: none;
 }
-.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active
-{
-    border: 1px solid #7096ab;
-    background: #85b2cb url(images/ui-bg_inset-hard_65_85b2cb_1x100.png) 50% 50% repeat-x;
-    background: #85b2cb linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,0.4));
-    background: #85b2cb -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0)), to(rgba(255,255,255,0.4)));
-    background: #85b2cb -moz-linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,0.4)); /*    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF, endColorstr=#CCFFFFFF);     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF, endColorstr=#CCFFFFFF)"; */
-    font-weight: bold;
-    color: #1C4257;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    border: 1px solid #1a1a1a;
+    background: #171717 url(images/ui-ciapi-bg_highlight_active.png) 50% 50% repeat-x;
 }
-.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited
-{
-    color: #2f556a;
+
+.ui-state-active.ui-ciapi-button-yellow {
+    background: #ffd500 url(images/ui-ciapi-bg_highlight_active_yellow.png) 50% 50% repeat-x;
+}
+
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+    color: #fff;
     text-decoration: none;
 }
-.ui-widget :active
-{
+.ui-widget :active {
     outline: none;
 }
-.ui-state-active
-{
-    -moz-box-shadow: inset 0px -1px 0px #fff;
-    -webkit-box-shadow: inset 0px 1px 0px #fff;
-    box-shadow: inset 0px 1px 0px #fff;
-}
+
 /* Interaction Cues
 ----------------------------------*/
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight
@@ -287,35 +264,44 @@ a
 {
     width: 16px;
     height: 16px;
-    background-image: url(images/ui-icons_616161_256x240.png);
+    background-image: url(images/ui-icons_ffffff_256x240.png);
 }
 .ui-widget-content .ui-icon
 {
-    background-image: url(images/ui-icons_616161_256x240.png);
+    background-image: url(images/ui-icons_ffffff_256x240.png);
 }
 .ui-widget-header .ui-icon
 {
-    background-image: url(images/ui-icons_898989_256x240.png);
+    background-image: url(images/ui-icons_ffffff_256x240.png);
 }
-.ui-state-default .ui-icon
-{
-    background-image: url(images/ui-icons_38667f_256x240.png);
+.ui-state-default .ui-icon {
+    background-image: url(images/ui-icons_ffffff_256x240.png);
 }
+
+.ui-state-default.ui-ciapi-button-yellow .ui-icon {
+    background-image: url(images/ui-icons_222222_256x240.png);
+}
+
 .ui-state-hover .ui-icon, .ui-state-focus .ui-icon
 {
-    background-image: url(images/ui-icons_38667f_256x240.png);
+    background-image: url(images/ui-icons_ffffff_256x240.png);
 }
 .ui-state-active .ui-icon
 {
-    background-image: url(images/ui-icons_38667f_256x240.png);
+    background-image: url(images/ui-icons_ffffff_256x240.png);
 }
 .ui-state-highlight .ui-icon
 {
-    background-image: url(images/ui-icons_2e83ff_256x240.png);
+    background-image: url(images/ui-icons_ffffff_256x240.png);
 }
 .ui-state-error .ui-icon, .ui-state-error-text .ui-icon
 {
     background-image: url(images/ui-icons_cd0a0a_256x240.png);
+}
+
+
+.ui-button-text-icon-primary .ui-button-icon-primary, .ui-button-text-icons .ui-button-icon-primary, .ui-button-icons-only .ui-button-icon-primary {
+    left: 0.5em;
 }
 
 /* positioning */
@@ -1084,9 +1070,9 @@ a
 }
 .ui-corner-all
 {
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 .ui-round-all
 {
@@ -2204,7 +2190,7 @@ button.ui-button::-moz-focus-inner
 .ui-ciapi-authentication .ui-ciapi-authentication-content {
     border: 0;
     overflow: auto;
-    padding: 0.6em 1.2em 0;
+    padding: 1em 1.2em 0;
     position: relative;
     zoom: 1;
 }
@@ -2230,9 +2216,9 @@ button.ui-button::-moz-focus-inner
 
 .ui-ciapi-authentication .ui-ciapi-authentication-buttonpane {
     text-align: left;
-    border-width: 1px 0 0 0;
+    border-width: 0;
     background-image: none;
-    padding: 0.5em 1.2em;
+    padding: 0 1.2em 0.5em;
 }
 
 .ui-ciapi-authentication .ui-ciapi-authentication-buttonpane .ui-ciapi-authentication-buttonset {

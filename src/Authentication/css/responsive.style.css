@@ -85,18 +85,36 @@ body {-webkit-tap-highlight-color: rgb(255,255,158);}
 cols    1     2      3      4      5      6      7      8      9      10
 px      68    160    252    344    436    528    620    712    804    896    */
 
+
+/* Some Helper Classes */
+.rsp-hidden {
+    display: none;
+}
+
+.rsp-fl-r {
+    float: right;
+}
+
+.rsp-fl-l {
+    float: left;
+}
+
 body {
     -webkit-text-size-adjust: 100%; /* Stops Mobile Safari from auto-adjusting font-sizes */
 
-    background: rgb(232,232,232);
+    background: #fff;
     color: rgb(60,60,60);
     margin: 0 auto;
-    padding: 48px 0 60px;
+    padding: 0;
     width: 992px;
 }
 
 header {
+    -moz-border-radius: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
+    
     background: #7da7d9;
+    border-radius: 0 0 5px 5px;
     color: #fff;
     margin: 0 0 24px;
     overflow: hidden;
@@ -107,7 +125,13 @@ header a {
 }
 
 .logo {
-    padding: 10px;
+    background: url(images/logo.png) no-repeat 0 0;
+    height: 77px;
+}
+
+.logo h1,
+.logo p {
+    text-indent: -9999px;
 }
 
 .title {
@@ -120,9 +144,8 @@ header a {
 }
 
 .nav-feature {
-    background: #5e8dc4;
     float: right;
-    margin: 40px 10px 0 0;
+    margin: 25px 10px 0 0;
     padding: 0 0 0 10px;
 }
 
@@ -132,15 +155,38 @@ header a {
     margin: 0 10px 0 0;
 }
 
+.nav-feature li.rsp-toggle-hide {
+    display: none;
+}
+
 .nav-primary {
-    background: #5e8dc4;
-    padding: 5px 10px;
+    -moz-border-radius: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
+    
+    background: url(images/nav-bg.png) 50% 50% repeat-x;
+    border-radius: 0 0 5px 5px;
+    height: 30px;
 }
 
 .nav-primary li {
-    list-style: none;
     display: inline;
-    margin: 0 10px 0 0;
+    float: left;
+    margin: 0;
+    padding: 6px 10px 0 22px;
+}
+
+.nav-primary li a {
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-primary li a:hover {
+    color: #ffd500;
+}
+
+.nav-primary li.active a {
+    color: #ffd500;
 }
 
 .authentication {
@@ -205,7 +251,7 @@ px      68    160    252    344    436    528    620    712    */
 
 	body {
 		width: 712px;
-		padding: 48px 28px 60px;
+		padding: 0 28px 0;
 	}
 
     .title {
@@ -226,6 +272,10 @@ px      68    160    252    344    436    528    620    712    */
         padding: 10px;
         width: 692px;
 
+    }
+
+    .nav-primary li {
+        padding: 6px 5px 0 12px;
     }
 
     .content {
@@ -262,7 +312,7 @@ px      68    160    252    */
 
 	body {
 		width: 252px;
-		padding: 48px 34px 60px;
+		padding: 0px 34px 0px;
 	}
 
     .logo {
@@ -275,9 +325,67 @@ px      68    160    252    */
     }
 
     .nav-feature {
-        display: block;
-        width: 242px;
+        background: #434343;
+        float: none;
+        width: 252px;
+        padding: 0;
         margin: 0;
+    }
+
+    .nav-feature .ui-state-default {
+        border: none;
+        background: none;
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 0px 1px 0px rgba(0,0,0,0.7);
+    }
+
+    .nav-feature .ui-state-default.ui-ciapi-button-yellow {
+        background: none;
+        color: #fff;
+        text-shadow: 0px 1px 0px rgba(0,0,0,0.7);
+    }
+
+    .nav-feature .ui-button {
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-feature .ui-state-default.ui-ciapi-button-yellow .ui-icon {
+        background-image: url("../themes/ci.default/images/ui-icons_ffffff_256x240.png")
+    }
+
+    .nav-feature li {
+        margin: 0;
+    }
+
+    .nav-feature li.rsp-toggle-hide {
+        display: inline;
+    }
+
+    .nav-feature li.rsp-toggle-hide a {
+        font-size: 12px;
+        font-weight: bold;
+        text-decoration: none;
+        line-height: 24px;
+        margin: 0 10px 0 0;
+    }
+
+    .nav-primary {
+        height: 100px;
+    }
+
+    .nav-primary li {
+        padding: 6px 10px 11px;
+        width: 64px;
+    }
+
+    .nav-primary li a {
+        font-size: 11px;
+    }
+    
+    .nav-primary li.rsp-toggle-hide {
+        display: none;
     }
 
     .authentication {
@@ -317,6 +425,7 @@ px      68    160    252    */
         display: block;
         margin: 0 0 10px 0;
     }
+
 }
 
 
@@ -333,11 +442,11 @@ px      68    160    252    344    436    */
 
 	body {
 		width: 436px;
-		padding: 36px 22px 48px;
+		padding: 0px 22px 0px;
 	}
 
     .logo {
-        width: 416px;
+        width: 436px;
         
     }
 
@@ -347,7 +456,47 @@ px      68    160    252    344    436    */
     }
 
     .nav-feature {
-        width: 426px;
+        background: #434343;
+        float: none;
+        width: 436px;
+        padding: 0;
+
+    }
+
+    .nav-feature .ui-state-default {
+        border: none;
+        background: none;
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 0px 1px 0px rgba(0,0,0,0.7);
+    }
+
+    .nav-feature .ui-state-default.ui-ciapi-button-yellow {
+        background: none;
+        color: #fff;
+        text-shadow: 0px 1px 0px rgba(0,0,0,0.7);
+    }
+
+    .nav-feature .ui-button {
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-feature .ui-state-default.ui-ciapi-button-yellow .ui-icon {
+        background-image: url("../themes/ci.default/images/ui-icons_ffffff_256x240.png")
+    }
+
+    .nav-primary {
+        height: 55px;
+    }
+    
+    .nav-primary li {
+        width: 112px;
+        padding: 6px 10px 0 22px;
+    }
+
+    .nav-primary li a {
+        font-size: 12px;
     }
     
     .authentication {

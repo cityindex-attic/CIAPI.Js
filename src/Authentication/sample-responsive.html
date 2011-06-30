@@ -39,7 +39,7 @@
 
 	<body lang="en">
     <!--[! Themeswitcher tool -->
-    <div id="switcher_wrap" style="position: absolute; top: 10px; right: 10px;"><div id="switcher"></div></div>
+
     <script type="text/javascript" src="/publish/libs/jquery-ui/Super-Theme-Switcher/jquery.themeswitcher.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -49,15 +49,30 @@
                     { title: "City Index", name: "ci.default", icon: "???", url: "themes/ci.default/ci.default.css" }
                 ]
             });
+
+            $('.ui-ciapi-button').button({
+                icons: {
+                    primary: "ui-icon-circle-triangle-e"
+                }
+            });
+
+            $('.ui-ciapi-button-yellow').button({
+                icons: {
+                    primary: "ui-icon-circle-triangle-e"
+                }
+            });
+            
         });
     </script>
     
     <header>
         <nav class="nav-feature">
             <ul>
-                <li><a href="#">log in</a></li>
-                <li><a href="#">apply now</a></li>
+                <li><a href="#" class="ui-ciapi-button">log In</a></li>
+                <li><a href="#" class="ui-ciapi-button-yellow">Apply Now</a></li>
+                <li class="rsp-toggle-hide rsp-fl-r"><a href="#">Contact Us</a></li>
             </ul>
+
         </nav>
 
         <div class="logo">
@@ -67,9 +82,13 @@
 
         <nav class="nav-primary">
             <ul>
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#">Spread Betting</a></li>
+                <li><a href="#">CFD Trading</a></li>
+                <li><a href="#">Range of Markets</a></li>
+                <li><a href="#">Trading Platform</a></li>
+                <li class="active"><a href="#">Learn to Trade</a></li>
+                <li><a href="#">Market Analysis</a></li>
+                <li class="rsp-toggle-hide"><a href="#">Contact Us</a></li>
             </ul>
         </nav>
     </header>
@@ -92,6 +111,8 @@
         <p>Indices are the most widely traded markets in the world, with indices such as the UK 100 being one of the most popular among new traders. With your City Index account you can spread bet on a majority of the major indices across the globe and our most popularly traded indices include the UK 100, Germany 30, US S&P, Wall Street, Japan 225 and Australia 200.</p>
 
         <p>We also run a number of our indices markets outside their normal underlying trading hours, thus enabling you to trade these indices 24 hours a day. Spreads may vary according to the underlying market spread, market conditions and liquidity.</p>
+
+        <div id="switcher_wrap"><div id="switcher"></div></div>
 
     </div>
     
@@ -159,7 +180,7 @@
                 </fieldset>
             </div>
             <div class="ui-ciapi-authentication-buttonpane ui-widget-content ui-helper-clearfix ui-corner-bottom">
-                <button class="ui-ciapi-authentication-button" data-bind="click: doLogOn">Log on</button>
+                <button class="ui-ciapi-authentication-button" data-bind="click: doLogOn">Log In</button>
             </div>
         </div>
         <div class="ui-ciapi-logoff-view  ui-corner-all" data-bind="visible: activeView() === 'LogOff'">
@@ -167,7 +188,7 @@
                 <p>You are logged in as <span data-bind="text: username"/></p>
             </div>
             <div class="ui-ciapi-authentication-buttonpane ui-widget-content ui-helper-clearfix">
-                <button class="ui-ciapi-authentication-button" data-bind="click: doLogOff">Log off</button>
+                <button class="ui-ciapi-authentication-button" data-bind="click: doLogOff">Log Out</button>
             </div>
         </div>
     </div>

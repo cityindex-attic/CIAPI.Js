@@ -87,7 +87,11 @@
 
             this.element.css('width', this.options.width);
 
-            this.element.find(".ui-ciapi-authentication-button").button();
+            this.element.find(".ui-ciapi-authentication-button").button({
+                icons: {
+                    primary: "ui-icon-circle-triangle-e"
+                }
+            });
 
             this._update();
         },

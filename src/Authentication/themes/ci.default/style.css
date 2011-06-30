@@ -11,13 +11,12 @@ body {
     height: 400px;
 }
 
-.logo {
-    width: 600px;
-}
+
 
 .header-right {
     float: right;
 }
+
 
 .content-sidebar {
     width: 960px;
