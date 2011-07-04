@@ -1,45 +1,82 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <ProjectGuid>{703FAA6A-1456-43EC-8275-C74E2FB53FAD}</ProjectGuid>
+    <ProjectGuid>{6662A89B-4123-42D7-A916-B82B42E3F7FE}</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="build.project.xml" />
+    <Content Include="chart.html" />
     <Content Include="css\handheld.css" />
     <Content Include="css\style.css" />
     <Content Include="images\Schrodinger-Lolcat.jpg" />
     <Content Include="images\Schrodinger-Lolcat.png" />
     <Content Include="images\widget-content-bg.png" />
-    <Content Include="js\libs\dd_belatedpng.js" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-bg_flat_30_cccccc_40x100.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-bg_flat_50_5c5c5c_40x100.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-bg_glass_40_ffc73d_1x400.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-bg_highlight-hard_20_0972a5_1x100.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-bg_highlight-soft_33_003147_1x100.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-bg_highlight-soft_35_222222_1x100.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-bg_highlight-soft_44_444444_1x100.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-bg_highlight-soft_80_eeeeee_1x100.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-bg_loop_25_000000_21x21.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-icons_222222_256x240.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-icons_4b8e0b_256x240.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-icons_a83300_256x240.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-icons_cccccc_256x240.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\css\dark-hive\jquery-ui-1.8.11.custom.css" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\index.html" />
-    <Content Include="js\libs\jquery-ui-1.8.11.custom\js\jquery-ui-1.8.11.custom.min.js" />
+    <Content Include="js\libs\jqplot\excanvas.js" />
+    <Content Include="js\libs\jqplot\excanvas.min.js" />
+    <Content Include="js\libs\jqplot\jquery.jqplot.css" />
+    <Content Include="js\libs\jqplot\jquery.jqplot.js" />
+    <Content Include="js\libs\jqplot\jquery.jqplot.min.css" />
+    <Content Include="js\libs\jqplot\jquery.jqplot.min.js" />
+    <Content Include="js\libs\jqplot\MIT-LICENSE.txt" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.barRenderer.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.barRenderer.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.BezierCurveRenderer.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.BezierCurveRenderer.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.blockRenderer.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.blockRenderer.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.bubbleRenderer.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.bubbleRenderer.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.canvasAxisLabelRenderer.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.canvasAxisLabelRenderer.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.canvasAxisTickRenderer.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.canvasAxisTickRenderer.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.canvasOverlay.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.canvasOverlay.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.canvasTextRenderer.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.canvasTextRenderer.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.categoryAxisRenderer.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.categoryAxisRenderer.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.ciParser.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.ciParser.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.cursor.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.cursor.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.dateAxisRenderer.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.dateAxisRenderer.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.donutRenderer.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.donutRenderer.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.dragable.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.dragable.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.enhancedLegendRenderer.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.enhancedLegendRenderer.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.funnelRenderer.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.funnelRenderer.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.highlighter.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.highlighter.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.json2.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.json2.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.logAxisRenderer.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.logAxisRenderer.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.mekkoAxisRenderer.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.mekkoAxisRenderer.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.mekkoRenderer.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.mekkoRenderer.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.meterGaugeRenderer.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.meterGaugeRenderer.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.ohlcRenderer.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.ohlcRenderer.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.pieRenderer.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.pieRenderer.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.pointLabels.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.pointLabels.min.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.trendline.js" />
+    <Content Include="js\libs\jqplot\plugins\jqplot.trendline.min.js" />
     <Content Include="js\libs\jquery.sparkline.min.js" />
-    <Content Include="js\libs\jquery.tmpl.js" />
-    <Content Include="js\libs\knockout-1.2.0.debug.js" />
-    <Content Include="js\libs\knockout-1.2.0.js" />
-    <Content Include="js\libs\knockout.mapping-latest.debug.js" />
-    <Content Include="js\libs\knockout.mapping-latest.js" />
-    <Content Include="js\libs\modernizr-1.7.min.js" />
     <Content Include="js\chart.js" />
+    <Content Include="Run_AcceptanceTests.html" />
+    <Content Include="Run_UnitTests.html" />
+    <Content Include="test\DoNothingTest.js" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="test\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="build.project.properties" />
     <None Include="JsTestDriver.conf" />

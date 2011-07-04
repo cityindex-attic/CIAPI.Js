@@ -11,8 +11,6 @@
     <Content Include="js\mylibs\b.knockout.mapping-1.0pre.min.js" />
     <Content Include="js\mylibs\b.knockout.mapping-latest.debug.js" />
     <Content Include="test\CIAPI.UnitTests.js" />
-    <Content Include="test\Run_AcceptanceTests.html" />
-    <Content Include="test\Run_UnitTests.html" />
     <Content Include="test\CIAPI.AcceptanceTests.js" />
   </ItemGroup>
   <ItemGroup>

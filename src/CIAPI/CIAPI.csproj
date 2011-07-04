@@ -12,6 +12,7 @@
     <Content Include="js\a.CIAPI.dto.ListCfdMarketsResponseDTO.js" />
     <Content Include="js\a.CIAPI.dto.PriceBarDTO.js" />
     <Content Include="js\a.CIAPI.dto.PriceDTO.js" />
+    <Content Include="js\CIAPI.a.pubsub.js" />
     <Content Include="js\CIAPI.amplify.requests.js" />
     <Content Include="js\CIAPI.connect.js" />
     <Content Include="js\CIAPI.dojo.js" />
@@ -24,14 +25,15 @@
     <Content Include="js\mylibs\amplify.min.js" />
     <Content Include="js\mylibs\underscore.debug.js" />
     <Content Include="js\mylibs\underscore.min.js" />
+    <Content Include="Run_AcceptanceTests.html" />
+    <Content Include="Run_UnitTests.html" />
     <Content Include="test\CIAPI.amplify.requests.mock.js" />
     <Content Include="test\CIAPI.connect.UnitTests.js" />
+    <Content Include="test\CIAPI.pubsub.UnitTests.js" />
     <Content Include="test\CIAPI.services.UnitTests.js" />
     <Content Include="test\CIAPI.streams.UnitTests.js" />
     <Content Include="test\CIAPI.UnitTests.js" />
     <Content Include="test\dto.PriceBar.UnitTests.js" />
-    <Content Include="test\Run_AcceptanceTests.html" />
-    <Content Include="test\Run_UnitTests.html" />
     <Content Include="test\CIAPI.AcceptanceTests.js" />
   </ItemGroup>
   <ItemGroup>

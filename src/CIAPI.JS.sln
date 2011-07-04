@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CIAPI.Widget", "CIAPI.widge
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication", "Authentication\Authentication.csproj", "{157F90A6-B9FA-4EC5-9182-F15C1C78B09D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart", "Chart\Chart.csproj", "{6662A89B-4123-42D7-A916-B82B42E3F7FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,16 @@ Global
 		{157F90A6-B9FA-4EC5-9182-F15C1C78B09D}.Release|Mixed Platforms.Build.0 = Debug|x86
 		{157F90A6-B9FA-4EC5-9182-F15C1C78B09D}.Release|x86.ActiveCfg = Debug|x86
 		{157F90A6-B9FA-4EC5-9182-F15C1C78B09D}.Release|x86.Build.0 = Debug|x86
+		{6662A89B-4123-42D7-A916-B82B42E3F7FE}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{6662A89B-4123-42D7-A916-B82B42E3F7FE}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{6662A89B-4123-42D7-A916-B82B42E3F7FE}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{6662A89B-4123-42D7-A916-B82B42E3F7FE}.Debug|x86.ActiveCfg = Debug|x86
+		{6662A89B-4123-42D7-A916-B82B42E3F7FE}.Debug|x86.Build.0 = Debug|x86
+		{6662A89B-4123-42D7-A916-B82B42E3F7FE}.Release|Any CPU.ActiveCfg = Debug|x86
+		{6662A89B-4123-42D7-A916-B82B42E3F7FE}.Release|Mixed Platforms.ActiveCfg = Debug|x86
+		{6662A89B-4123-42D7-A916-B82B42E3F7FE}.Release|Mixed Platforms.Build.0 = Debug|x86
+		{6662A89B-4123-42D7-A916-B82B42E3F7FE}.Release|x86.ActiveCfg = Debug|x86
+		{6662A89B-4123-42D7-A916-B82B42E3F7FE}.Release|x86.Build.0 = Debug|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
