@@ -605,12 +605,17 @@
 	
 	<target name="-html" depends="-load-build-info" description="(PRIVATE) Very basic clean up of the HTML">
 		<echo message="Clean up the html..."/>
-		<!-- style.css replacement handled as a replacetoken above -->
+		<!--[! use comments like this one to avoid having them get minified -->
+        <echo>Replacing script references between &lt;!-- scripts concatenated ... &lt;!-- end scripts--&gt; with reference to ${dir.js}/${scripts.filename}.min.js</echo>
 		<replaceregexp match="&lt;!-- scripts concatenated [\d\w\s\W]*?!-- end ((scripts)|(concatenated and minified scripts))--&gt;"
-                       replace="&lt;script src='${dir.js}/${scripts.filename}.min.js\'&gt;&lt;/script&gt;" flags="m">
+                       replace="&lt;script src='${dir.js}/${scripts.filename}.min.js'&gt;&lt;/script&gt;" flags="m">
 			<fileset dir="./${dir.publish}" includes="${page-files}"/>
 		</replaceregexp>
-		<!--[! use comments like this one to avoid having them get minified -->
+		<echo>Replacing CSS references between &lt;!-- css concatenated ... &lt;!-- end css--&gt; with reference to ${dir.css}/${css.filename}.min.css</echo>
+        <replaceregexp match="&lt;!-- css concatenated [\d\w\s\W]*?!-- end ((css)|(concatenated and minified css))--&gt;"
+                       replace="&lt;link type='text/css' href='${dir.css}/${css.filename}.min.css' rel='Stylesheet'/&gt;" flags="m">
+			<fileset dir="./${dir.publish}" includes="${page-files}"/>
+		</replaceregexp>
 	</target>
 	
 	
@@ -685,10 +690,9 @@
 			<arg path="./${dir.build.tools}/${tool.yuicompressor}"/>
 			<srcfile/>
 		<redirector>
-			<outputmapper type="glob" from="all_styles.css" to="./${dir.publish}/${dir.css}/style.min.css"/>
+			<outputmapper type="glob" from="all_styles.css" to="./${dir.publish}/${dir.css}/${css.filename}.min.css"/>
 		</redirector>
 		</apply>
-		<replace token="style.css" value="style.min.css" dir="${dir.publish}" includes="${page-files}"/>
 	</target>
         <target name="-check-css-exists" unless="css.folder.exists">
 		    <!--<echo message="Checking if folder &quot;./${dir.publish}/${dir.css}/&quot; exists" />-->

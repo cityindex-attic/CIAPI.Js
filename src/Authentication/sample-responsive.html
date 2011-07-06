@@ -1,19 +1,22 @@
 <!doctype html>
 <html>
 
-	<head>
-		<meta charset="utf-8"/>
-		<title></title>
-		<!--[if lt IE 9]>
-			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+    <title>Sample responsive design page</title>
 
     <!--[! We expect these to already be loaded in the "deployment" page -->
     <script type="text/javascript" src="/publish/libs/jquery/1.5.1/jQuery.debug.js"></script>
     <script type="text/javascript" src="/publish/libs/jquery.tmpl.min.js"></script>
     <script type="text/javascript" src="/publish/libs/json2.js"></script>
     <script type="text/javascript" src="/publish/libs/jquery-ui/1.8.11/js/jquery-ui.min.js"></script>
-    <!--<link type="text/css" href="../../libs/jquery-ui/1.8.11/css/dark-hive/jquery-ui-1.8.11.custom.css" rel="Stylesheet"/>-->
+    <!--[if lt IE 9]>
+    <script src="/publish/libs/html5shim.js"></script>
+    <![endif]-->
+    <link type="text/css" href="/publish/libs/themes/ci.default/ci.default.css" rel="Stylesheet"/>
+    <link rel="stylesheet" media="all" href="/publish/libs/layouts/responsive/responsive.layout.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
 
     <!--[! These are shared by all CIAPI widgets -->
     <script src="/publish/CIAPI/js/CIAPI.debug.js"></script>
@@ -24,137 +27,151 @@
     <!--[!  CC735158 / password are valid mock credentials -->
 
     <!--[! This is for CIAPI.authentication widget -->
+    <!-- css concatenated and minified via ant build script-->
+    <link type="text/css" href="css/authentication.css" rel="Stylesheet"/>
+    <!-- end css-->
     <!-- scripts concatenated and minified via ant build script-->
     <script src="js/authentication.js"></script>
     <!-- end scripts-->
 
-    <link type="text/css" href="themes/ci.default/ci.default.css" rel="Stylesheet"/>
-    <link type="text/css" href="themes/ci.default/style.css" rel="Stylesheet"/>
+</head>
 
-        
-		<link rel="stylesheet" media="all" href="/src/Authentication/css/responsive.style.css"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
-	</head>
+<body lang="en">
+<!--[! Themeswitcher tool -->
 
-	<body lang="en">
-    <!--[! Themeswitcher tool -->
-
-    <script type="text/javascript" src="/publish/libs/jquery-ui/Super-Theme-Switcher/jquery.themeswitcher.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#switcher').themeswitcher({
-                imgpath: "/publish/libs/jquery-ui/Super-Theme-Switcher/images/",
-                additionalThemes: [
-                    { title: "City Index", name: "ci.default", icon: "???", url: "themes/ci.default/ci.default.css" }
-                ]
-            });
-
-            $('.ui-ciapi-button').button({
-                icons: {
-                    primary: "ui-icon-circle-triangle-e"
-                }
-            });
-
-            $('.ui-ciapi-button-yellow').button({
-                icons: {
-                    primary: "ui-icon-circle-triangle-e"
-                }
-            });
-            
+<script type="text/javascript" src="/publish/libs/jquery-ui/Super-Theme-Switcher/jquery.themeswitcher.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#switcher').themeswitcher({
+            imgpath: "/publish/libs/jquery-ui/Super-Theme-Switcher/images/",
+            additionalThemes: [
+                { title: "City Index", name: "ci.default",
+                  icon: "theme_90_cityindex.png", url: "/publish/libs/themes/ci.default/ci.default.css" }
+            ]
         });
-    </script>
-    
-    <header>
-        <nav class="nav-feature">
-            <ul>
-                <li><a href="#" class="ui-ciapi-button">log In</a></li>
-                <li><a href="#" class="ui-ciapi-button-yellow">Apply Now</a></li>
-                <li class="rsp-toggle-hide rsp-fl-r"><a href="#">Contact Us</a></li>
-            </ul>
 
-        </nav>
+        $('.ui-ciapi-button').button({
+            icons: {
+                primary: "ui-icon-circle-triangle-e"
+            }
+        });
 
-        <div class="logo">
-            <h1 class="title"><a href="#">CI Responsive Design</a></h1>
-            <p class="tagline">Content view across multiple devices</p>
-        </div>
+        $('.ui-ciapi-button-yellow').button({
+            icons: {
+                primary: "ui-icon-circle-triangle-e"
+            }
+        });
 
-        <nav class="nav-primary">
-            <ul>
-                <li><a href="#">Spread Betting</a></li>
-                <li><a href="#">CFD Trading</a></li>
-                <li><a href="#">Range of Markets</a></li>
-                <li><a href="#">Trading Platform</a></li>
-                <li class="active"><a href="#">Learn to Trade</a></li>
-                <li><a href="#">Market Analysis</a></li>
-                <li class="rsp-toggle-hide"><a href="#">Contact Us</a></li>
-            </ul>
-        </nav>
-    </header>
+    });
+</script>
 
-    <aside class="authentication">
-        <div id="CustomAuthenticationWidget2"></div>
-    </aside>
-    
-    <div class="featured">
-        <h3>Trade Major Indices</h3>
-        <p>Spread bet and trade CFDs on major indices from just 1 point &raquo; FTSE 100 &raquo; Wall Street &raquo; DAX 30 &raquo; CAC 40</p>
-        <a href="#" class="ui-ciapi-button">Find out more</a>
-    </div>
-    
-    <div class="content">
-        <h3>Indices Trading</h3>
-
-        <p>We offer some of the tightest spreads on our indices markets, including 1-point on the 4 major indices – UK 100, Wall Street, Germany 30 and France 40 – during market hours.</p>
-
-        <p>Indices are the most widely traded markets in the world, with indices such as the UK 100 being one of the most popular among new traders. With your City Index account you can spread bet on a majority of the major indices across the globe and our most popularly traded indices include the UK 100, Germany 30, US S&P, Wall Street, Japan 225 and Australia 200.</p>
-
-        <p>We also run a number of our indices markets outside their normal underlying trading hours, thus enabling you to trade these indices 24 hours a day. Spreads may vary according to the underlying market spread, market conditions and liquidity.</p>
-
-        <div id="switcher_wrap"><div id="switcher"></div></div>
-
-    </div>
-    
-    <aside class="sidebar">
-        <h3>Why choose CityIndex</h3>
-        <p>One of the leading providers of spread betting and CFD trading in the UK, City Index has over 25 years’ experience in the industry.</p>
+<header>
+    <nav class="nav-feature">
         <ul>
-            <li>Thousands of global markets</li>
-            <li>Tight spread from 1 point</li>
-            <li>Low margins from 1%</li>
-            <li>Spread betting & CFD trading from one platform</li>
-            <p><a href="#" class="ui-ciapi-button">Apply now</a></p>
-        </ul>
-        
-    </aside>
-    
-    <footer>
-        <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Help & Support</a></li>
-            <li><a href="#">City Index Global Partnerships</a></li>
-            <li><a href="#">Terms and Policies</a></li>
-            <li><a href="#">Press Area</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">Glossary</a></li>
-            <li><a href="#">Site Map</a></li>
+            <li><a href="#" class="ui-ciapi-button">log In</a></li>
+            <li><a href="#" class="ui-ciapi-button-yellow">Apply Now</a></li>
+            <li class="rsp-toggle-hide rsp-fl-r"><a href="#">Contact Us</a></li>
         </ul>
 
-        <p>Spread betting and CFD trading are leveraged products which can result in losses greater than your initial deposit. Ensure you fully understand the risks.</p>
-        <p>*Spread betting and CFD trading are exempt from UK stamp duty. Spread betting is also exempt from UK Capital Gains Tax. However, tax laws are subject to change and depend on individual circumstances. Please seek independent advice if necessary.</p>
-        
-    </footer>
+    </nav>
+
+    <div class="logo">
+        <h1 class="title"><a href="#">CI Responsive Design</a></h1>
+
+        <p class="tagline">Content view across multiple devices</p>
+    </div>
+
+    <nav class="nav-primary">
+        <ul>
+            <li><a href="#">Spread Betting</a></li>
+            <li><a href="#">CFD Trading</a></li>
+            <li><a href="#">Range of Markets</a></li>
+            <li><a href="#">Trading Platform</a></li>
+            <li class="active"><a href="#">Learn to Trade</a></li>
+            <li><a href="#">Market Analysis</a></li>
+            <li class="rsp-toggle-hide"><a href="#">Contact Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<aside class="authentication">
+    <div id="CustomAuthenticationWidget2"></div>
+</aside>
+
+<div class="featured">
+    <h3>Trade Major Indices</h3>
+
+    <p>Spread bet and trade CFDs on major indices from just 1 point &raquo; FTSE 100 &raquo; Wall Street &raquo; DAX
+        30 &raquo; CAC 40</p>
+    <a href="#" class="ui-ciapi-button">Find out more</a>
+</div>
+
+<div class="content">
+    <h3>Indices Trading</h3>
+
+    <p>We offer some of the tightest spreads on our indices markets, including 1-point on the 4 major indices – UK 100,
+        Wall Street, Germany 30 and France 40 – during market hours.</p>
+
+    <p>Indices are the most widely traded markets in the world, with indices such as the UK 100 being one of the most
+        popular among new traders. With your City Index account you can spread bet on a majority of the major indices
+        across the globe and our most popularly traded indices include the UK 100, Germany 30, US S&P, Wall Street,
+        Japan 225 and Australia 200.</p>
+
+    <p>We also run a number of our indices markets outside their normal underlying trading hours, thus enabling you to
+        trade these indices 24 hours a day. Spreads may vary according to the underlying market spread, market
+        conditions and liquidity.</p>
+
+    <div id="switcher_wrap">
+        <div id="switcher"></div>
+    </div>
+
+</div>
+
+<aside class="sidebar">
+    <h3>Why choose CityIndex</h3>
+
+    <p>One of the leading providers of spread betting and CFD trading in the UK, City Index has over 25 years’
+        experience in the industry.</p>
+    <ul>
+        <li>Thousands of global markets</li>
+        <li>Tight spread from 1 point</li>
+        <li>Low margins from 1%</li>
+        <li>Spread betting & CFD trading from one platform</li>
+        <p><a href="#" class="ui-ciapi-button">Apply now</a></p>
+    </ul>
+
+</aside>
+
+<footer>
+    <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Help & Support</a></li>
+        <li><a href="#">City Index Global Partnerships</a></li>
+        <li><a href="#">Terms and Policies</a></li>
+        <li><a href="#">Press Area</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Glossary</a></li>
+        <li><a href="#">Site Map</a></li>
+    </ul>
+
+    <p>Spread betting and CFD trading are leveraged products which can result in losses greater than your initial
+        deposit. Ensure you fully understand the risks.</p>
+
+    <p>*Spread betting and CFD trading are exempt from UK stamp duty. Spread betting is also exempt from UK Capital
+        Gains Tax. However, tax laws are subject to change and depend on individual circumstances. Please seek
+        independent advice if necessary.</p>
+
+</footer>
 
 <script>
     $(document).ready(function () {
         $("#customAuthWidgetTemplate").template("customAuthWidgetTemplate"); //compile & name the template
 
         $('#CustomAuthenticationWidget2').CIAPI_widget_AuthenticationWidget(
-        {
-            template: 'customAuthWidgetTemplate', //override the default template
-            width: 'auto'
-        });
+                {
+                    template: 'customAuthWidgetTemplate', //override the default template
+                    width: 'auto'
+                });
 
 
     });
@@ -166,18 +183,20 @@
                 <p class="ui-state-error" data-bind="text: errorMessage, visible: errorMessage().length > 0"></p>
                 <fieldset>
                     <label for="username">UserName</label>
+
                     <div class="ui-ciapi-authentication-input ui-corner-all ui-widget-content">
                         <input type="text"
-                           name="username"
-                           id="username"
-                           data-bind="value: username"/>
+                               name="username"
+                               id="username"
+                               data-bind="value: username"/>
                     </div>
                     <label for="password">Password</label>
+
                     <div class="ui-ciapi-authentication-input ui-corner-all ui-widget-content">
                         <input type="password"
-                           name="password"
-                           id="password"
-                           data-bind="value: password"/>
+                               name="password"
+                               id="password"
+                               data-bind="value: password"/>
                     </div>
 
                 </fieldset>
@@ -197,6 +216,6 @@
     </div>
 </script>
 
-	</body>
+</body>
 
 </html>
