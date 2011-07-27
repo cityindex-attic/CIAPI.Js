@@ -63,8 +63,8 @@ describe("CIAPI.connect unit tests", function () {
         });
 
         runs(function () {
-            expect(document.cookie).toContain("UserName=CC735158;");
-            expect(document.cookie + ';').toContain("Session=%7Bef4923-mock-session-token-fe552%7D;");
+            expect(document.cookie).toContain("UserName=CC735158");
+            expect(document.cookie + ';').toContain("Session=%7Bef4923-mock-session-token-fe552%7D");
             CIAPI.disconnect();
         });
 
@@ -73,7 +73,7 @@ describe("CIAPI.connect unit tests", function () {
         });
 
         runs(function () {
-            expect(document.cookie).toMatch("UserName=?;");
+            expect(document.cookie).toMatch("(UserName=?;|UserName=$)");
             expect(document.cookie + ';').toMatch("Session=?;");
 
             expect(CIAPI.connection.UserName).toBeFalsy();
