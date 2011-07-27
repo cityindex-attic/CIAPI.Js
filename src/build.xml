@@ -3,15 +3,30 @@
 
     <property file="${basedir}/build.properties"/>
 
+    <!-- create a ordered list of all the build files so that CIAPI & CIAPI.widget are built first
+        (can't find a smarter way to do this, since ant filesets are unordered) -->
+    <fileset id="a" dir="."><include name="CIAPI/build.project.xml"/></fileset>
+    <fileset id="b" dir="."><include name="CIAPI.widget/build.project.xml"/></fileset>
+    <fileset id="c" dir=".">
+        <include name="**/build.project.xml"/>
+        <exclude name="CIAPI/build.project.xml" />
+        <exclude name="CIAPI.widget/build.project.xml" />
+    </fileset>
+    <union id="all_build_files">
+        <fileset refid="a"/>
+        <fileset refid="b"/>
+        <fileset refid="c"/>
+    </union>
+
     <target name="build">
         <subant target="build">
-            <fileset dir="." includes="**/build.project.xml"/>
+            <union refid="all_build_files" />
         </subant>
     </target>
 
     <target name="basics">
         <subant target="basics">
-            <fileset dir="." includes="**/build.project.xml"/>
+            <union refid="all_build_files" />
         </subant>
     </target>
 
