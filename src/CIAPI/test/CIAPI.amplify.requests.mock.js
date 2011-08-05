@@ -39,14 +39,27 @@ var mockData = {
    }, 1000);
 
    amplify.request.define( "createSession", function(settings) {
-       console.log("Mocking response for CreateSession request", settings.data); 
-       var matchingUsers = _(mockData.Users).filter(function(user) {
-            return user.UserName === settings.data.UserName && user.Password === settings.data.Password;
-       });
-       if (matchingUsers.length > 0) {
-           settings.success(new CIAPI.dto.CreateSessionResponseDTO(matchingUsers[0].Session));
-       } else {
-           settings.error(new CIAPI.dto.ApiErrorResponseDTO(401, 4010, "The credentials used to authenticate are invalid. Either the username, password or both are incorrect."));
+       console.log("Mocking response for CreateSession request", settings.data);
+
+       if (settings.data.UserName === "causeError-timeout")  {
+          console.log("mocking error 503 - pretending no response is received from the server", settings.data);
+          settings.error(new CIAPI.dto.ApiErrorResponseDTO(503, 503, "Server timeout"));
+       }
+       else
+       if (settings.data.UserName === "causeError-500")  {
+          console.log("mocking error 500", settings.data);
+          settings.error(new CIAPI.dto.ApiErrorResponseDTO(500, 500, "Server error"));
+       }
+       else
+       {
+           var matchingUsers = _(mockData.Users).filter(function(user) {
+                return user.UserName === settings.data.UserName && user.Password === settings.data.Password;
+           });
+           if (matchingUsers.length > 0) {
+               settings.success(new CIAPI.dto.CreateSessionResponseDTO(matchingUsers[0].Session));
+           } else {
+               settings.error(new CIAPI.dto.ApiErrorResponseDTO(401, 4010, "The credentials used to authenticate are invalid. Either the username, password or both are incorrect."));
+           }
        }
    });
 

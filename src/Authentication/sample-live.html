@@ -1,0 +1,72 @@
+<!doctype html>
+<head>
+    <title>Authentication demo</title>
+
+    <!--[! We expect these to already be loaded in the "deployment" page -->
+    <script type="text/javascript" src="/publish/libs/jquery/1.5.1/jQuery.debug.js"></script>
+    <script type="text/javascript" src="/publish/libs/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="/publish/libs/json2.js"></script>
+    <script type="text/javascript" src="/publish/libs/jquery-ui/1.8.11/js/jquery-ui.min.js"></script>
+
+    <link type="text/css" href="/publish/libs/themes/ci.default/ci.default.css" rel="Stylesheet"/>
+    <link type="text/css" href="/publish/libs/layouts/simple/simple_layout.css" rel="Stylesheet"/>
+
+    <!--[! These are shared by all CIAPI widgets -->
+    <script src="/publish/CIAPI/js/CIAPI.debug.js"></script>
+    <script src="/publish/CIAPI.widget/js/CIAPI.widget.debug.js"></script>
+
+    <!--[! Enable mock data -->
+    <!--[! This is for CIAPI.authentication widget -->
+    <!-- css concatenated and minified via ant build script-->
+    <link type="text/css" href="css/authentication.css" rel="Stylesheet"/>
+    <!-- end css-->
+    <!-- scripts concatenated and minified via ant build script-->
+    <script src="js/authentication.js"></script>
+    <!-- end scripts-->
+
+</head>
+<body>
+    <!--[! Themeswitcher tool -->
+    <div id="switcher" style="float:right"></div>
+    <script type="text/javascript" src="/publish/libs/jquery-ui/Super-Theme-Switcher/jquery.themeswitcher.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#switcher').themeswitcher({
+                imgpath: "/publish/libs/jquery-ui/Super-Theme-Switcher/images/",
+                additionalThemes: [
+                { title: "City Index", name: "ci.default",
+                  icon: "theme_90_cityindex.png", url: "/publish/libs/themes/ci.default/ci.default.css" }
+                    ]
+            });
+        });
+    </script>
+
+<script>
+    CIAPI.connection.ServiceUri = "https://ciapipreprod.cityindextest9.co.uk/TradingApi/";
+</script>
+
+<div class="wrapper">
+    <div id="AuthenticationWidget"></div>
+
+    <div style="margin: 25px; padding:25px; border: 1px solid black; background-color: #e4e4e4 ">
+        ServiceUri: <input type="text" id="ServiceUri" style="width:400px">
+        <ul>
+            <li>PPE: (DM317436 / password ) - https://ciapipreprod.cityindextest9.co.uk/TradingApi/</li>
+            <li>LIVE: (???) - https://ciapi.cityindex.com/TradingApi/</li>
+        </ul>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#AuthenticationWidget').CIAPI_widget_AuthenticationWidget({width:300});
+        $('#ServiceUri').val(CIAPI.connection.ServiceUri);
+        $('#ServiceUri').bind('change', function() {
+           CIAPI.connection.ServiceUri = $(this).val();
+        })
+    });
+</script>
+
+</body>
+</html>

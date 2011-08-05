@@ -25,7 +25,7 @@ CIAPI.connect = function(connectionOptions) {
         error: function() {}
    });
 
-   amplify.request( {
+   var createSessionRequest = amplify.request( {
            resourceId: "createSession",
            data:  {
                       ServiceUri: connectionOptions.ServiceUri,
@@ -59,6 +59,9 @@ CIAPI.connect = function(connectionOptions) {
 CIAPI.disconnect = function(options) {
    options = options || {};
    _(options).defaults({
+        UserName: CIAPI.connection.UserName,
+        Session: CIAPI.connection.Session,
+        ServiceUri: CIAPI.connection.ServiceUri,
         success: function () {},
         error: function() {}
    });
