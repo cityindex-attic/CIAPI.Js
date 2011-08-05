@@ -1,4 +1,4 @@
-#Ignore everything in publish/ except punlish/libs
+#Ignore everything in publish/ except publish/libs
 publish/*
 !publish/libs/
 
@@ -80,3 +80,7 @@ hudson-s3-plugin
 /scratchpad/
 /src/Authentication/js/libs/
 /src/OpenPositions/js/libs/
+
+# Ignore experimental tools
+tools/selenium-2.0rc3/
+tools/CodeGeneration/
