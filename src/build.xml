@@ -47,6 +47,7 @@
             <fileset dir="./CIAPI/target">
                 <include name="js/CIAPI.min.js"/>
                 <include name="js/CIAPI.debug.js"/>
+                <include name="js/libs/**/*"/>
                 <include name="test/**/*"/>
                 <include name="*.html"/>
             </fileset>

@@ -3,7 +3,7 @@
     <title>Authentication demo</title>
 
     <!--[! We expect these to already be loaded in the "deployment" page -->
-    <script type="text/javascript" src="/publish/libs/jquery/1.5.1/jQuery.debug.js"></script>
+    <script type="text/javascript" src="/publish/libs/jquery/1.6.1/jQuery.debug.js"></script>
     <script type="text/javascript" src="/publish/libs/jquery.tmpl.min.js"></script>
     <script type="text/javascript" src="/publish/libs/json2.js"></script>
     <script type="text/javascript" src="/publish/libs/jquery-ui/1.8.11/js/jquery-ui.min.js"></script>
@@ -12,8 +12,10 @@
     <link type="text/css" href="/publish/libs/layouts/simple/simple_layout.css" rel="Stylesheet"/>
 
     <!--[! These are shared by all CIAPI widgets -->
-    <script src="/publish/CIAPI/js/CIAPI.debug.js"></script>
-    <script src="/publish/CIAPI.widget/js/CIAPI.widget.debug.js"></script>
+    <script >var flensed={base_path:"/publish/Authentication/js/libs/libs/flXHR-1.0.6/"};</script>
+    <script src="/publish/Authentication/js/libs/libs/flXHR-1.0.6/flXHR.js"></script>
+    <script src="/publish/Authentication/js/libs/CIAPI.debug.js"></script>
+    <script src="/publish/Authentication/js/libs/CIAPI.widget.debug.js"></script>
 
     <!--[! Enable mock data -->
     <!--[! This is for CIAPI.authentication widget -->
