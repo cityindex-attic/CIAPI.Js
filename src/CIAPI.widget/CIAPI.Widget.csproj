@@ -10,6 +10,8 @@
     <Content Include="js\mylibs\a.knockout-1.2.0.min.js" />
     <Content Include="js\mylibs\b.knockout.mapping-1.0pre.min.js" />
     <Content Include="js\mylibs\b.knockout.mapping-latest.debug.js" />
+    <Content Include="js\mylibs\c.jquery.validate.debug.js" />
+    <Content Include="js\mylibs\c.jquery.validate.min.js" />
     <Content Include="test\CIAPI.UnitTests.js" />
     <Content Include="test\CIAPI.AcceptanceTests.js" />
   </ItemGroup>

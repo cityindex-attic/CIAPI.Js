@@ -19,8 +19,10 @@
     <!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
 
     <!--[! These are shared by all CIAPI widgets -->
-    <script src="/publish/CIAPI/js/CIAPI.debug.js"></script>
-    <script src="/publish/CIAPI.widget/js/CIAPI.widget.debug.js"></script>
+    <script>var flensed = { base_path: "/publish/libs/flXHR-1.0.6/" };</script>
+    <script src="/publish/libs/flXHR-1.0.6/flXHR.js"></script>
+    <script src="/publish/Authentication/js/libs/CIAPI.debug.js"></script>
+    <script src="/publish/Authentication/js/libs/CIAPI.widget.debug.js"></script>
 
     <!--[! Enable mock data -->
     <script src="/publish/CIAPI/test/CIAPI.amplify.requests.mock.js"></script>

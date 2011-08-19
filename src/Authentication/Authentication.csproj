@@ -6,18 +6,16 @@
   <ItemGroup>
     <Content Include="BasicFunctions_AcceptanceTest.html" />
     <Content Include="build.project.xml" />
-    <Content Include="css\handheld.css" />
     <Content Include="css\images\home_nav_middle.jpg" />
     <Content Include="css\images\logo.png" />
     <Content Include="css\images\nav-bg.png" />
-    <Content Include="css\responsive.style.css" />
-    <Content Include="css\style.css" />
     <Content Include="images\Schrodinger-Lolcat.jpg" />
     <Content Include="images\Schrodinger-Lolcat.png" />
     <Content Include="images\widget-content-bg.png" />
     <Content Include="js\authentication.js" />
     <Content Include="Run_AcceptanceTests.html" />
     <Content Include="Run_UnitTests.html" />
+    <Content Include="sample-live.html" />
     <Content Include="sample-responsive.html" />
     <Content Include="sample.html" />
     <Content Include="test\BasicFunctions.1.SeleniumTest.html" />
@@ -28,22 +26,6 @@
     <Content Include="test\libs\jasmine\jasmine-html.js" />
     <Content Include="test\libs\jasmine\jasmine.css" />
     <Content Include="test\libs\jasmine\jasmine.js" />
-    <Content Include="themes\ci.default\ci.default.css" />
-    <Content Include="themes\ci.default\images\ui-bg_flat_30_cccccc_40x100.png" />
-    <Content Include="themes\ci.default\images\ui-bg_flat_50_5c5c5c_40x100.png" />
-    <Content Include="themes\ci.default\images\ui-bg_glass_40_ffc73d_1x400.png" />
-    <Content Include="themes\ci.default\images\ui-bg_highlight-hard_20_0972a5_1x100.png" />
-    <Content Include="themes\ci.default\images\ui-bg_highlight-soft_33_003147_1x100.png" />
-    <Content Include="themes\ci.default\images\ui-bg_highlight-soft_35_222222_1x100.png" />
-    <Content Include="themes\ci.default\images\ui-bg_highlight-soft_44_444444_1x100.png" />
-    <Content Include="themes\ci.default\images\ui-bg_highlight-soft_80_eeeeee_1x100.png" />
-    <Content Include="themes\ci.default\images\ui-bg_loop_25_000000_21x21.png" />
-    <Content Include="themes\ci.default\images\ui-icons_222222_256x240.png" />
-    <Content Include="themes\ci.default\images\ui-icons_4b8e0b_256x240.png" />
-    <Content Include="themes\ci.default\images\ui-icons_a83300_256x240.png" />
-    <Content Include="themes\ci.default\images\ui-icons_cccccc_256x240.png" />
-    <Content Include="themes\ci.default\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="themes\ci.default\style.css" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
