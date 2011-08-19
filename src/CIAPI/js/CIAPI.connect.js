@@ -42,6 +42,7 @@ CIAPI.connect = function(connectionOptions) {
                 connectionOptions.success(data);
            },
            error: function( data ) {
+                _(data).defaults({ ErrorCode: 0, ErrorMessage: "Unknown", HttpStatus: 0});
                 CIAPI.connection.isConnected = false;
                 CIAPI.connection.Session = "";
                 CIAPI.store("CIAPI.connection", CIAPI.connection);
