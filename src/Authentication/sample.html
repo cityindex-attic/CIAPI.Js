@@ -91,7 +91,8 @@
         $('#CustomAuthenticationWidget2').CIAPI_widget_AuthenticationWidget(
         {
             template: 'customAuthWidgetTemplate', //override the default template
-            width: 600
+            width: 600,
+            shakeOnError: true
         });
 
         $('#CustomAuthenticationWidget3').CIAPI_widget_AuthenticationWidget(
@@ -104,6 +105,7 @@
 <script id="customAuthWidgetTemplate" type="text/x-jquery-tmpl">
     <div class="ui-ciapi-authentication ui-widget ui-widget-content ui-corner-all">
         <div class="ui-ciapi-logon-view  ui-corner-all" data-bind="visible: activeView() === 'LogOn'">
+            <form class="ui-ciapi-authentication-form">
             <div class="ui-ciapi-authentication-content ui-widget-content ui-corner-top">
                 <p class="ui-state-error" data-bind="text: errorMessage, visible: errorMessage().length > 0"></p>
                 <fieldset>
@@ -112,6 +114,7 @@
                         <input type="text"
                            name="username"
                            id="username"
+                           class="required inputFields"  
                            data-bind="value: username"/>
                     </div>
                     <label for="password">Password</label>
@@ -119,10 +122,12 @@
                         <input type="password"
                            name="password"
                            id="password"
+                           class="required inputFields"  
                            data-bind="value: password"/>
                     </div>
 
                 </fieldset>
+            </form>
             </div>
             <div class="ui-ciapi-authentication-buttonpane ui-widget-content ui-helper-clearfix ui-corner-bottom">
                 <button class="ui-ciapi-authentication-button" data-bind="click: doLogOn">Log on</button>

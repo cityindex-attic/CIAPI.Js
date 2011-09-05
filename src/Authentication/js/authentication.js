@@ -2,8 +2,9 @@
     $.widget("ui.CIAPI_widget_AuthenticationWidget", $.ui.CIAPI_widget, {
         options: {
             width: 600,
-            afterLogOn: function (message) { },
-            afterLogOff: function (message) { },
+            afterLogOn: function (CIAPIConnection) { },
+            afterLogOff: function (CIAPIConnection) { },
+            shakeOnError: false,
             template: $.template('defaultAuthWidgetTemplate',                                                                  
                 '<div class="ui-ciapi-authentication ui-widget ui-widget-content ui-corner-all">                               '+
                 '    <div class="ui-ciapi-logon-view  ui-corner-all" data-bind="visible: activeView() === \'LogOn\'">          '+
@@ -105,7 +106,7 @@
             var activeView = CIAPI.connection.isConnected ? 'LogOff' : 'LogOn';
             this.options.viewModel.activeView(activeView);
 
-            if (this.options.viewModel.errorMessage()) {
+            if (this.options.shakeOnError && this.options.viewModel.errorMessage()) {
                 this.element.effect("shake", { times: 2 }, 100);
             }
         }
