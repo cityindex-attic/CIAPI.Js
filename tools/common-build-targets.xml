@@ -458,6 +458,7 @@
       <arg line="-jar"/>
       <arg path="./${dir.build.tools}/${tool.yuicompressor}"/>
       <srcfile/>
+      <arg line="--charset utf-8"/>
       <arg line="--line-break"/>
       <arg line="4000"/>
       <arg line="-o"/>
