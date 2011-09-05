@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <head>
     <title>Authentication demo</title>
 
@@ -63,11 +63,13 @@
     <div class="content-sidebar">
         <div class="content">
             <div id="CustomAuthenticationWidget2"></div>
+
+            <h1>Localization test</h1>
+            <div id="CustomAuthenticationWidget4"></div>
         </div>
         <div class="sidebar">
             <div id="CustomAuthenticationWidget3"></div>
         </div>
-
     </div>
 
 </div>
@@ -75,6 +77,8 @@
 
 <script>
     $(document).ready(function () {
+        $.widget.culture('pl-PL'); //this sets the culture for everything
+
         $("#customAuthWidgetTemplate").template("customAuthWidgetTemplate"); //compile & name the template
         $('#CustomAuthenticationWidget').CIAPI_widget_AuthenticationWidget(
             {
@@ -99,6 +103,11 @@
         {
             template: 'customAuthWidgetTemplate', //override the default template
             width: 300
+        });
+
+        $('#CustomAuthenticationWidget4').CIAPI_widget_AuthenticationWidget(
+        {
+            translations: { "pl-PL": { "error": "Pomyłka"} }
         });
     });
 </script>
