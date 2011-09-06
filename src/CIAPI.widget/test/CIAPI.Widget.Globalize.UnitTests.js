@@ -21,10 +21,10 @@
 
     it("format should set and get the current culture correctly", function () {
         $.widget.culture('en-GB');
-        expect($.widget.getCurrentCulture()).toBe("en-GB");
+        expect($.widget.getCurrentCulture().name).toBe("en-GB");
 
         $.widget.culture('pl-PL');
-        expect($.widget.getCurrentCulture()).toBe("pl-PL");
+        expect($.widget.getCurrentCulture().name).toBe("pl-PL");
 
     });
 

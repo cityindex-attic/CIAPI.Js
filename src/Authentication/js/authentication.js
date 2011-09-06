@@ -16,7 +16,7 @@
                     '<div class="ui-ciapi-authentication-content ui-widget-content ui-corner-top">                         ' +
                 '            <p class="ui-state-error" data-bind="text: errorMessage, visible: errorMessage().length > 0"></p> ' +
                 '            <fieldset>                                                                                        ' +
-                '                <label for="username">UserName</label>                                                        ' +
+                '                <label for="username">${username}</label>                                                        ' +
                 '                <div class="ui-ciapi-authentication-input ui-corner-all ui-widget-content">                   ' +
                 '                    <input type="text"                                                                        ' +
                 '                       name="username"                                                                        ' +
@@ -24,7 +24,7 @@
                 '                       class="required inputFields"                                                                    ' +
                 '                       data-bind="value: username"/>                                                          ' +
                 '                </div>                                                                                        ' +
-                '                <label for="password">Password</label>                                                        ' +
+                '                <label for="password">${password}</label>                                                        ' +
                 '                <div class="ui-ciapi-authentication-input ui-corner-all ui-widget-content">                   ' +
                 '                    <input type="password"                                                                    ' +
                 '                       name="password"                                                                        ' +
@@ -71,7 +71,7 @@
                         error: function (data) {
                             var errorMsg = $.widget.localize('error') + ': ' + $.widget.localize(data.HttpStatus) + ' [' + data.ErrorCode + ']';
                             //Only add full error message text if culture is English
-                            if ($.widget.getCurrentCulture().indexOf('en') != -1) errorMsg += ' - ' + data.ErrorMessage;
+                            if ($.widget.getCurrentCulture().language == 'en') errorMsg += ' - ' + data.ErrorMessage;
                             viewModel.errorMessage(errorMsg);
                             viewModel.widget._update();
                         }
@@ -92,10 +92,13 @@
          //Set sane defaults for translation messages, then initialize the translation messages
             var t = this.options.translations;
             t["en-GB"] = t["en-GB"] || {};
-            _(t["en-GB"]).defaults({ "error": "Error", 401: "(401) Not authorized", 500: "(500) Server error" });
+            _(t["en-GB"]).defaults({ "error": "Error", 401: "(401) Not authorized", 500: "(500) Server error", "username": "UserName", "password": "Password" });
             
             t["pl-PL"] = t["pl-PL"] || {};
-            _(t["pl-PL"]).defaults({"error":"Błąd", 401: "(401) Nie dopuszczony", 500: "(500) Błąd serwera" });
+            _(t["pl-PL"]).defaults({ "error": "Błąd", 401: "(401) Nie dopuszczony", 500: "(500) Błąd serwera", "username": "Użytkownika", "password": "Hasło" });
+
+            t["de-DE"] = t["de-DE"] || {};
+            _(t["de-DE"]).defaults({ "error": "Fehler", 401: "(401) Nicht autorisiert", 500: "(500) Server-Fehler", "username": "Benutzername", "password": "Kennwort" });
 
             _(this.options.translations).each(function (translations_value, culture_key) {
                 $.widget.addCultureInfo(culture_key, { messages: translations_value });
@@ -109,7 +112,7 @@
             //The viewModel needs to be created here rather than defined in options above to prevent cross widget pollution
             this.options.viewModel = this._createViewModel(this);
 
-            $.tmpl(this.options.template, {}).appendTo(this.element);
+            $.tmpl(this.options.template, $.widget.getCurrentCulture().messages).appendTo(this.element);
 
             ko.applyBindings(this.options.viewModel, this.element.get(0));
 

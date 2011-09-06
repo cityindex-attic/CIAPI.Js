@@ -11,6 +11,9 @@
     <link type="text/css" href="/publish/libs/themes/ci.default/ci.default.css" rel="Stylesheet"/>
     <link type="text/css" href="/publish/libs/layouts/simple/simple_layout.css" rel="Stylesheet"/>
 
+    <!--[! For the jQueryUI theme switching -->
+    <script type="text/javascript" src="/publish/libs/jquery-ui/Super-Theme-Switcher/jquery.themeswitcher.min.js"></script>
+
      <!--[! These are shared by all CIAPI widgets -->
     <script>var flensed = { base_path: "/publish/libs/flXHR-1.0.6/" };</script>
     <script src="/publish/libs/flXHR-1.0.6/flXHR.js"></script>
@@ -29,23 +32,27 @@
     <script src="js/authentication.js"></script>
     <!-- end scripts-->
 
+    <style>
+        #controls  
+        {
+            padding:5px;
+            margin-bottom: 15px;
+            border: 1px solid yellow;
+            background-color: lightyellow;
+        }
+    </style>
 </head>
 <body>
-    <!--[! Themeswitcher tool -->
-    <div id="switcher" style="float:right"></div>
-    <script type="text/javascript" src="/publish/libs/jquery-ui/Super-Theme-Switcher/jquery.themeswitcher.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#switcher').themeswitcher({
-                imgpath: "/publish/libs/jquery-ui/Super-Theme-Switcher/images/",
-                additionalThemes: [
-                { title: "City Index", name: "ci.default",
-                  icon: "theme_90_cityindex.png", url: "/publish/libs/themes/ci.default/ci.default.css" }
-                    ]
-            });
-        });
-    </script>
-
+    <div id="controls">
+        <span id="themeSwitcher" style="float:right"></span>
+        <span>
+        Culture: <select id="cultureSwitcher">
+            <option>en-GB</option>
+            <option>pl-PL</option>
+            <option>de-DE</option>
+        </select>
+        </span>
+    </div>
 <script>
     //These default connection options must be set before interacting with CIAPI,
     //unless mock requests are being included above
@@ -54,30 +61,57 @@
 </script>
 
 <div class="wrapper">
-    <div class="header">
-        <div class="logo"></div>
-        <div class="header-right">
-            <div id="CustomAuthenticationWidget"></div>
-        </div>
-    </div>
     <div class="content-sidebar">
         <div class="content">
-            <div id="CustomAuthenticationWidget2"></div>
-
-            <h1>Localization test</h1>
-            <div id="CustomAuthenticationWidget4"></div>
+            <h1>Standard</h1>
+            <div id="StandardAuthenticationWidget" style="border:1px solid black"></div>
+            <h1>Extra options</h1>
+            <div id="ExtraOptionsAuthenticationWidget"></div>
+            <h1>Custom template</h1>
+            <div id="CustomAuthenticationWidget"></div>
         </div>
         <div class="sidebar">
-            <div id="CustomAuthenticationWidget3"></div>
+            Sidebar here?
         </div>
     </div>
-
 </div>
 
 
 <script>
+    function getQueryString(name) {
+        var match = RegExp('[?&]' + name + '=([^&]*)')
+                        .exec(window.location.search);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    }
+
     $(document).ready(function () {
-        $.widget.culture('pl-PL'); //this sets the culture for everything
+        $('#themeSwitcher').themeswitcher({
+            imgpath: "/publish/libs/jquery-ui/Super-Theme-Switcher/images/",
+            additionalThemes: [
+                { title: "City Index", name: "ci.default",
+                    icon: "theme_90_cityindex.png", url: "/publish/libs/themes/ci.default/ci.default.css"
+                }
+               ]
+        });
+        
+        //Set the default widget culture, and trigger a page refresh when it changes
+        var culture = getQueryString("culture") || "en-GB";
+        $.widget.culture(culture);
+
+        $('#cultureSwitcher').val( culture ).attr('selected',true);
+        $('#cultureSwitcher').change(function (evt) {
+            var selectedCulture = $(this).find("option:selected").text();
+            window.location.href = window.location.pathname + "?culture=" + selectedCulture;
+        });
+
+        //Widgets must be rendered after the culture is set
+        $("#StandardAuthenticationWidget").CIAPI_widget_AuthenticationWidget();
+
+        $('#ExtraOptionsAuthenticationWidget').CIAPI_widget_AuthenticationWidget(
+            {
+                width: 300,
+                shakeOnError: true
+            });
 
         $("#customAuthWidgetTemplate").template("customAuthWidgetTemplate"); //compile & name the template
         $('#CustomAuthenticationWidget').CIAPI_widget_AuthenticationWidget(
@@ -91,27 +125,10 @@
                     console.log("afterLogOff for CustomAuthenticationWidget", data);
                 }
             });
-
-        $('#CustomAuthenticationWidget2').CIAPI_widget_AuthenticationWidget(
-        {
-            template: 'customAuthWidgetTemplate', //override the default template
-            width: 600,
-            shakeOnError: true
-        });
-
-        $('#CustomAuthenticationWidget3').CIAPI_widget_AuthenticationWidget(
-        {
-            template: 'customAuthWidgetTemplate', //override the default template
-            width: 300
-        });
-
-        $('#CustomAuthenticationWidget4').CIAPI_widget_AuthenticationWidget(
-        {
-            translations: { "pl-PL": { "error": "Pomyłka"} }
-        });
     });
 </script>
 <script id="customAuthWidgetTemplate" type="text/x-jquery-tmpl">
+    Error:${error}
     <div class="ui-ciapi-authentication ui-widget ui-widget-content ui-corner-all">
         <div class="ui-ciapi-logon-view  ui-corner-all" data-bind="visible: activeView() === 'LogOn'">
             <form class="ui-ciapi-authentication-form">
