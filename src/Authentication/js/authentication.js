@@ -84,7 +84,7 @@
                         UserName: viewModel.username(),
                         Password: viewModel.password(),
                         success: function (data) {
-                            viewModel.widget.options.afterLogOn(CIAPI.connection);
+                            viewModel.widget.options.afterLogOn.call(viewModel.widget, CIAPI.connection);
                             viewModel.errorMessage("");
                             viewModel.widget._update();
                         },
@@ -101,12 +101,20 @@
                     var viewModel = this;
                     CIAPI.disconnect({
                         success: function (data) {
-                            viewModel.widget.options.afterLogOff(CIAPI.connection);
+                            viewModel.widget.options.afterLogOff.call(viewModel.widget, CIAPI.connection);
                             viewModel.widget._update();
                         }
                     });
                 }
             };
+        },
+        replaceTokens: function (input) {
+            if (!CIAPI.connection.isConnected) {
+                console.log("Warning:  replaceTokens should not be called before authentication has happened, or not all tokens will be replaced");
+            }
+            return input.replace("{CIAPI.connection.UserName}", CIAPI.connection.UserName)
+                        .replace("{CIAPI.connection.Session}", CIAPI.connection.Session);
+
         },
         _initCulture: function () {
             //Set sane defaults for translation messages, then initialize the translation messages
