@@ -12,8 +12,15 @@
     <Content Include="js\mylibs\b.knockout.mapping-latest.debug.js" />
     <Content Include="js\mylibs\c.jquery.validate.debug.js" />
     <Content Include="js\mylibs\c.jquery.validate.min.js" />
+    <Content Include="js\mylibs\d.globalize.debug.js" />
+    <Content Include="js\mylibs\d.globalize.min.js" />
+    <Content Include="js\mylibs\e.globalize.cultures.debug.js" />
+    <Content Include="js\mylibs\e.globalize.cultures.min.js" />
+    <Content Include="Run_AcceptanceTests.html" />
+    <Content Include="Run_UnitTests.html" />
     <Content Include="test\CIAPI.UnitTests.js" />
     <Content Include="test\CIAPI.AcceptanceTests.js" />
+    <Content Include="test\CIAPI.Widget.Globalize.UnitTests.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

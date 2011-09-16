@@ -6,6 +6,11 @@
   <title>Unit Test Runner</title>
     <!--[! standard dependencies -->
     <script type="text/javascript" src="/publish/libs/jquery/1.6.1/jQuery.debug.js"></script>
+    <script type="text/javascript" src="/publish/libs/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="/publish/libs/json2.js"></script>
+    <script type="text/javascript" src="/publish/libs/jquery-ui/1.8.11/js/jquery-ui.min.js"></script>
+    <script>var flensed = { base_path: "/publish/libs/flXHR-1.0.6/" };</script>
+    <script src="/publish/libs/flXHR-1.0.6/flXHR.js"></script>
 
     <!--[! test framework -->
     <script type="text/javascript" src="/publish/libs/jasmine/jasmine.js" ></script>
@@ -19,15 +24,19 @@
     <!-- scripts concatenated and minified via ant build script-->
     <script type="text/javascript" src="js/mylibs/a.knockout-1.2.0.debug.js" ></script>
     <script type="text/javascript" src="js/mylibs/b.knockout.mapping-latest.debug.js" ></script>
+    <script type="text/javascript" src="js/mylibs/c.jquery.validate.debug.js" ></script>
+    <script type="text/javascript" src="js/mylibs/d.globalize.debug.js" ></script>
+    <script type="text/javascript" src="js/mylibs/e.globalize.cultures.debug.js" ></script>
 
     <script type="text/javascript" src="js/CIAPI.widget.js" ></script>
     <!-- end scripts-->
 
      <!--[! Use mock data -->
-    <script type="text/javascript" src="/publish/CIAPI/CIAPI.amplify.requests.mock.js" ></script>
+    <script type="text/javascript" src="/publish/CIAPI/test/CIAPI.amplify.requests.mock.js" ></script>
 
     <!--[! Tests -->
     <script type="text/javascript" src="test/CIAPI.UnitTests.js" ></script>
+    <script type="text/javascript" src="test/CIAPI.Widget.Globalize.UnitTests.js" ></script>
 </head>
 
 <body>

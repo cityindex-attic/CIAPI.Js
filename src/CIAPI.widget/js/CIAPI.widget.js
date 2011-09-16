@@ -19,4 +19,39 @@ var CIAPI = CIAPI || {};
             }
         }
     });
+
+    /*  Hook into the jQuery globalize library.  This can be removed when JQueryUI
+    Natively supports jQuery globalization - http://wiki.jqueryui.com/w/page/39118647/Globalize */
+    $.widget.addCultureInfo = function( cultureName, extendCultureName, info ) {
+        return Globalize.addCultureInfo(cultureName, extendCultureName, info);
+    };
+    
+    $.widget.getCurrentCulture = function() {
+        return Globalize.culture();
+    };
+
+    $.widget.culture = function( selector ) {
+        Globalize.culture(selector);
+    };
+
+    $.widget.localize = function( key, culture ) {
+        return Globalize.localize(key, culture);
+    };
+
+    $.widget.format = function(value, format, culture ) {
+        return Globalize.format(value, format, culture);
+    };
+
+    $.widget.parseDate = function( value, formats, culture ) {
+        return Globalize.parseDate(value, formats, culture);
+    };
+
+    $.widget.parseInt = function( value, radix, culture ) {
+        return Globalize.parseInt(value, radix, culture);
+    };
+
+    $.widget.parseFloat = function( value, culture ) {
+        return Globalize.parseFloat(value, culture);
+    };
+
 }(jQuery));

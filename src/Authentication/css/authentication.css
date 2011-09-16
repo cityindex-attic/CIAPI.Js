@@ -1,7 +1,86 @@
 /**
  * These are custom styles for the Authentication widget
+ *
+ * CIAPI Authentication @VERSION 0.1
+ *
+ * {Copyright message could go here}
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * {Link to license}
+ *
+ * {url to docs on on the dev portal for Authentication widget}
  */
 
 .ui-ciapi-authentication {
+    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.4);
 
+    box-shadow: 0 0 4px rgba(0,0,0,0.4);
+    overflow: hidden;
+    padding: 0;
+}
+
+.ui-ciapi-authentication .ui-ciapi-authentication-titlebar {
+    border-bottom: 1px solid #a1a1a1;
+    border-top: 1px solid #fff;
+    padding: .5em 1em;
+    position: relative;
+}
+
+.ui-ciapi-authentication .ui-ciapi-authentication-title {
+    float: left;
+}
+
+.ui-ciapi-authentication .ui-ciapi-authentication-content {
+    border: 0;
+    overflow: auto;
+    padding: 2em 2em 0;
+    position: relative;
+    zoom: 1;
+}
+
+.ui-ciapi-authentication .ui-ciapi-authentication-content fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ui-ciapi-authentication .ui-ciapi-authentication-input {
+    background: #fff;
+    margin: 0.5em 0 2em;
+    padding: 0.5em 0.8em;
+}
+
+.ui-ciapi-authentication .ui-ciapi-authentication-input input {
+    border: none;
+    padding: 0;
+    width: 100%;
+}
+
+
+.ui-ciapi-authentication .ui-ciapi-authentication-buttonpane {
+    text-align: left;
+    border-width: 1px 0 0 0;
+    background-image: none;
+    padding: 1em 2em;
+}
+
+.ui-ciapi-authentication .ui-ciapi-authentication-buttonpane .ui-ciapi-authentication-buttonset {
+    float: right;
+}
+
+.ui-ciapi-authentication .ui-ciapi-authentication-buttonpane button {
+    float: right;
+    margin: 0.5em 0;
+    cursor: pointer;
+}
+
+.ui-ciapi-authentication .ui-resizable-se {
+    width: 14px;
+    height: 14px;
+    right: 3px;
+    bottom: 3px;
+}
+
+.ui-draggable .ui-ciapi-authentication-titlebar {
+    cursor: move;
 }
