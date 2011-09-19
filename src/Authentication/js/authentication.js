@@ -10,7 +10,7 @@
                 "pl-PL": { "error": "Błąd" }
             },
             template: $.template('defaultAuthWidgetTemplate',
-                '<div class="ui-ciapi-authentication ui-widget ui-widget-content ui-corner-all">                               ' +
+                '<div class="ui-ciapi-authentication ui-widget ui-widget-content ui-corner-all"> ' +
                 '    <div class="ui-ciapi-logon-view  ui-corner-all" data-bind="visible: activeView() === \'LogOn\'">          ' +
                 '    <form class="ui-ciapi-authentication-form">    ' +
                 '        <div class="ui-ciapi-authentication-content ui-widget-content ui-corner-top">                         ' +
@@ -71,7 +71,7 @@
             return form.valid();
         },
         _createViewModel: function (widgetRef) {
-            return {
+            var viewModel = {
                 widget: widgetRef,     //Store a reference to this instance of the widget for use in viewModel event handling functions
                 username: ko.observable(CIAPI.connection.UserName),
                 password: ko.observable(""),
@@ -107,6 +107,7 @@
                     });
                 }
             };
+            return viewModel;
         },
         replaceTokens: function (input) {
             if (!CIAPI.connection.isConnected) {
@@ -181,15 +182,20 @@
                 }
             });
 
+            var thisWidget = this;
+            var oldOnConnectionInvalid = CIAPI.OnConnectionInvalid;
+            CIAPI.OnConnectionInvalid = function(connection) {
+               thisWidget._update.call(thisWidget.options.viewModel.widget);
+               oldOnConnectionInvalid();
+            };
+
             this._update();
         },
         destroy: function () {
             $.Widget.prototype.destroy.call(this);
         },
         _update: function () {
-            var activeView = CIAPI.connection.isConnected ? 'LogOff' : 'LogOn';
-            this.options.viewModel.activeView(activeView);
-
+            this.options.viewModel.activeView(CIAPI.connection.isConnected ? 'LogOff' : 'LogOn');
             if (this.options.shakeOnError && this.options.viewModel.errorMessage()) {
                 this.element.effect("shake", { times: 2 }, 100);
             }

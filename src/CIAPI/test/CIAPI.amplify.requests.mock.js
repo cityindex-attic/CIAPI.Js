@@ -70,6 +70,18 @@ var mockData = {
        settings.success();
    });
 
+   amplify.request.define("GetClientAndTradingAccount", function(settings) {
+       console.log("Mocking response for GetClientAndTradingAccount request", settings.data);
+
+       var resp = new CIAPI.dto.AccountInformationResponseDTO("Joe Bloggs", 44444444444, "GBP",
+           [{ TradingAccountId: 1,TradingAccountCode: "a string value", TradingAccountStatus: "a string value", TradingAccountType: "a string value" }]
+       );
+       settings.success(resp);
+
+//        settings.success(new CIAPI.dto.ApiErrorResponseDTO(401, 4010, "The credentials used to authenticate are invalid. Either the username, password or both are incorrect."));
+
+   });
+
    amplify.request.define( "ListCfdMarkets", function(settings) {
         console.log("Mocking response for ListCfdMarkets request", settings.data);
         var regex = new RegExp(settings.data.searchByMarketName+".*");
