@@ -78,7 +78,7 @@ var mockData = {
        );
        settings.success(resp);
 
-//        settings.success(new CIAPI.dto.ApiErrorResponseDTO(401, 4010, "The credentials used to authenticate are invalid. Either the username, password or both are incorrect."));
+//        settings.error(new CIAPI.dto.ApiErrorResponseDTO(401, 4010, "The credentials used to authenticate are invalid. Either the username, password or both are incorrect."));
 
    });
 

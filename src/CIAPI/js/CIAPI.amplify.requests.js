@@ -41,10 +41,10 @@
     });
 
    amplify.request.define("GetClientAndTradingAccount", "cors", {
-        url: "{ServiceUri}/UserAccount/ClientAndTradingAccount?only200=true",
+        url: "{ServiceUri}/UserAccount/ClientAndTradingAccount?UserName={UserName}&Session={Session}&only200=true",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
-        type: "POST",
+        type: "GET",
         processData: false,
         beforeSend: function(xhr, settings) {
                         settings.data = JSON.stringify(settings.data);

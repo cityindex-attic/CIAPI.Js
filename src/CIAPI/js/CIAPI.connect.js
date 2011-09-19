@@ -120,6 +120,8 @@ CIAPI.OnConnectionInvalid = function(connection) {
  * If connection not valid, remove stored connection and raise OnConnectionInvalid event
  */
 CIAPI.validateConnection = function() {
+   if (!CIAPI.connection.isConnected) 
+        return;  // no use validating an invalid connection!
    amplify.request( {
            resourceId: "GetClientAndTradingAccount",
            data:  {
@@ -128,12 +130,13 @@ CIAPI.validateConnection = function() {
                       Session: CIAPI.connection.Session
                   },
            success:  function( data ) {
+              //Do nothing - connection is still valid 
+           },
+           error: function( data ) {
                if (data.HttpStatus === 401) {
                   removeConnection();
                   CIAPI.OnConnectionInvalid(CIAPI.connection);
                }
-           },
-           error: function( data ) {
            }
    });
 };
@@ -159,6 +162,6 @@ var stopConnectionValidationPolling = function() {
  *  Init
  */
 loadConnection();
-
+CIAPI.validateConnection();
 
 })(amplify, _);
