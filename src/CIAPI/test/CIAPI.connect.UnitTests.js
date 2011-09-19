@@ -1,4 +1,6 @@
 describe("CIAPI.connect unit tests", function () {
+    var EIGHT_HOURS = 8 * 60 * 60 * 1000; //in ms
+
     beforeEach(function () {
         CIAPI.connection.ServiceUri = "http://174.129.8.84/TradingApi";
         CIAPI.connection.StreamUri = "http://pushpreprod.cityindextest9.co.uk";
@@ -103,61 +105,80 @@ describe("CIAPI.connect unit tests", function () {
         });
 
     });
-//
-//    it("should destroy a session (including cookies)", function () {
-//        runs(function () {
-//            var that = this;
-//            CIAPI.connect({
-//                UserName: "CC735158",
-//                Password: "password"
-//            });
-//        });
-//
-//        waitsFor(function () {
-//            return CIAPI.connection.isConnected;
-//        });
-//
-//        runs(function () {
-//            expect(document.cookie).toContain("UserName=CC735158");
-//            expect(document.cookie + ';').toContain("Session=%7Bef4923-mock-session-token-fe552%7D");
-//            CIAPI.disconnect();
-//        });
-//
-//        waitsFor(function () {
-//            return !CIAPI.connection.isConnected;
-//        });
-//
-//        runs(function () {
-//            expect(document.cookie).toMatch("(UserName=?;|UserName=$)");
-//            expect(document.cookie + ';').toMatch("Session=?;");
-//
-//            expect(CIAPI.connection.UserName).toBeFalsy();
-//            expect(CIAPI.connection.Session).toBeFalsy();
-//        });
-//
-//    });
-//
-//    it("connect should store the session and username", function () {
-//        spyOn(CIAPI, "store");
-//
-//        runs(function () {
-//            CIAPI.connect({
-//                UserName: "CC735158",
-//                Password: "password"
-//            });
-//        });
-//
-//        waitsFor(function () {
-//            return CIAPI.connection.isConnected;
-//        });
-//
-//        runs(function () {
-//            expect(CIAPI.store).toHaveBeenCalled();
-//            expect(CIAPI.store.mostRecentCall.args[1].UserName).toBe("CC735158");
-//            expect(CIAPI.store.mostRecentCall.args[1].Session).toBeTruthy();
-//        });
-//
-//    });
+
+     it("connect should store the connection details in sessionStorage", function () {
+        spyOn(CIAPI, "store");
+
+        runs(function () {
+            CIAPI.connect({
+                UserName: "CC735158",
+                Password: "password"
+            });
+        });
+
+        waitsFor(function () {
+            return CIAPI.connection.isConnected;
+        });
+
+        runs(function () {
+            expect(CIAPI.store).toHaveBeenCalledWith({
+                key: "CIAPI_connection",
+                value:  {
+                    isConnected : true,
+                    UserName : 'CC735158',
+                    Session : '{ef4923-mock-session-token-fe552}',
+                    ServiceUri : 'http://174.129.8.84/TradingApi',
+                    StreamUri : 'http://pushpreprod.cityindextest9.co.uk'
+                },
+                storageType: "sessionStorage",
+                expires: EIGHT_HOURS
+            });
+
+        });
+
+    });
+
+    it("should destroy a session", function () {
+        spyOn(CIAPI, "store");
+
+        runs(function () {
+            var that = this;
+            CIAPI.connect({
+                UserName: "CC735158",
+                Password: "password"
+            });
+        });
+
+        waitsFor(function () {
+            return CIAPI.connection.isConnected;
+        });
+
+        runs(function () {
+            CIAPI.disconnect();
+        });
+
+        waitsFor(function () {
+            return !CIAPI.connection.isConnected;
+        });
+
+        runs(function () {
+            expect(CIAPI.store).toHaveBeenCalledWith({
+                key: "CIAPI_connection",
+                value:  {
+                    isConnected : false,
+                    UserName : '',
+                    Session : '',
+                    ServiceUri : 'http://174.129.8.84/TradingApi',
+                    StreamUri : 'http://pushpreprod.cityindextest9.co.uk'
+                },
+                storageType: "sessionStorage",
+                expires: EIGHT_HOURS
+            });
+        });
+
+    });
+
+
 });
 
 
