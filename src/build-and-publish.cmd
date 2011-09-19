@@ -1,1 +1,2 @@
 ant build publish
+pause
