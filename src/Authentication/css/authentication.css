@@ -65,12 +65,12 @@
 }
 
 .ui-ciapi-authentication .ui-ciapi-authentication-buttonpane .ui-ciapi-authentication-buttonset {
-    float: right;
+    float: left;
 }
 
 .ui-ciapi-authentication .ui-ciapi-authentication-buttonpane button {
-    float: right;
-    margin: 0.5em 0;
+    float: left;
+    margin: 0.5em 0.4em 0.5em 0;
     cursor: pointer;
 }
 
@@ -83,4 +83,9 @@
 
 .ui-draggable .ui-ciapi-authentication-titlebar {
     cursor: move;
+}
+
+/* Custom Authentication Widget Icons */
+.ui-ciapi-authentication .ui-ciapi-authentication-buttonpane .ui-state-disabled .ui-icon {
+     background: url("images/button_loading_spinner.gif") no-repeat 0 0;
 }
