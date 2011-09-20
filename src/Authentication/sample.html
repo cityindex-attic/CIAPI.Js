@@ -1,4 +1,5 @@
 ﻿<!doctype html>
+<html>
 <head>
     <title>Authentication demo</title>
 
@@ -77,7 +78,7 @@
     <div class="content-sidebar">
         <div class="content">
             <h1>Standard</h1>
-            <div id="StandardAuthenticationWidget" style="border:1px solid black"></div>
+            <div id="StandardAuthenticationWidget" style="border:1px solid black; padding: 50px"></div>
             <h1>Extra options</h1>
             <div id="ExtraOptionsAuthenticationWidget"></div>
             <h1>Custom template</h1>
@@ -176,7 +177,7 @@
                 <p>${you_are_logged_in_as} <span data-bind="text: username"/></p>
             </div>
             <div class="ui-ciapi-authentication-buttonpane ui-widget-content ui-helper-clearfix">
-                <button class="ui-ciapi-authentication-button ui-icon-loading-spinner" onclick="<%=clientId%>_launchPlatform(); return false;">Launch</button>
+                <button class="ui-ciapi-authentication-button ui-icon-loading-spinner" onclick="window.open('http://www.google.com'); return false;">${launch_platform}</button>
                 <button class="ui-ciapi-authentication-button" data-bind="click: doLogOff">${logoff}</button>
             </div>
         </div>

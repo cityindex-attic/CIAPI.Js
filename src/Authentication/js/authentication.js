@@ -49,7 +49,7 @@
                 '    </div>                                                                                                    ' +
                 '</div>')
         },
-        isFormValid: function(viewModel) {
+        isFormValid: function (viewModel) {
             $.validator.messages.required = "";
             var form = viewModel.widget.element.find('.ui-ciapi-authentication-form');
             form.validate({
@@ -61,10 +61,10 @@
                 errorPlacement: function (error, element) {
                     //don't place error messages anywhere
                 },
-                highlight: function(element, errorClass, validClass) {
+                highlight: function (element, errorClass, validClass) {
                     $(element).parent().addClass(errorClass).removeClass(validClass);
                 },
-                unhighlight: function(element, errorClass, validClass) {
+                unhighlight: function (element, errorClass, validClass) {
                     $(element).parent().addClass(validClass).removeClass(errorClass);
                 }
             });
@@ -80,6 +80,7 @@
                 doLogOn: function () {
                     var viewModel = this;
                     if (!viewModel.widget.isFormValid(viewModel)) return;
+                    viewModel.widget._toggleInput({ isDisabled: true, parentElement: viewModel.widget.element });
                     CIAPI.connect({
                         UserName: viewModel.username(),
                         Password: viewModel.password(),
@@ -99,6 +100,7 @@
                 },
                 doLogOff: function () {
                     var viewModel = this;
+                    viewModel.widget._toggleInput({ isDisabled: true, parentElement: viewModel.widget.element });
                     CIAPI.disconnect({
                         success: function (data) {
                             viewModel.widget.options.afterLogOff.call(viewModel.widget, CIAPI.connection);
@@ -129,8 +131,9 @@
                 "password": "Password",
                 "logon": "Log On",
                 "logoff": "Log Off",
+                "launch_platform": "Launch platform",
                 "you_are_logged_in_as":
-                "You are logged in as" 
+                "You are logged in as"
             });
 
             t["pl-PL"] = t["pl-PL"] || {};
@@ -142,8 +145,9 @@
                 "password": "Hasło",
                 "logon": "Zaloguj się",
                 "logoff": "Wyloguj",
+                "launch_platform": "Uruchomienie Platformy",
                 "you_are_logged_in_as":
-                "Jesteś zalogowany jako" 
+                "Jesteś zalogowany jako"
             });
 
             t["de-DE"] = t["de-DE"] || {};
@@ -155,7 +159,8 @@
                 "password": "Kennwort",
                 "logon": "Anmeldung",
                 "logoff": "Logout",
-                "you_are_logged_in_as": "Sie sind angemeldet als" 
+                "launch_platform": "Start-Plattform",
+                "you_are_logged_in_as": "Sie sind angemeldet als"
             });
 
             _(this.options.translations).each(function (translations_value, culture_key) {
@@ -163,6 +168,13 @@
             });
 
             $.widget.culture(this.options.culture);
+        },
+        _toggleInput: function (args) {
+            _(args).defaults({
+                isDisabled: true,
+                parentElement: null
+            });
+            args.parentElement.find(".ui-ciapi-authentication-button").button("option", "disabled", args.isDisabled);
         },
         _create: function () {
             this._initCulture();
@@ -184,9 +196,9 @@
 
             var thisWidget = this;
             var oldOnConnectionInvalid = CIAPI.OnConnectionInvalid;
-            CIAPI.OnConnectionInvalid = function(connection) {
-               thisWidget._update.call(thisWidget.options.viewModel.widget);
-               oldOnConnectionInvalid();
+            CIAPI.OnConnectionInvalid = function (connection) {
+                thisWidget._update.call(thisWidget.options.viewModel.widget);
+                oldOnConnectionInvalid();
             };
 
             this._update();
@@ -199,6 +211,7 @@
             if (this.options.shakeOnError && this.options.viewModel.errorMessage()) {
                 this.element.effect("shake", { times: 2 }, 100);
             }
+            //this._toggleInput({ isDisabled: false, parentElement: this.options.viewModel.widget.element });
         }
     });
 })(jQuery);
