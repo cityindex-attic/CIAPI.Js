@@ -1,6 +1,8 @@
 ﻿(function ($, undefined) {
     $.widget("ui.CIAPI_widget_AuthenticationWidget", $.ui.CIAPI_widget, {
         options: {
+            ServiceUri : "",
+            StreamingUri: "",
             width: 600,
             afterLogOn: function (CIAPIConnection) { },
             afterLogOff: function (CIAPIConnection) { },
@@ -84,6 +86,8 @@
                     CIAPI.connect({
                         UserName: viewModel.username(),
                         Password: viewModel.password(),
+                        ServiceUri: viewModel.widget.options.ServiceUri,
+                        StreamingUri: viewModel.widget.options.StreamingUri,
                         success: function (data) {
                             viewModel.widget.options.afterLogOn.call(viewModel.widget, CIAPI.connection);
                             viewModel.errorMessage("");
@@ -179,6 +183,8 @@
         _create: function () {
             this._initCulture();
 
+            CIAPI.reconnect();
+
             //The viewModel needs to be created here rather than defined in options above to prevent cross widget pollution
             this.options.viewModel = this._createViewModel(this);
 
@@ -194,12 +200,11 @@
                 }
             });
 
+            //monitor changes to connection status
             var thisWidget = this;
-            var oldOnConnectionInvalid = CIAPI.OnConnectionInvalid;
-            CIAPI.OnConnectionInvalid = function (connection) {
+            CIAPI.subscribe("CIAPI.connection.status", function (message) {
                 thisWidget._update.call(thisWidget.options.viewModel.widget);
-                oldOnConnectionInvalid();
-            };
+            });
 
             this._update();
         },
@@ -211,7 +216,7 @@
             if (this.options.shakeOnError && this.options.viewModel.errorMessage()) {
                 this.element.effect("shake", { times: 2 }, 100);
             }
-            //this._toggleInput({ isDisabled: false, parentElement: this.options.viewModel.widget.element });
+            this._toggleInput({ isDisabled: false, parentElement: this.options.viewModel.widget.element });
         }
     });
 })(jQuery);

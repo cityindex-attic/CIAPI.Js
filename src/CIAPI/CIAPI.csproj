@@ -7,6 +7,7 @@
     <Content Include="build.project.xml" />
     <Content Include="js\!amplify.types.cors.js" />
     <Content Include="js\!CIAPI.init.js" />
+    <Content Include="js\a.CIAPI.dto.AccountInformationResponseDTO.js" />
     <Content Include="js\a.CIAPI.dto.ApiErrorResponseDTO.js" />
     <Content Include="js\a.CIAPI.dto.CreateSessionResponseDTO.js" />
     <Content Include="js\a.CIAPI.dto.ListCfdMarketsResponseDTO.js" />
@@ -21,6 +22,7 @@
     <Content Include="js\CIAPI.streams.js" />
     <Content Include="js\CIAPI.__testData.js" />
     <Content Include="js\CIAPI.a.store.js" />
+    <Content Include="js\a.CIAPI.dto.SessionDeletionResponseDTO.js" />
     <Content Include="js\mylibs\amplify.debug.js" />
     <Content Include="js\mylibs\amplify.min.js" />
     <Content Include="js\mylibs\underscore.debug.js" />

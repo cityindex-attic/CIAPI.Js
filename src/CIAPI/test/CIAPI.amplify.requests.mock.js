@@ -63,23 +63,39 @@ var mockData = {
        }
    });
 
-   amplify.request.define("DeleteSession", function(settings) {
-       console.log("Mocking response for DeleteSession request", settings.data); 
-       
-       //Can this ever error?
-       settings.success();
-   });
+    amplify.request.define( "DeleteSession", function(settings) {
+       console.log("Mocking response for Delete request", settings.data);
 
-   amplify.request.define("GetClientAndTradingAccount", function(settings) {
-       console.log("Mocking response for GetClientAndTradingAccount request", settings.data);
+        amplify.request.decoders.ciapiDecoder(
+                new CIAPI.dto.SessionDeletionResponseDTO(true),
+                "success", {}, settings.success, settings.error
+        );
+    });
 
-       var resp = new CIAPI.dto.AccountInformationResponseDTO("Joe Bloggs", 44444444444, "GBP",
-           [{ TradingAccountId: 1,TradingAccountCode: "a string value", TradingAccountStatus: "a string value", TradingAccountType: "a string value" }]
-       );
-       settings.success(resp);
+    amplify.request.define("GetClientAndTradingAccount", function(settings) {
+        console.log("Mocking response for GetClientAndTradingAccount request", settings.data);
 
-//        settings.error(new CIAPI.dto.ApiErrorResponseDTO(401, 4010, "The credentials used to authenticate are invalid. Either the username, password or both are incorrect."));
+        var resp = new CIAPI.dto.AccountInformationResponseDTO("Joe Bloggs", 44444444444, "GBP",
+            [{ TradingAccountId: 1,TradingAccountCode: "a string value", TradingAccountStatus: "a string value", TradingAccountType: "a string value" }]
+        );
+        
+        amplify.request.decoders.ciapiDecoder(
+                resp,
+                "success", {}, settings.success, settings.error
+        );
+    });
 
+   /**
+   * Use this mock route to simulate API errors.  
+   * Just pass the error you'd like to receive as settings.errorReponse
+   */
+   amplify.request.define( "apiError", function(settings) {
+       console.log("Mocking response an api error response", settings.errorResponse);
+
+       amplify.request.decoders.ciapiDecoder(
+            settings.errorResponse,
+            "success", {}, settings.success, settings.error
+        );
    });
 
    amplify.request.define( "ListCfdMarkets", function(settings) {
@@ -88,12 +104,20 @@ var mockData = {
         var markets = _(mockData.CfdMarkets).filter(function(m) {
            return regex.test(m.Name);
         });
-       settings.success(new CIAPI.dto.ListCfdMarketsResponseDTO(markets));
+
+        amplify.request.decoders.ciapiDecoder(
+                new CIAPI.dto.ListCfdMarketsResponseDTO(markets),
+                "success", {}, settings.success, settings.error
+        );
    });
 
    amplify.request.define( "GetPriceBars", function(settings) {
         console.log("Mocking response for GetPriceBars request", settings.data);
-        settings.success(mockData.PriceHistory.slice(0, settings.data.maxResults));
+
+        amplify.request.decoders.ciapiDecoder(
+                mockData.PriceHistory.slice(0, settings.data.maxResults),
+                "success", {}, settings.success, settings.error
+        );
    });
 
 })(amplify, _);
