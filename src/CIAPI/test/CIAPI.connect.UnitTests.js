@@ -107,7 +107,8 @@ describe("CIAPI.connect unit tests", function () {
     });
 
      it("connect should store the connection details in sessionStorage", function () {
-        spyOn(CIAPI, "store");
+        if (!CIAPI.store.isSpy) 
+            spyOn(CIAPI, "store");
 
         runs(function () {
             CIAPI.connect({
@@ -139,7 +140,8 @@ describe("CIAPI.connect unit tests", function () {
     });
 
     it("should destroy a session", function () {
-        spyOn(CIAPI, "store");
+        if (!CIAPI.store.isSpy) 
+            spyOn(CIAPI, "store");
 
         runs(function () {
             var that = this;
