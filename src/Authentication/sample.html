@@ -21,10 +21,6 @@
     <script src="/publish/Authentication/js/libs/CIAPI.debug.js"></script>
     <script src="/publish/Authentication/js/libs/CIAPI.widget.debug.js"></script>
   
-    <!--[! Enable mock data -->
-    <script src="/publish/CIAPI/test/CIAPI.amplify.requests.mock.js"></script>
-    <!--[!  CC735158 / password are valid mock credentials -->
-
     <!--[! This is for CIAPI.authentication widget -->
     <!-- css concatenated and minified via ant build script-->
     <link type="text/css" href="css/authentication.css" rel="Stylesheet"/>
@@ -54,14 +50,18 @@
             <option>de-DE</option>
         </select>
         </span>
+        <br />
+        <span>
+            Connection: <select id="connectionSwitcher">
+                <option value="mock">Mock connection (use: CC735158 / password )</option>
+                <option value="real">Real connection (enter details below)</option>
+            </select>
+            <br />
+            <span id="serviceUriBlock">
+            ServiceUri: <input id="serviceUri" value="https://ciapipreprod.cityindextest9.co.uk" style="width: 400px" />
+            </span>
+        </span>
     </div>
-
-<script>
-    //These default connection options must be set before interacting with CIAPI,
-    //unless mock requests are being included above
-    CIAPI.connection.ServiceUri = "http://174.129.8.69/TradingApi";
-    CIAPI.connection.StreamUri = "http://pushpreprod.cityindextest9.co.uk";
-</script>
 
 <div class="wrapper">
     <div class="content-sidebar">
@@ -79,41 +79,77 @@
     </div>
 </div>
 
-
 <script>
     function getQueryString(name) {
         var match = RegExp('[?&]' + name + '=([^&]*)')
                         .exec(window.location.search);
         return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
     }
+   
+    var PageConfig = {
+            Culture: getQueryString("culture") || "en-GB",
+            ConnectionType: getQueryString("connectionType") || "mock",
+            ServiceUri: "http://ciapipreprod.cityindextest9.co.uk/TradingApi",
+            StreamUri: "http://pushpreprod.cityindextest9.co.uk"
+         };
 
-    $(document).ready(function () {
-        $('#themeSwitcher').themeswitcher({
-            imgpath: "/publish/libs/jquery-ui/Super-Theme-Switcher/images/",
-            additionalThemes: [
+         $(document).ready(function () {
+             $('#themeSwitcher').themeswitcher({
+                 imgpath: "/publish/libs/jquery-ui/Super-Theme-Switcher/images/",
+                 additionalThemes: [
                 { title: "City Index", name: "ci.default",
                     icon: "theme_90_cityindex.png", url: "/publish/libs/themes/ci.default/ci.default.css"
                 }
                ]
-        });
-        
-        //Set the default widget culture, and trigger a page refresh when it changes
-        var culture = getQueryString("culture") || "en-GB";
-        $.widget.culture(culture);
+             });
 
-        $('#cultureSwitcher').val( culture ).attr('selected',true);
-        $('#cultureSwitcher').change(function (evt) {
-            var selectedCulture = $(this).find("option:selected").text();
-            window.location.href = window.location.pathname + "?culture=" + selectedCulture;
-        });
+             //Trigger a page refresh when culture is changed
+             $('#cultureSwitcher').val(PageConfig.culture).attr('selected', true);
+             $('#cultureSwitcher').change(function (evt) {
+                 var selectedCulture = $(this).find("option:selected").text();
+                 window.location.href = window.location.pathname + "?culture=" + selectedCulture + "&connectionType=" + PageConfig.ConnectionType;
+             });
+
+             //Set the connection
+             $('#connectionSwitcher').val(PageConfig.ConnectionType).attr('selected', true);
+             if (PageConfig.ConnectionType === "real") {
+                 $('#serviceUriBlock').show();
+             }
+             if (PageConfig.ConnectionType === "mock") {
+                 $.getScript("/publish/CIAPI/test/CIAPI.amplify.requests.mock.js");
+                 $('#serviceUriBlock').hide();
+             }
+             $('#connectionSwitcher').change(function (evt) {
+                 var selected = $(this).find("option:selected").val();
+                 window.location.href = window.location.pathname + "?culture=" + PageConfig.Culture + "&connectionType=" + selected;
+             });
+             $('#serviceUri').change(function (evt) {
+                 Page.ServiceUri = $(this).val();
+             });
+         });
+
+</script>
+
+
+<script>
+    $(document).ready(function () {
+
+        //Set the default widget culture, and trigger a page refresh when it changes
+        $.widget.culture(PageConfig.Culture);
 
         //Widgets must be rendered after the culture is set
-        $("#StandardAuthenticationWidget").CIAPI_widget_AuthenticationWidget();
+        
+        $("#StandardAuthenticationWidget").CIAPI_widget_AuthenticationWidget({
+            ServiceUri: PageConfig.ServiceUri,
+            StreamUri: PageConfig.StreamUri
+        });
 
         $('#ExtraOptionsAuthenticationWidget').CIAPI_widget_AuthenticationWidget(
             {
                 width: 300,
-                shakeOnError: true
+                shakeOnError: true,
+                ServiceUri: PageConfig.ServiceUri,
+                StreamUri: PageConfig.StreamUri
             });
 
         $("#customAuthWidgetTemplate").template("customAuthWidgetTemplate"); //compile & name the template
@@ -126,7 +162,9 @@
                 },
                 afterLogOff: function (data) {
                     console.log("afterLogOff for CustomAuthenticationWidget", data);
-                }
+                },
+                ServiceUri: PageConfig.ServiceUri,
+                StreamUri: PageConfig.StreamUri
             });
     });
 </script>
@@ -166,7 +204,7 @@
                 <p>${you_are_logged_in_as} <span data-bind="text: username"/></p>
             </div>
             <div class="ui-ciapi-authentication-buttonpane ui-widget-content ui-helper-clearfix">
-                <button class="ui-ciapi-authentication-button ui-icon-loading-spinner" onclick="window.open('http://www.google.com'); return false;">${launch_platform}</button>
+                <button class="ui-ciapi-authentication-button ui-icon-loading-spinner" onclick="window.open(CIAPI.replaceConnectionTokens('https://ciapipreprod.cityindextest9.co.uk/tp/fx/index.html#UserName={CIAPI.connection.UserName}&Session={CIAPI.connection.Session}&AuthenticationUri=http://google.com'),'', 'width=975,height=575'); return false;">${launch_platform}</button>
                 <button class="ui-ciapi-authentication-button" data-bind="click: doLogOff">${logoff}</button>
             </div>
         </div>

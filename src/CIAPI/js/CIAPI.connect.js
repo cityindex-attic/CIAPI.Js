@@ -135,12 +135,22 @@ CIAPI.disconnect = function(options) {
                   },
            success:  function( data ) {
                 removeStoredConnection();
+                CIAPI.publish("CIAPI.connection.status", CIAPI.connection);
                 options.success(data);
            },
            error: function( data ) {
                 options.error(data);
            }
    });
+};
+
+CIAPI.replaceConnectionTokens = function (input) {
+    if (!CIAPI.connection.isConnected) {
+        console.log("Warning:  replaceTokens should not be called before authentication has happened, or not all tokens will be replaced");
+    }
+    return input.replace("{CIAPI.connection.UserName}", CIAPI.connection.UserName)
+                .replace("{CIAPI.connection.Session}", CIAPI.connection.Session);
+
 };
 
 })(amplify, _);

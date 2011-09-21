@@ -1,8 +1,8 @@
 ﻿(function ($, undefined) {
     $.widget("ui.CIAPI_widget_AuthenticationWidget", $.ui.CIAPI_widget, {
         options: {
-            ServiceUri : "",
-            StreamingUri: "",
+            ServiceUri: "must_be_set",
+            StreamUri: "must_be_set",
             width: 600,
             afterLogOn: function (CIAPIConnection) { },
             afterLogOff: function (CIAPIConnection) { },
@@ -51,6 +51,10 @@
                 '    </div>                                                                                                    ' +
                 '</div>')
         },
+        _validateOptions: function () {
+            if (this.options.ServiceUri === "must_be_set") alert("You must set the ServiceUri option when calling the AuthenticationWidget");
+            if (this.options.StreamUri === "must_be_set") alert("You must set the StreamUri option when calling the AuthenticationWidget");
+        },
         isFormValid: function (viewModel) {
             $.validator.messages.required = "";
             var form = viewModel.widget.element.find('.ui-ciapi-authentication-form');
@@ -87,9 +91,10 @@
                         UserName: viewModel.username(),
                         Password: viewModel.password(),
                         ServiceUri: viewModel.widget.options.ServiceUri,
-                        StreamingUri: viewModel.widget.options.StreamingUri,
+                        StreamUri: viewModel.widget.options.StreamingUri,
                         success: function (data) {
                             viewModel.widget.options.afterLogOn.call(viewModel.widget, CIAPI.connection);
+                            viewModel.password("");
                             viewModel.errorMessage("");
                             viewModel.widget._update();
                         },
@@ -114,14 +119,6 @@
                 }
             };
             return viewModel;
-        },
-        replaceTokens: function (input) {
-            if (!CIAPI.connection.isConnected) {
-                console.log("Warning:  replaceTokens should not be called before authentication has happened, or not all tokens will be replaced");
-            }
-            return input.replace("{CIAPI.connection.UserName}", CIAPI.connection.UserName)
-                        .replace("{CIAPI.connection.Session}", CIAPI.connection.Session);
-
         },
         _initCulture: function () {
             //Set sane defaults for translation messages, then initialize the translation messages
@@ -181,6 +178,8 @@
             args.parentElement.find(".ui-ciapi-authentication-button").button("option", "disabled", args.isDisabled);
         },
         _create: function () {
+            this._validateOptions();
+
             this._initCulture();
 
             CIAPI.reconnect();
@@ -202,7 +201,11 @@
 
             //monitor changes to connection status
             var thisWidget = this;
-            CIAPI.subscribe("CIAPI.connection.status", function (message) {
+            CIAPI.subscribe("CIAPI.connection.status", function (newConnection) {
+                if (newConnection.isConnected) { //ensure we update the viewModel with the new connection details
+                    thisWidget.options.viewModel.username(newConnection.UserName);
+                    thisWidget.options.viewModel.errorMessage("");
+                }
                 thisWidget._update.call(thisWidget.options.viewModel.widget);
             });
 

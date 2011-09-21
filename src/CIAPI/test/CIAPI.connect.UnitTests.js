@@ -256,19 +256,7 @@ describe("CIAPI.connect unit tests", function () {
         if (!CIAPI.store.isSpy)
             spyOn(CIAPI, "store");
 
-        runs(function () {
-            var that = this;
-            CIAPI.connect({
-                UserName: "CC735158",
-                Password: "password",
-                ServiceUri: "https://{the_service_Uri}/TradingApi",
-                StreamUri: "https://{the_streaming_Uri}/"
-            });
-        });
-
-        waitsFor(function () {
-            return CIAPI.connection.isConnected;
-        });
+        makeSuccessfulConnection();
 
         runs(function () {
             CIAPI.disconnect();
@@ -295,7 +283,38 @@ describe("CIAPI.connect unit tests", function () {
 
     });
 
+    it("disconnect should publish a CIAPI.connection.status update message", function () {
+        var publishedConnection, statusUpdateWasPublished = false;
 
+        makeSuccessfulConnection();
+
+        CIAPI.subscribe("CIAPI.connection.status", function (message) {
+            statusUpdateWasPublished = true;
+            publishedConnection = message;
+        });
+
+        runs(function () {
+            CIAPI.disconnect();
+        });
+
+        waitsFor(function () {
+            return statusUpdateWasPublished;
+        });
+
+        runs(function () {
+            expect(publishedConnection.isConnected).toBeFalsy();
+            expect(publishedConnection.UserName).toBe("");
+        });
+
+    });
+
+    it("should replace Connection tokens in string", function () {
+        makeSuccessfulConnection();
+
+        runs(function () {
+            expect(CIAPI.replaceConnectionTokens("UserName is {CIAPI.connection.UserName}")).toBe("UserName is CC735158");
+            expect(CIAPI.replaceConnectionTokens("Session is {CIAPI.connection.Session}")).toBe("Session is {ef4923-mock-session-token-fe552}");
+        });
+    });
 });
-
 
