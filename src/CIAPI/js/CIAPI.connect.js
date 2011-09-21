@@ -107,6 +107,8 @@ CIAPI.reconnect = function() {
  * Trap any 401 request errors and update the CIAPI.connection status
  */
 CIAPI.subscribe("CIAPI.request.error", function(errorMessage) {
+    if (errorMessage === null) return;
+
     if (errorMessage.HttpStatus === 401) {
         removeStoredConnection();
         CIAPI.publish("CIAPI.connection.status", CIAPI.connection);
