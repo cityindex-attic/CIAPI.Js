@@ -7,7 +7,8 @@
     <Content Include="BasicFunctions_AcceptanceTest.html" />
     <Content Include="build.project.xml" />
     <Content Include="css\authentication.css" />
-    <Content Include="css\images\button_loading_spinner.gif" />
+    <Content Include="css\images\button_loading_spinner_272727.gif" />
+    <Content Include="css\images\button_loading_spinner_efefef.gif" />
     <Content Include="images\Schrodinger-Lolcat.jpg" />
     <Content Include="images\Schrodinger-Lolcat.png" />
     <Content Include="images\widget-content-bg.png" />

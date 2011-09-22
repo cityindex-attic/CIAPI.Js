@@ -64,10 +64,10 @@
                     //don't place error messages anywhere
                 },
                 highlight: function (element, errorClass, validClass) {
-                    $(element).parent().addClass(errorClass).removeClass(validClass);
+                    $(element).addClass(errorClass).removeClass(validClass);
                 },
                 unhighlight: function (element, errorClass, validClass) {
-                    $(element).parent().addClass(validClass).removeClass(errorClass);
+                    $(element).addClass(validClass).removeClass(errorClass);
                 }
             });
             return form.valid();
