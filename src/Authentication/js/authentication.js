@@ -33,7 +33,7 @@
                 '            </fieldset>                                                                                       ' +
                 '        </div>                                                                                                ' +
                 '        <div class="ui-ciapi-authentication-buttonpane ui-widget-content ui-helper-clearfix ui-corner-bottom">' +
-                '            <button class="ui-ciapi-authentication-button" data-bind="click: doLogOn">${logon}</button>       ' +
+                '            <button type="submit" class="ui-ciapi-authentication-button" data-bind="click: doLogOn">${logon}</button>' +
                 '        </div>       ' +
                     '</form>                                                                                                   ' +
                 '    </div>                                                                                                    ' +
@@ -214,6 +214,9 @@
             this.options.viewModel.activeView(CIAPI.connection.isConnected ? 'LogOff' : 'LogOn');
             if (this.options.shakeOnError && this.options.viewModel.errorMessage()) {
                 this.element.effect("shake", { times: 2 }, 100);
+            }
+            if (this.options.viewModel.errorMessage()) {
+                this.element.find(".ui-state-error").hide().fadeIn('fast');
             }
             this._toggleInput({ isDisabled: false, parentElement: this.options.viewModel.widget.element });
         }

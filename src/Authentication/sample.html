@@ -79,66 +79,16 @@
     </div>
 </div>
 
-<script>
-    function getQueryString(name) {
-        var match = RegExp('[?&]' + name + '=([^&]*)')
-                        .exec(window.location.search);
-        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
-    }
-   
-    var PageConfig = {
-            Culture: getQueryString("culture") || "en-GB",
-            ConnectionType: getQueryString("connectionType") || "mock",
-            ServiceUri: "http://ciapipreprod.cityindextest9.co.uk/TradingApi",
-            StreamUri: "http://pushpreprod.cityindextest9.co.uk"
-         };
 
-         $(document).ready(function () {
-             $('#themeSwitcher').themeswitcher({
-                 imgpath: "/publish/libs/jquery-ui/Super-Theme-Switcher/images/",
-                 additionalThemes: [
-                { title: "City Index", name: "ci.default",
-                    icon: "theme_90_cityindex.png", url: "/publish/libs/themes/ci.default/ci.default.css"
-                }
-               ]
-             });
-
-             //Trigger a page refresh when culture is changed
-             $('#cultureSwitcher').val(PageConfig.culture).attr('selected', true);
-             $('#cultureSwitcher').change(function (evt) {
-                 var selectedCulture = $(this).find("option:selected").text();
-                 window.location.href = window.location.pathname + "?culture=" + selectedCulture + "&connectionType=" + PageConfig.ConnectionType;
-             });
-
-             //Set the connection
-             $('#connectionSwitcher').val(PageConfig.ConnectionType).attr('selected', true);
-             if (PageConfig.ConnectionType === "real") {
-                 $('#serviceUriBlock').show();
-             }
-             if (PageConfig.ConnectionType === "mock") {
-                 $.getScript("/publish/CIAPI/test/CIAPI.amplify.requests.mock.js");
-                 $('#serviceUriBlock').hide();
-             }
-             $('#connectionSwitcher').change(function (evt) {
-                 var selected = $(this).find("option:selected").val();
-                 window.location.href = window.location.pathname + "?culture=" + PageConfig.Culture + "&connectionType=" + selected;
-             });
-             $('#serviceUri').change(function (evt) {
-                 Page.ServiceUri = $(this).val();
-             });
-         });
-
-</script>
 
 
 <script>
-    $(document).ready(function () {
+    var initWidgets = function () {
 
         //Set the default widget culture, and trigger a page refresh when it changes
         $.widget.culture(PageConfig.Culture);
 
         //Widgets must be rendered after the culture is set
-        
         $("#StandardAuthenticationWidget").CIAPI_widget_AuthenticationWidget({
             ServiceUri: PageConfig.ServiceUri,
             StreamUri: PageConfig.StreamUri
@@ -166,7 +116,7 @@
                 ServiceUri: PageConfig.ServiceUri,
                 StreamUri: PageConfig.StreamUri
             });
-    });
+    };
 </script>
 <script id="customAuthWidgetTemplate" type="text/x-jquery-tmpl">
     <div class="ui-ciapi-authentication ui-widget ui-widget-content ui-corner-all">
@@ -190,21 +140,78 @@
 
                 </fieldset>
             </div>
-            </form>
             <div class="ui-ciapi-authentication-buttonpane ui-widget-content ui-helper-clearfix ui-corner-bottom">
-                <button class="ui-ciapi-authentication-button" data-bind="click: doLogOn">${logon}</button>
+                <button type="submit" class="ui-ciapi-authentication-button" data-bind="click: doLogOn">${logon}</button>
             </div>
+            </form>
         </div>
         <div class="ui-ciapi-logoff-view  ui-corner-all" data-bind="visible: activeView() === 'LogOff'">
             <div class="ui-ciapi-authentication-content ui-widget-content">
                 <p>${you_are_logged_in_as} <span data-bind="text: username"/></p>
             </div>
             <div class="ui-ciapi-authentication-buttonpane ui-widget-content ui-helper-clearfix">
-                <button class="ui-ciapi-authentication-button ui-icon-loading-spinner" onclick="window.open(CIAPI.replaceConnectionTokens('https://ciapipreprod.cityindextest9.co.uk/tp/fx/index.html#UserName={CIAPI.connection.UserName}&Session={CIAPI.connection.Session}&AuthenticationUri=http://google.com'),'', 'width=975,height=575'); return false;">${launch_platform}</button>
+                <button class="ui-ciapi-authentication-button" onclick="window.open(CIAPI.replaceConnectionTokens('https://ciapipreprod.cityindextest9.co.uk/tp/fx/index.html#UserName={CIAPI.connection.UserName}&Session={CIAPI.connection.Session}&AuthenticationUri=http://google.com'),'', 'width=975,height=575'); return false;">${launch_platform}</button>
                 <button class="ui-ciapi-authentication-button" data-bind="click: doLogOff">${logoff}</button>
             </div>
         </div>
     </div>
+</script>
+
+<script>
+    function getQueryString(name) {
+        var match = RegExp('[?&]' + name + '=([^&]*)')
+                        .exec(window.location.search);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    }
+
+    var PageConfig = {
+        Culture: getQueryString("culture") || "en-GB",
+        ConnectionType: getQueryString("connectionType") || "mock",
+        ServiceUri: "http://ciapipreprod.cityindextest9.co.uk/TradingApi",
+        StreamUri: "http://pushpreprod.cityindextest9.co.uk"
+    };
+
+    $(document).ready(function () {
+        $('#themeSwitcher').themeswitcher({
+            imgpath: "/publish/libs/jquery-ui/Super-Theme-Switcher/images/",
+            additionalThemes: [
+                { title: "City Index", name: "ci.default",
+                    icon: "theme_90_cityindex.png", url: "/publish/libs/themes/ci.default/ci.default.css"
+                }
+               ]
+        });
+
+        //Trigger a page refresh when culture is changed
+        $('#cultureSwitcher').val(PageConfig.culture).attr('selected', true);
+        $('#cultureSwitcher').change(function (evt) {
+            var selectedCulture = $(this).find("option:selected").text();
+            window.location.href = window.location.pathname + "?culture=" + selectedCulture + "&connectionType=" + PageConfig.ConnectionType;
+        });
+
+        //Set the connection
+        $('#connectionSwitcher').val(PageConfig.ConnectionType).attr('selected', true);
+        if (PageConfig.ConnectionType === "real") {
+            $('#serviceUriBlock').show();
+        }
+        $('#connectionSwitcher').change(function (evt) {
+            var selected = $(this).find("option:selected").val();
+            window.location.href = window.location.pathname + "?culture=" + PageConfig.Culture + "&connectionType=" + selected;
+        });
+        $('#serviceUri').change(function (evt) {
+            Page.ServiceUri = $(this).val();
+        });
+
+
+        //Only init the widgets after the request mocking is in place (if required)
+        if (PageConfig.ConnectionType === "mock") {
+            $.getScript("/publish/CIAPI/test/CIAPI.amplify.requests.mock.js", function () { initWidgets(); });
+            $('#serviceUriBlock').hide();
+        } else {
+            initWidgets();
+        }
+
+    });
+
 </script>
 
 </body>
