@@ -44,18 +44,12 @@
     padding: 0;
 }
 
-.ui-ciapi-authentication .ui-ciapi-authentication-input {
+.ui-ciapi-authentication input {
     background: #fff;
     margin: 0.5em 0 2em;
     padding: 0.5em 0.8em;
+    width: 95%;
 }
-
-.ui-ciapi-authentication .ui-ciapi-authentication-input input {
-    border: none;
-    padding: 0;
-    width: 100%;
-}
-
 
 .ui-ciapi-authentication .ui-ciapi-authentication-buttonpane {
     text-align: left;

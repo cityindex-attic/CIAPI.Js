@@ -176,21 +176,17 @@
                 <p class="ui-state-error" data-bind="text: errorMessage, visible: errorMessage().length > 0"></p>
                 <fieldset>
                     <label for="username">${username}</label>
-                    <div class="ui-ciapi-authentication-input ui-corner-all ui-widget-content">
-                        <input type="text"
+                    <input type="text"
                            name="username"
                            id="username"
-                           class="inputFields"  
+                           class="inputFields ui-widget-content ui-corner-all"
                            data-bind="value: username"/>
-                    </div>
                     <label for="password">${password}</label>
-                    <div class="ui-ciapi-authentication-input ui-corner-all ui-widget-content">
-                        <input type="password"
+                    <input type="password"
                            name="password"
                            id="password"
-                           class="inputFields"  
+                           class="inputFields ui-widget-content ui-corner-all"
                            data-bind="value: password"/>
-                    </div>
 
                 </fieldset>
             </div>
