@@ -10,6 +10,11 @@
             return;
         }
 
+        if (status === "error") {
+            returnError(new CIAPI.dto.ApiErrorResponseDTO(500, 0, "There was an error with the Ajax transport"));
+            return;
+        }
+
         if (!_(data).isNull() && !_(data).isUndefined(data) && !data.ErrorCode) {
             success(data);
         } else {
