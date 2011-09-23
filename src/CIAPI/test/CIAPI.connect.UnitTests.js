@@ -155,12 +155,12 @@ describe("CIAPI.connect unit tests", function () {
 
         var publishedConnection,
             statusUpdateWasPublished = false,
-            oldGetClientAndTradingAccount = amplify.request.resources.GetClientAndTradingAccount;
+            oldValidateSession = amplify.request.resources.ValidateSession;
 
         makeSuccessfulConnection();
 
         //Override
-        amplify.request.resources.GetClientAndTradingAccount = function (settings) {
+        amplify.request.resources.ValidateSession = function (settings) {
             amplify.request.decoders.ciapiDecoder(
                 new CIAPI.dto.ApiErrorResponseDTO(401, 4010, "The credentials used to authenticate are invalid. Either the username, password or both are incorrect."),
                 "success", {}, settings.success, settings.error
@@ -184,7 +184,7 @@ describe("CIAPI.connect unit tests", function () {
             expect(publishedConnection.isConnected).toBeFalsy();
 
             //Restore 
-            amplify.request.resources.GetClientAndTradingAccount = oldGetClientAndTradingAccount;
+            amplify.request.resources.ValidateSession = oldValidateSession;
         });
     });
 

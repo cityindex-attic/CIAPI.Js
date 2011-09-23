@@ -15,7 +15,6 @@
     <Content Include="js\authentication.js" />
     <Content Include="Run_AcceptanceTests.html" />
     <Content Include="Run_UnitTests.html" />
-    <Content Include="sample-live.html" />
     <Content Include="sample-responsive.html" />
     <Content Include="sample.html" />
     <Content Include="test\BasicFunctions.1.SeleniumTest.html" />

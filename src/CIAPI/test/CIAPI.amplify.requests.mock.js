@@ -72,8 +72,8 @@ var mockData = {
         );
     });
 
-    amplify.request.define("GetClientAndTradingAccount", function(settings) {
-        console.log("Mocking response for GetClientAndTradingAccount request", settings.data);
+    amplify.request.define("ValidateSession", function(settings) {
+        console.log("Mocking response for ValidateSession request", settings.data);
 
         var resp = new CIAPI.dto.AccountInformationResponseDTO("Joe Bloggs", 44444444444, "GBP",
             [{ TradingAccountId: 1,TradingAccountCode: "a string value", TradingAccountStatus: "a string value", TradingAccountType: "a string value" }]

@@ -45,8 +45,8 @@
         decoder: "ciapiDecoder"
     });
 
-    amplify.request.define("GetClientAndTradingAccount", "cors", {
-        url: "{ServiceUri}/UserAccount/ClientAndTradingAccount?UserName={UserName}&Session={Session}&only200=true",
+    amplify.request.define("ValidateSession", "cors", {
+        url: "{ServiceUri}/UserAccount/ClientAndTradingAccount?UserName={UserName}&Session={Session}&only200=true&ts={ts}",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         type: "GET",

@@ -90,11 +90,12 @@ CIAPI.reconnect = function() {
     //Validate the existing connection by trying to use it
     //An error will be trapped by the 401 error trapper below
     amplify.request( {
-        resourceId: "GetClientAndTradingAccount",
+        resourceId: "ValidateSession",
         data:  {
                     ServiceUri: CIAPI.connection.ServiceUri,
                     UserName: CIAPI.connection.UserName,
-                    Session: CIAPI.connection.Session
+                    Session: CIAPI.connection.Session,
+                    ts: (new Date()).getTime()
                 },
         success:  function( data ) {
             CIAPI.publish("CIAPI.connection.status", CIAPI.connection);
