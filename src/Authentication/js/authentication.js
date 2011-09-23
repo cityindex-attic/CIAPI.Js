@@ -123,6 +123,7 @@
             _(t["en-GB"]).defaults({
                 "error": "Error",
                 401: "(401) Not authorized",
+                403: "(403) Forbidden",
                 500: "(500) Server error",
                 "username": "UserName",
                 "password": "Password",
@@ -137,6 +138,7 @@
             _(t["pl-PL"]).defaults({
                 "error": "Błąd",
                 401: "(401) Nie dopuszczony",
+                403: "(403) Zakazany",
                 500: "(500) Błąd serwera",
                 "username": "Użytkownika",
                 "password": "Hasło",
@@ -149,8 +151,9 @@
 
             t["de-DE"] = t["de-DE"] || {};
             _(t["de-DE"]).defaults({
-                "error": "Fehler", 401:
-                "(401) Nicht autorisiert",
+                "error": "Fehler",
+                401: "(401) Nicht autorisiert",
+                403: "(403) Verboten",
                 500: "(500) Server-Fehler",
                 "username": "Benutzername",
                 "password": "Kennwort",

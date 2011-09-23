@@ -11,7 +11,11 @@
         }
 
         if (status === "error") {
-            returnError(new CIAPI.dto.ApiErrorResponseDTO(500, 0, "There was an error with the Ajax transport"));
+            if (!_(data).isNull() && !_(data).isUndefined(data)) {
+                returnError(data);
+                return;
+            }
+            returnError(new CIAPI.dto.ApiErrorResponseDTO(403, 1, "The server is refusing to respond to this request.  Are you making an HTTPS request from an HTTP page?"));
             return;
         }
 
