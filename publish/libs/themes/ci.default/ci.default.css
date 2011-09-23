@@ -224,7 +224,6 @@ a
 .ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error
 {
     border: 1px solid #cd0a0a;
-    background: #fef1ec url(images/ui-bg_inset-soft_95_fef1ec_1x100.png) 50% bottom repeat-x;
     background: #fef1ec linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
     background: #fef1ec -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0)));
     background: #fef1ec -moz-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0)); /*    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#DDFFFFFF, endColorstr=#00FFFFFF);     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#DDFFFFFF, endColorstr=#00FFFFFF)";*/
