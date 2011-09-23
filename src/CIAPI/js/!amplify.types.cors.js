@@ -130,11 +130,6 @@
     var xhrProps = [ "status", "statusText", "responseText", "responseXML", "readyState" ],
         rurlData = /\{([^\}]+)\}/g;
 
-//    $.support.cors = false;
-    if (!$.support.cors) {
-        $.flXHRproxy.registerOptions('',{xmlResponseText:false});
-    }
-
     amplify.request.types.cors = function( defnSettings ) {
         defnSettings = $.extend({
             type: "GET"
@@ -237,7 +232,7 @@
                 }
             });
             if (!$.support.cors) {
-                ajaxSettings.transport = 'flXHRproxy';
+               ajaxSettings.flXHR = true;
             }
             $.ajax( ajaxSettings );
 
