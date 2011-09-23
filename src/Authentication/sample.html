@@ -45,9 +45,9 @@
         <span id="themeSwitcher" style="float:right"></span>
         <span>
         Culture: <select id="cultureSwitcher">
-            <option>en-GB</option>
-            <option>pl-PL</option>
-            <option>de-DE</option>
+            <option value="en-GB">en-GB</option>
+            <option value="pl-PL">pl-PL</option>
+            <option value="de-DE">de-DE</option>
         </select>
         </span>
         <br />
@@ -182,7 +182,7 @@
         });
 
         //Trigger a page refresh when culture is changed
-        $('#cultureSwitcher').val(PageConfig.culture).attr('selected', true);
+        $('#cultureSwitcher').val(PageConfig.Culture).attr('selected', true);
         $('#cultureSwitcher').change(function (evt) {
             var selectedCulture = $(this).find("option:selected").text();
             window.location.href = window.location.pathname + "?culture=" + selectedCulture + "&connectionType=" + PageConfig.ConnectionType;
