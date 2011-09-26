@@ -1,0 +1,98 @@
+﻿<!doctype html>
+<html>
+<head>
+    <title>Window.Open sample</title>
+
+    <!--[! We expect these to already be loaded in the "deployment" page -->
+    <script type="text/javascript" src="/publish/libs/jquery/1.6.1/jQuery.debug.js"></script>
+    <script type="text/javascript" src="/publish/libs/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="/publish/libs/json2.js"></script>
+    <script type="text/javascript" src="/publish/libs/jquery-ui/1.8.11/js/jquery-ui.min.js"></script>
+
+    <link type="text/css" href="/publish/libs/themes/ci.default/ci.default.css" rel="Stylesheet"/>
+    <link type="text/css" href="/publish/libs/layouts/simple/simple_layout.css" rel="Stylesheet"/>
+
+    <!--[! For the jQueryUI theme switching -->
+    <script type="text/javascript" src="/publish/libs/jquery-ui/Super-Theme-Switcher/jquery.themeswitcher.min.js"></script>
+
+     <!--[! These are shared by all CIAPI widgets -->
+    <script>var flensed = { base_path: "/publish/libs/flXHR-1.0.6/" };</script>
+    <script src="/publish/libs/flXHR-1.0.6/flXHR.js"></script>
+    <script src="/publish/Authentication/js/libs/CIAPI.debug.js"></script>
+    <script src="/publish/Authentication/js/libs/CIAPI.widget.debug.js"></script>
+  
+    <!--[! This is for CIAPI.authentication widget -->
+    <!-- css concatenated and minified via ant build script-->
+    <link type="text/css" href="css/authentication.css" rel="Stylesheet"/>
+    <!-- end css-->
+
+    <!-- scripts concatenated and minified via ant build script-->
+    <script src="js/authentication.js"></script>
+    <!-- end scripts-->
+
+    <style>
+        .controls  
+        {
+            padding:5px;
+            margin-bottom: 15px;
+            border: 1px solid yellow;
+            background-color: lightyellow;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+       <div id="StandardAuthenticationWidget" style="border:1px solid black; padding: 50px"></div>
+       
+       <div class="controls">
+            ITP url:
+            <div id="ITPUri" style="border:1px solid black; margin:5px; padding:3px;"></div>
+            <a id="popupLink" href="#" target="_blank">Open ITP using link</a> | 
+            <a id="windowOpen" href="#" onclick="popupITP(); return false;">Open ITP using window.open()</a>
+       </div>
+</div>
+
+<script>
+    var initWidgets = function () {
+
+        //Set the default widget culture, and trigger a page refresh when it changes
+        $.widget.culture(PageConfig.Culture);
+
+        //Widgets must be rendered after the culture is set
+        $("#StandardAuthenticationWidget").CIAPI_widget_AuthenticationWidget({
+            ServiceUri: PageConfig.ServiceUri,
+            StreamUri: PageConfig.StreamUri,
+            afterLogOn: function (data) {
+                 PageConfig.CurrentITPUri = CIAPI.replaceConnectionTokens(PageConfig.ITPUri);
+                 $("#ITPUri").html(PageConfig.CurrentITPUri);
+                 $("#popupLink").attr('href', PageConfig.CurrentITPUri);
+            }
+        });
+
+         PageConfig.CurrentITPUri = CIAPI.replaceConnectionTokens(PageConfig.ITPUri);
+         $("#ITPUri").html(PageConfig.CurrentITPUri);
+         $("#popupLink").attr('href', PageConfig.CurrentITPUri);
+    };
+</script>
+
+<script>
+    var PageConfig = {
+        Culture: "en-GB",
+        ServiceUri: "https://ciapipreprod.cityindextest9.co.uk/TradingApi",
+        StreamUri: "https://pushpreprod.cityindextest9.co.uk",
+        ITPUri: "https://ciapipreprod.cityindextest9.co.uk/tp/fx/index.html#UserName={CIAPI.connection.UserName}&Session={CIAPI.connection.Session}&AuthenticationUri=https://www.google.com",
+    };
+
+    var popupITP = function () {
+        window.open(PageConfig.CurrentITPUri, '', 'width=975,height=575,location=yes');
+    };
+
+    $(document).ready(function () {
+            initWidgets();
+    });
+
+</script>
+
+</body>
+</html>
