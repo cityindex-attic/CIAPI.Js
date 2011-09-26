@@ -21,7 +21,7 @@ describe("CIAPI.pubsub unit tests", function () {
         runs(function () {
             amplify.request({
                 resourceId: "apiError",
-                errorResponse: new CIAPI.dto.ApiErrorResponseDTO(401, 4010, "Error message details"),
+                errorResponse: new CIAPI.dto.ApiErrorResponseDTO(401, 4010, "Error message details")
             });
         });
 
