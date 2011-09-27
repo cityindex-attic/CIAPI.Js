@@ -6,16 +6,15 @@
   <ItemGroup>
     <Content Include="BasicFunctions_AcceptanceTest.html" />
     <Content Include="build.project.xml" />
-    <Content Include="css\images\home_nav_middle.jpg" />
-    <Content Include="css\images\logo.png" />
-    <Content Include="css\images\nav-bg.png" />
+    <Content Include="css\authentication.css" />
+    <Content Include="css\images\button_loading_spinner_272727.gif" />
+    <Content Include="css\images\button_loading_spinner_efefef.gif" />
     <Content Include="images\Schrodinger-Lolcat.jpg" />
     <Content Include="images\Schrodinger-Lolcat.png" />
     <Content Include="images\widget-content-bg.png" />
     <Content Include="js\authentication.js" />
     <Content Include="Run_AcceptanceTests.html" />
     <Content Include="Run_UnitTests.html" />
-    <Content Include="sample-live.html" />
     <Content Include="sample-responsive.html" />
     <Content Include="sample.html" />
     <Content Include="test\BasicFunctions.1.SeleniumTest.html" />

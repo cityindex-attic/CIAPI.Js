@@ -1,6 +1,8 @@
 ﻿(function ($, undefined) {
     $.widget("ui.CIAPI_widget_AuthenticationWidget", $.ui.CIAPI_widget, {
         options: {
+            ServiceUri: "must_be_set",
+            StreamUri: "must_be_set",
             width: 600,
             afterLogOn: function (CIAPIConnection) { },
             afterLogOff: function (CIAPIConnection) { },
@@ -17,25 +19,21 @@
                 '            <p class="ui-state-error" data-bind="text: errorMessage, visible: errorMessage().length > 0"></p> ' +
                 '            <fieldset>                                                                                        ' +
                 '                <label for="username">${username}</label>                                                     ' +
-                '                <div class="ui-ciapi-authentication-input ui-corner-all ui-widget-content">                   ' +
-                '                    <input type="text"                                                                        ' +
+                '                <input type="text"                                                                            ' +
                 '                       name="username"                                                                        ' +
                 '                       id="username"                                                                          ' +
-                '                       class="inputFields"                                                                    ' +
+                '                       class="inputFields ui-widget-content ui-corner-all"                                    ' +
                 '                       data-bind="value: username"/>                                                          ' +
-                '                </div>                                                                                        ' +
                 '                <label for="password">${password}</label>                                                     ' +
-                '                <div class="ui-ciapi-authentication-input ui-corner-all ui-widget-content">                   ' +
-                '                    <input type="password"                                                                    ' +
+                '                <input type="password"                                                                        ' +
                 '                       name="password"                                                                        ' +
                 '                       id="password"                                                                          ' +
-                '                       class="inputFields"                                                                    ' +
+                '                       class="inputFields ui-widget-content ui-corner-all"                                    ' +
                 '                       data-bind="value: password"/>                                                          ' +
-                '                </div>                                                                                        ' +
                 '            </fieldset>                                                                                       ' +
                 '        </div>                                                                                                ' +
                 '        <div class="ui-ciapi-authentication-buttonpane ui-widget-content ui-helper-clearfix ui-corner-bottom">' +
-                '            <button class="ui-ciapi-authentication-button" data-bind="click: doLogOn">${logon}</button>       ' +
+                '            <button type="submit" class="ui-ciapi-authentication-button" data-bind="click: doLogOn">${logon}</button>' +
                 '        </div>       ' +
                     '</form>                                                                                                   ' +
                 '    </div>                                                                                                    ' +
@@ -49,7 +47,11 @@
                 '    </div>                                                                                                    ' +
                 '</div>')
         },
-        isFormValid: function(viewModel) {
+        _validateOptions: function () {
+            if (this.options.ServiceUri === "must_be_set") alert("You must set the ServiceUri option when calling the AuthenticationWidget");
+            if (this.options.StreamUri === "must_be_set") alert("You must set the StreamUri option when calling the AuthenticationWidget");
+        },
+        isFormValid: function (viewModel) {
             $.validator.messages.required = "";
             var form = viewModel.widget.element.find('.ui-ciapi-authentication-form');
             form.validate({
@@ -61,11 +63,11 @@
                 errorPlacement: function (error, element) {
                     //don't place error messages anywhere
                 },
-                highlight: function(element, errorClass, validClass) {
-                    $(element).parent().addClass(errorClass).removeClass(validClass);
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass(errorClass).removeClass(validClass);
                 },
-                unhighlight: function(element, errorClass, validClass) {
-                    $(element).parent().addClass(validClass).removeClass(errorClass);
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).addClass(validClass).removeClass(errorClass);
                 }
             });
             return form.valid();
@@ -80,11 +82,15 @@
                 doLogOn: function () {
                     var viewModel = this;
                     if (!viewModel.widget.isFormValid(viewModel)) return;
+                    viewModel.widget._toggleInput({ isDisabled: true, parentElement: viewModel.widget.element });
                     CIAPI.connect({
                         UserName: viewModel.username(),
                         Password: viewModel.password(),
+                        ServiceUri: viewModel.widget.options.ServiceUri,
+                        StreamUri: viewModel.widget.options.StreamingUri,
                         success: function (data) {
                             viewModel.widget.options.afterLogOn.call(viewModel.widget, CIAPI.connection);
+                            viewModel.password("");
                             viewModel.errorMessage("");
                             viewModel.widget._update();
                         },
@@ -99,6 +105,7 @@
                 },
                 doLogOff: function () {
                     var viewModel = this;
+                    viewModel.widget._toggleInput({ isDisabled: true, parentElement: viewModel.widget.element });
                     CIAPI.disconnect({
                         success: function (data) {
                             viewModel.widget.options.afterLogOff.call(viewModel.widget, CIAPI.connection);
@@ -109,14 +116,6 @@
             };
             return viewModel;
         },
-        replaceTokens: function (input) {
-            if (!CIAPI.connection.isConnected) {
-                console.log("Warning:  replaceTokens should not be called before authentication has happened, or not all tokens will be replaced");
-            }
-            return input.replace("{CIAPI.connection.UserName}", CIAPI.connection.UserName)
-                        .replace("{CIAPI.connection.Session}", CIAPI.connection.Session);
-
-        },
         _initCulture: function () {
             //Set sane defaults for translation messages, then initialize the translation messages
             var t = this.options.translations;
@@ -124,38 +123,44 @@
             _(t["en-GB"]).defaults({
                 "error": "Error",
                 401: "(401) Not authorized",
+                403: "(403) Forbidden",
                 500: "(500) Server error",
                 "username": "UserName",
                 "password": "Password",
                 "logon": "Log On",
                 "logoff": "Log Off",
+                "launch_platform": "Launch platform",
                 "you_are_logged_in_as":
-                "You are logged in as" 
+                "You are logged in as"
             });
 
             t["pl-PL"] = t["pl-PL"] || {};
             _(t["pl-PL"]).defaults({
                 "error": "Błąd",
                 401: "(401) Nie dopuszczony",
+                403: "(403) Zakazany",
                 500: "(500) Błąd serwera",
                 "username": "Użytkownika",
                 "password": "Hasło",
                 "logon": "Zaloguj się",
                 "logoff": "Wyloguj",
+                "launch_platform": "Uruchomienie Platformy",
                 "you_are_logged_in_as":
-                "Jesteś zalogowany jako" 
+                "Jesteś zalogowany jako"
             });
 
             t["de-DE"] = t["de-DE"] || {};
             _(t["de-DE"]).defaults({
-                "error": "Fehler", 401:
-                "(401) Nicht autorisiert",
+                "error": "Fehler",
+                401: "(401) Nicht autorisiert",
+                403: "(403) Verboten",
                 500: "(500) Server-Fehler",
                 "username": "Benutzername",
                 "password": "Kennwort",
                 "logon": "Anmeldung",
                 "logoff": "Logout",
-                "you_are_logged_in_as": "Sie sind angemeldet als" 
+                "launch_platform": "Start-Plattform",
+                "you_are_logged_in_as": "Sie sind angemeldet als"
             });
 
             _(this.options.translations).each(function (translations_value, culture_key) {
@@ -164,8 +169,19 @@
 
             $.widget.culture(this.options.culture);
         },
+        _toggleInput: function (args) {
+            _(args).defaults({
+                isDisabled: true,
+                parentElement: null
+            });
+            args.parentElement.find(".ui-ciapi-authentication-button").button("option", "disabled", args.isDisabled);
+        },
         _create: function () {
+            this._validateOptions();
+
             this._initCulture();
+
+            CIAPI.reconnect();
 
             //The viewModel needs to be created here rather than defined in options above to prevent cross widget pollution
             this.options.viewModel = this._createViewModel(this);
@@ -182,12 +198,15 @@
                 }
             });
 
+            //monitor changes to connection status
             var thisWidget = this;
-            var oldOnConnectionInvalid = CIAPI.OnConnectionInvalid;
-            CIAPI.OnConnectionInvalid = function(connection) {
-               thisWidget._update.call(thisWidget.options.viewModel.widget);
-               oldOnConnectionInvalid();
-            };
+            CIAPI.subscribe("CIAPI.connection.status", function (newConnection) {
+                if (newConnection.isConnected) { //ensure we update the viewModel with the new connection details
+                    thisWidget.options.viewModel.username(newConnection.UserName);
+                    thisWidget.options.viewModel.errorMessage("");
+                }
+                thisWidget._update.call(thisWidget.options.viewModel.widget);
+            });
 
             this._update();
         },
@@ -199,6 +218,10 @@
             if (this.options.shakeOnError && this.options.viewModel.errorMessage()) {
                 this.element.effect("shake", { times: 2 }, 100);
             }
+            if (this.options.viewModel.errorMessage()) {
+                this.element.find(".ui-state-error").hide().fadeIn('fast');
+            }
+            this._toggleInput({ isDisabled: false, parentElement: this.options.viewModel.widget.element });
         }
     });
 })(jQuery);

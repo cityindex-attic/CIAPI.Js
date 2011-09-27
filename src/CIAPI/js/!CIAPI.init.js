@@ -31,3 +31,8 @@ if (typeof String.trim == "undefined") {
         return this.replace(/^\s*(\S*(\s+\S+)*)\s*$/, "$1");
     };
 }
+
+if (typeof console === "undefined" || typeof console.log === "undefined") {
+    console = {};
+    console.log = function () { /*do nothing*/ };
+}

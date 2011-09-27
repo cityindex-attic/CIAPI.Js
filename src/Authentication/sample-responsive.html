@@ -6,7 +6,7 @@
     <title>Sample responsive design page</title>
 
     <!--[! We expect these to already be loaded in the "deployment" page -->
-    <script type="text/javascript" src="/publish/libs/jquery/1.6.1/jQuery.debug.js"></script>
+    <script type="text/javascript" src="/publish/libs/jquery/1.6.4/jquery.debug.js"></script>
     <script type="text/javascript" src="/publish/libs/jquery.tmpl.min.js"></script>
     <script type="text/javascript" src="/publish/libs/json2.js"></script>
     <script type="text/javascript" src="/publish/libs/jquery-ui/1.8.11/js/jquery-ui.min.js"></script>
@@ -172,7 +172,9 @@
         $('#CustomAuthenticationWidget2').CIAPI_widget_AuthenticationWidget(
                 {
                     template: 'customAuthWidgetTemplate', //override the default template
-                    width: 'auto'
+                    width: 'auto',
+                    ServiceUri: "mock",
+                    StreamUri: "mock"
                 });
 
 
@@ -190,27 +192,24 @@
                 <fieldset>
                     <label for="username">UserName</label>
 
-                    <div class="ui-ciapi-authentication-input ui-corner-all ui-widget-content">
-                        <input type="text"
-                               name="username"
-                               id="username"
-                               class="required inputFields"
-                               data-bind="value: username"/>
-                    </div>
+                    <input type="text"
+                           name="username"
+                           id="username"
+                           class="required inputFields ui-widget-content ui-corner-all"
+                           data-bind="value: username"/>
+                    
                     <label for="password">Password</label>
 
-                    <div class="ui-ciapi-authentication-input ui-corner-all ui-widget-content">
-                        <input type="password"
-                               name="password"
-                               id="password"
-                               class="required inputFields"
-                               data-bind="value: password"/>
-                    </div>
+                    <input type="password"
+                           name="password"
+                           id="password"
+                           class="required inputFields ui-widget-content ui-corner-all"
+                           data-bind="value: password"/>
 
                 </fieldset>
             </div>
             <div class="ui-ciapi-authentication-buttonpane ui-widget-content ui-helper-clearfix ui-corner-bottom">
-                <button class="ui-ciapi-authentication-button" data-bind="click: doLogOn">Log In</button>
+                <button class="ui-ciapi-authentication-button" type="submit" data-bind="click: doLogOn">Log In</button>
             </div>
             </form>
         </div>

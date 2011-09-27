@@ -1,0 +1,2 @@
+ant basics publish
+pause
