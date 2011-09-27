@@ -217,7 +217,7 @@ describe("CIAPI.connect unit tests", function () {
 
     });
 
-    it("connect should store the connection details in localStorage", function () {
+    it("connect should store the connection details", function () {
         if (!CIAPI.store.isSpy)
             spyOn(CIAPI, "store");
 
@@ -244,7 +244,6 @@ describe("CIAPI.connect unit tests", function () {
                     ServiceUri: "https://{the_service_Uri}/TradingApi",
                     StreamUri: "https://{the_streaming_Uri}/"
                 },
-                storageType: "localStorage",
                 expires: EIGHT_HOURS
             });
 
@@ -276,7 +275,6 @@ describe("CIAPI.connect unit tests", function () {
                     ServiceUri: '',
                     StreamUri: ''
                 },
-                storageType: "localStorage",
                 expires: EIGHT_HOURS
             });
         });
