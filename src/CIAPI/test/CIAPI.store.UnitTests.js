@@ -7,33 +7,21 @@ describe("CIAPI.store unit tests", function () {
        })
     });
 
-    it("should save & read from sessionStorage", function () {
+    it("should save & read from localStorage if available", function () {
+
+        //Ignore this test if localStorage isn't available
+        try {
+            if ( window.localStorage.getItem ) {
+                //do nothing
+            }
+        } catch( e ) {
+            return;
+        }
 
         //Test saving
         CIAPI.store({
             key: "testKey",
-            value: theValue,
-            storageType: "sessionStorage"
-        });
-
-        expect(JSON.parse(window.sessionStorage.getItem('__amplify__testKey')).data).toEqual(theValue);
-
-        //Test reading
-        var readValue = CIAPI.store({
-            key: "testKey",
-            storageType: "sessionStorage"
-        });
-
-        expect(readValue).toEqual(theValue);
-
-    });
-    it("should save & read from localStorage", function () {
-
-        //Test saving
-        CIAPI.store({
-            key: "testKey",
-            value: theValue,
-            storageType: "localStorage"
+            value: theValue
         });
 
         expect(JSON.parse(window.localStorage.getItem('__amplify__testKey')).data).toEqual(theValue);
