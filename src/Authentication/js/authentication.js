@@ -84,7 +84,7 @@
                     if (!viewModel.widget.isFormValid(viewModel)) return;
                     viewModel.widget._toggleInput({ isDisabled: true, parentElement: viewModel.widget.element });
                     CIAPI.connect({
-                        UserName: viewModel.username(),
+                        UserName: viewModel.username().trim(),
                         Password: viewModel.password(),
                         ServiceUri: viewModel.widget.options.ServiceUri,
                         StreamUri: viewModel.widget.options.StreamingUri,
